@@ -1,41 +1,35 @@
 # DESIGN.md — EXIOR
 
-Une direction. Tu ne la changes pas à chaque retour.
+Style entre Linear et Cursor. Spécifique à EXIOR.
 
 ## Couleurs
 
-Fond `#090a0b`. Surface `#141516`. Texte `#f4f1ea`. Secondaire `#a39e94` (vérifier ≥ 4.5:1). Filet `#2a2c2d`. Accent `#ff2d3a`.
+Fond `#08090a` (Linear). Surface `#121414`. Texte `#f7f8f8`. Secondaire `#8a8f98`. Filet `#23252a`. Accent `#f54e00` (Cursor, un seul usage). Pas de dégradé.
 
 ## Typo
 
-Une sans. L’italique serif seulement sur le mot accent du hero, un mot.
+Inter Variable. Display 48–64 px, tracking −0.03em, weight 510. Corps 15–16 px, line-height 1.6. Label 13 px.
 
-- Display : 56–72 px desktop, 32–40 px mobile, line-height 1.05, tracking −0.03em.
-- H2 : 28–36 px.
-- Corps : 16–18 px, line-height 1.6.
-- Label : 12–13 px, tracking +0.05em.
-- Mobile corps minimum 16 px. Sinon le navigateur zoome sur les champs.
+## Style
 
-## Hero
+Retenue. Le produit ou le schéma porte. Pas de chrome qui crie. Un seul accent. Espaces larges. Composants réels, pas de captures de faux logiciels.
 
-Une promesse. Le prix. Le délai. Un bouton. Titre : changement d’état, pas une liste de livrables.
+## Positionnement (document Drive 02.11.2026)
 
-## Schéma
+Signature : « EXIOR transforme l’innovation mondiale en avantage compétitif. »
 
-Nœuds reliés : événement, système, règle, contrôle humain, résultat. Meridian fictif.
+Offre : Plan de transformation EXIOR — 990 € HT, paiement unique. Quatre semaines après le dossier complet. Espace EXIOR personnalisé inclus. Conception seulement. Déploiement distinct.
+
+CTA permanent : « Découvrir le Plan — 990 € HT ».
 
 ## Interdit
 
-Dégradé qui couvre le texte. Tableau. Carte vide. Lueur autour d’une colonne étroite. Superlatif. Négation en titre. Client, note ou visage inventé. Glassmorphism. Particules.
+Preuve inventée. Client inventé. Chiffre de gain non mesuré. Dégradé sur texte. Tableau. Carte vide. Glassmorphism.
 
 ## Parcours
 
-Barre, hero, schéma du problème, schéma de l’architecture, cinq pièces, trois mouvements, trois scénarios fictifs, offre, FAQ, dossier, pied.
+Accueil (schéma monde → signal → contexte → décision → capacité). Intelligence. Performance. Meta-OS. Méthode. Expertise. Démonstrations fictives. Plan. Espace. Contact.
 
-## Pied légal
+## Démonstrateur
 
-Liens vers `mentions-legales/`, `confidentialite/`, `cgv/`. Ne pas les modifier.
-
-## Schema
-
-JSON-LD `Organization` + `Service` sur la home. Prix seulement s’il est affiché. Pas de balisage faux.
+Quatre états : signal détecté, entreprise cartographiée, options arbitrées, capacité conçue. Données fictives marquées.
