@@ -5,235 +5,289 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#090a0b">
+<title>EXIOR | Transformez le fonctionnement de votre entreprise</title>
+<meta name="description" content="EXIOR conçoit l'architecture évolutive de votre entreprise : outils, données, processus et agents IA coordonnés. Votre plan personnalisé en 7 jours ouvrés, 990 €.">
+<meta property="og:title" content="EXIOR | Transformez le fonctionnement de votre entreprise">
+<meta property="og:description" content="EXIOR conçoit l'architecture évolutive de votre entreprise : outils, données, processus et agents IA coordonnés. Votre plan personnalisé en 7 jours ouvrés, 990 €.">
+<meta property="og:image" content="assets/visuels/og.webp">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
 <script src="assets/offre.js"></script>
-<script>
-document.write("<title>" + exiorEsc(EXIOR_OFFRE.marque) + " — " + exiorEsc(EXIOR_OFFRE.produit) + "</title>");
-document.write('<meta name="description" content="' + exiorEsc(EXIOR_OFFRE.description) + '">');
-document.write('<meta property="og:title" content="' + exiorEsc(EXIOR_OFFRE.marque) + " — " + exiorEsc(EXIOR_OFFRE.produit) + '">');
-document.write('<meta property="og:description" content="' + exiorEsc(EXIOR_OFFRE.description) + '">');
-document.write('<meta property="og:type" content="website">');
-document.write('<meta property="og:image" content="assets/schemas/chaine-meridian.webp">');
-var ld = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": EXIOR_OFFRE.produit,
-  "provider": {
-    "@type": "Organization",
-    "name": EXIOR_OFFRE.marque,
-    "url": "https://exior.io",
-    "email": EXIOR_OFFRE.email
-  },
-  "description": EXIOR_OFFRE.description,
-  "offers": {
-    "@type": "Offer",
-    "price": EXIOR_OFFRE.prixMontant,
-    "priceCurrency": EXIOR_OFFRE.devise,
-    "description": EXIOR_OFFRE.prix + ", " + EXIOR_OFFRE.paiement + ". " + EXIOR_OFFRE.delai + " " + EXIOR_OFFRE.declencheur + ". " + EXIOR_OFFRE.perimetre + " " + EXIOR_OFFRE.hors
-  }
-};
-document.write('<script type="application/ld+json">' + JSON.stringify(ld) + "<" + "/script>");
-</script>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/home.css">
-<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
+<div class="glow" aria-hidden="true"></div>
 <a class="skip" href="#contenu">Aller au contenu</a>
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="./" aria-label="EXIOR, accueil">
-      <svg class="mark" viewBox="0 0 28 28" width="22" height="22" aria-hidden="true"><circle cx="14" cy="14" r="9" fill="none" stroke="#f7f8f8" stroke-width="1.6"/><circle cx="14" cy="14" r="3" fill="#f7f8f8"/></svg>
-      <span>EXIOR</span>
-    </a>
+    <a class="brand" href="./" aria-label="EXIOR, accueil"><span class="logo"></span></a>
     <nav class="nav" aria-label="Principal">
-      <span class="nav-links"><a href="#schema">Schéma</a><a href="#mouvements">Méthode</a><a href="#offre">Offre</a></span>
-      <a class="btn top-cta" href="#dossier"><script>exior("cta")</script></a>
+      <div class="nav-links"><a href="comment-ca-marche/">La transformation</a>
+<a href="architecture-evolutive/">Votre architecture</a>
+<a href="applications-metiers/">Applications métiers</a>
+<a href="methode/">Méthode</a>
+<a href="faq/">Questions fréquentes</a></div>
+      <details class="nav-more">
+        <summary>Menu</summary>
+        <div class="panel"><a href="comment-ca-marche/">La transformation</a>
+<a href="architecture-evolutive/">Votre architecture</a>
+<a href="applications-metiers/">Applications métiers</a>
+<a href="methode/">Méthode</a>
+<a href="faq/">Questions fréquentes</a></div>
+      </details>
+      <a class="btn top-cta" href="commander/">Obtenir mon architecture — 990 €</a>
     </nav>
   </div>
 </header>
-
 <main id="contenu">
-  <section class="hero" id="probleme" aria-labelledby="h1">
-    <div class="wrap hero-in">
-      <div class="hero-copy">
-        <p class="eyebrow">EXIOR</p>
-        <h1 id="h1">L’innovation mondiale devient votre architecture.</h1>
-        <p class="lead"><script>exior("signature")</script></p>
-        <div class="facts">
-          <p><strong><script>exior("prix")</script></strong><span><script>exior("paiement")</script></span></p>
-          <p><strong><script>exior("delai")</script></strong><span><script>exior("declencheur")</script></span></p>
-        </div>
-        <a class="btn" href="#dossier"><script>exior("cta")</script></a>
-        <p class="fine"><script>exior("perimetre")</script> <script>exior("hors")</script></p>
-      </div>
-      <figure class="chain" id="schema">
-        <p class="chain-k">Meridian · entreprise fictive</p>
-        <ol>
-          <li>
-            <div class="step"><span class="n">01</span><span class="t">Monde</span></div>
-            <p>Innovations, connaissances, évolutions concurrentielles et réglementaires.</p>
-            <span class="arrow" aria-hidden="true"></span>
-          </li>
-          <li>
-            <div class="step"><span class="n">02</span><span class="t">Signal</span></div>
-            <p>Source, date et maturité.</p>
-            <span class="arrow" aria-hidden="true"></span>
-          </li>
-          <li>
-            <div class="step"><span class="n">03</span><span class="t">Contexte</span></div>
-            <p>Objectifs, ressources et contraintes.</p>
-            <span class="arrow" aria-hidden="true"></span>
-          </li>
-          <li>
-            <div class="step"><span class="n">04</span><span class="t">Décision</span></div>
-            <p>Options comparées, hypothèses écrites.</p>
-            <span class="arrow" aria-hidden="true"></span>
-          </li>
-          <li>
-            <div class="step"><span class="n">05</span><span class="t">Capacité</span></div>
-            <p>Règles, données, permissions, mesure.</p>
-          </li>
-        </ol>
-        <figcaption>Meridian est une entreprise fictive. Ce n’est pas un client.</figcaption>
-      </figure>
-    </div>
-  </section>
 
-  <section class="sec" id="scenarios" aria-labelledby="h-etats">
-    <div class="wrap">
-      <p class="eyebrow">Démonstrateur</p>
-      <h2 id="h-etats">Quatre états, du signal à la capacité.</h2>
-      <p class="sec-lead">Meridian, PME de services fictive, reçoit un modèle récent pour l’analyse de dossiers techniques. L’exemple s’arrête à la conception.</p>
-      <div class="states">
-        <article class="node">
-          <div class="mark" aria-hidden="true"></div>
-          <p class="label">01 · Signal détecté</p>
-          <h3>Un modèle de dossiers techniques</h3>
-          <p>Source, date et maturité sont notées. Le signal est un document, pas un flux en direct.</p>
-        </article>
-        <article class="node">
-          <div class="mark" aria-hidden="true"></div>
-          <p class="label">02 · Entreprise cartographiée</p>
-          <h3>Les demandes de Meridian</h3>
-          <p>EXIOR relie le signal aux données accessibles, aux validations et aux responsables.</p>
-        </article>
-        <article class="node">
-          <div class="mark" aria-hidden="true"></div>
-          <p class="label">03 · Options arbitrées</p>
-          <h3>Trois chemins écrits</h3>
-          <p>Conserver le fonctionnement, simplifier les validations, ou ajouter une assistance supervisée. Effort, risque et hypothèses sont visibles.</p>
-        </article>
-        <article class="node">
-          <div class="mark" aria-hidden="true"></div>
-          <p class="label">04 · Capacité conçue</p>
-          <h3>L’assistance dans l’architecture</h3>
-          <p>Règles, données, permissions, supervision et mesure. La mission de conception s’arrête ici.</p>
-        </article>
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">EXIOR — Enterprise transformation</p>
+      <h1>Transformez le fonctionnement de votre entreprise.</h1>
+      <p class="lead">Vos équipes ont les logiciels, les données et les compétences. Le temps part dans les passages : identifier le dossier, lire la donnée qui fait foi, demander une validation, écrire le statut, vérifier que l’étape est close.</p>
+      <p class="strong">EXIOR conçoit l’architecture de ces passages. Outils connectés, règles, agents spécialisés, permissions et validation humaine. La conception s’arrête avant le déploiement.</p>
+      <p class="price-line">990&nbsp;€ · Votre architecture personnalisée sous 7 jours ouvrés</p>
+      <div class="actions">
+        <a class="btn" href="commander/">Obtenir mon architecture — 990 €</a>
+        <a class="link" href="methode/">Découvrir la méthode</a>
       </div>
+      <p class="micro">Conception personnalisée. Déploiement technique et exploitation proposés séparément, sur devis.</p>
     </div>
-  </section>
+    <div>
+      <figure class="figure"><img src="assets/visuels/hero-accueil.webp" width="1280" height="720" alt="Réseau abstrait de blocs reliés, fond sombre, un nœud orangé. Aucune donnée réelle." fetchpriority="high"></figure>
+      <p class="label" style="margin-top:16px">Meridian · entreprise fictive</p>
+      <ol class="chain chain-live">
+<li>
+<div class="step"><span class="n">01</span><strong>Outils et données</strong></div>
+<p>Logiciels, dossiers et référentiels déjà en place chez Meridian.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">02</span><strong>Orchestration</strong></div>
+<p>L’événement ouvre un parcours : état, donnée qui fait foi, prochaine tâche.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">03</span><strong>Exécution</strong></div>
+<p>Un agent spécialisé, une règle ou un collaborateur reçoit la tâche permise.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">04</span><strong>Validation humaine</strong></div>
+<p>Décision, risque ou responsabilité : le flux s’arrête sur une personne.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">05</span><strong>Action</strong></div>
+<p>L’écriture part dans l’outil autorisé. Le journal garde la trace.</p>
+</li>
+</ol>
+      <p class="fine">Meridian n’est pas un client. La chaîne montre un fonctionnement conçu, pas un agent en production.</p>
+    </div>
+  </div>
+</section>
+<section class="sec reveal" id="probleme">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Vos logiciels travaillent. Qui fait travailler l’ensemble&nbsp;?</h2>
+      <p>Chaque outil accomplit sa fonction. La coordination entre eux reste souvent humaine. C’est dans le passage d’un système à l’autre que se forment ressaisies, attentes et dossiers sans statut.</p>
+    </div>
+    <ol class="chain">
+<li>
+<div class="step"><span class="n">1</span><strong>Email reçu</strong></div>
+<p>L’événement entre. Rien n’est encore un dossier.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">2</span><strong>Dossier</strong></div>
+<p>La référence métier est cherchée à la main.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">3</span><strong>Logiciel métier</strong></div>
+<p>Une information est contrôlée dans un second outil.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">4</span><strong>Collègue</strong></div>
+<p>Une question part, sans file d’attente ni échéance.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">5</span><strong>Tableau</strong></div>
+<p>Le statut est recopié. La trace dépend de la personne.</p>
+</li>
+</ol>
+  </div>
+</section>
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Une entreprise conçue pour agir, pas seulement pour enregistrer.</h2>
+    </div>
+    <div class="grid-5 stagger">
+      <article class="card"><p class="label">Relier</p><h3>Le graphe réel</h3><p>Équipes, logiciels, données, documents et partenaires, avec le flux qui les lie.</p></article>
+      <article class="card"><p class="label">Coordonner</p><h3>L’orchestration</h3><p>Passage d’étape, permission, état du dossier, donnée qui fait foi.</p></article>
+      <article class="card"><p class="label">Exécuter</p><h3>Qui tient la tâche</h3><p>Agent spécialisé, règle logicielle ou collaborateur. Le rôle est écrit.</p></article>
+      <article class="card"><p class="label">Contrôler</p><h3>Le point d’arrêt</h3><p>Validation humaine là où la décision, le risque ou la responsabilité l’exigent.</p></article>
+      <article class="card"><p class="label">Évoluer</p><h3>Le socle</h3><p>Un outil ou un agent s’ajoute sans reconstruire l’organisation.</p></article>
+    </div>
+  </div>
+</section>
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Nous ne vous vendons pas un logiciel supplémentaire.</h2>
+      <p>Un outil répond à un besoin isolé. Une automatisation exécute une séquence. Une architecture EXIOR nomme le déclencheur, la donnée, l’outil, le contrôle et le journal.</p>
+    </div>
+    <div class="grid-3 stagger">
+      <article class="card"><h3>Outil</h3><p>Une fonction. Pas le parcours.</p></article>
+      <article class="card"><h3>Automatisation</h3><p>Une séquence. Pas les exceptions ni la responsabilité.</p></article>
+      <article class="card"><h3>Architecture EXIOR</h3><p>Orchestrateur, agents, règles, validation, trace.</p></article>
+    </div>
+  </div>
+</section>
+<section class="sec reveal" id="offre">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>En 7 jours ouvrés, voyez comment votre entreprise pourrait fonctionner autrement.</h2>
+      <p>Nous analysons votre organisation et concevons votre architecture numérique évolutive. Livrée sous 7 jours ouvrés après réception du dossier complet.</p>
+    </div>
+    <ul class="list">
+      <li><strong>Cartographie.</strong> Processus, outils et points de friction.</li>
+      <li><strong>Architecture cible.</strong> Données, logiciels, équipes et agents IA, avec l’orchestrateur.</li>
+      <li><strong>Parcours avant / après.</strong> Priorités d’automatisation, sans gain chiffré.</li>
+      <li><strong>Règles.</strong> Contrôle, gouvernance, sécurité, responsabilités.</li>
+      <li><strong>Espace EXIOR.</strong> Vision des interfaces. Le dessin, pas l’environnement en service.</li>
+      <li><strong>Plan de déploiement.</strong> Étapes, dépendances, hypothèses budgétaires. La mise en œuvre est hors des 990&nbsp;€.</li>
+    </ul>
+    <p class="price-line">990&nbsp;€ — paiement unique.</p>
+    <div class="actions"><a class="btn" href="commander/">Obtenir mon architecture — 990 €</a></div>
+    <p class="micro">La mission de conception commence à réception du dossier complet. La mise en œuvre technique n’est pas comprise.</p>
+  </div>
+</section>
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Ce que change une architecture bien pensée</h2>
+      <p>Trois scénarios de fonctionnement. Ce ne sont pas des automatisations promises, ni des clients.</p>
+    </div>
+    <div class="grid-3" style="align-items:start">
+      <article>
+        <figure class="figure"><img src="assets/visuels/ex-syndic.webp" width="960" height="720" alt="Flux abstrait de documents vers une forme bâtie. Scénario fictif, sans personne." loading="lazy"></figure>
+        <h3 style="margin-top:14px">Cabinet de syndic</h3>
+        <ol class="chain">
+<li>
+<div class="step"><span class="n">1</span><strong>Document reçu</strong></div>
+<p>Email entrant.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">2</span><strong>Copropriété</strong></div>
+<p>Identification de la référence.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">3</span><strong>Pièces</strong></div>
+<p>Contrôle. Écart = exception.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">4</span><strong>Écriture</strong></div>
+<p>Préparation comptable.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">5</span><strong>Validation</strong></div>
+<p>Une personne autorise l’action finale.</p>
+</li>
+</ol>
+      </article>
+      <article>
+        <figure class="figure"><img src="assets/visuels/ex-comptable.webp" width="960" height="720" alt="Dalles abstraites et bifurcation orangée. Scénario fictif de dossier comptable." loading="lazy"></figure>
+        <h3 style="margin-top:14px">Cabinet comptable</h3>
+        <ol class="chain">
+<li>
+<div class="step"><span class="n">1</span><strong>Pièce manquante</strong></div>
+<p>Détection dans le dossier.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">2</span><strong>Demande</strong></div>
+<p>Le message est préparé, pas envoyé sans règle.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">3</span><strong>Suivi</strong></div>
+<p>Le dossier a un état.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">4</span><strong>Exception</strong></div>
+<p>Le collaborateur reçoit le cas, au moment utile.</p>
+</li>
+</ol>
+      </article>
+      <article>
+        <figure class="figure"><img src="assets/visuels/ex-services.webp" width="960" height="720" alt="Chemin abstrait entre blocs. Scénario fictif d’une demande de service." loading="lazy"></figure>
+        <h3 style="margin-top:14px">Entreprise de services</h3>
+        <ol class="chain">
+<li>
+<div class="step"><span class="n">1</span><strong>Demande</strong></div>
+<p>Réception.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">2</span><strong>Devis</strong></div>
+<p>Préparé dans l’outil commercial.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">3</span><strong>Intervention</strong></div>
+<p>Planifiée. L’imprévu revient à une personne.</p>
+<div class="flow" aria-hidden="true"><i></i></div>
+</li>
+<li>
+<div class="step"><span class="n">4</span><strong>Facture</strong></div>
+<p>Après l’étape qui la déclenche.</p>
+</li>
+</ol>
+      </article>
+    </div>
+    <p class="micro">Ce sont des scénarios de fonctionnement envisageables dans une architecture, non des automatisations promises ou déjà livrées à l’achat du plan.</p>
+  </div>
+</section>
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Vos décisions restent les vôtres.</h2>
+      <p>L’architecture prévoit les droits d’accès, la séparation des responsabilités, la traçabilité et les points de validation humaine. Un processus sensible ne part pas sur un agent sans contrôle.</p>
+    </div>
+    <div class="grid-2 stagger">
+      <article class="card"><h3>Permissions</h3><p>Qui lit, qui écrit, dans quel outil.</p></article>
+      <article class="card"><h3>Séparation</h3><p>La personne qui prépare n’est pas celle qui valide.</p></article>
+      <article class="card"><h3>Journal</h3><p>Chaque passage daté, rattaché à un rôle.</p></article>
+      <article class="card"><h3>Données métier</h3><p>Le logiciel qui fait foi reste la référence. La sécurité du déploiement est spécifiée, pas réalisée dans les 990&nbsp;€.</p></article>
+    </div>
+  </div>
+</section>
+<section class="sec reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Votre prochaine évolution ne devrait pas nécessiter de tout reconstruire.</h2>
+      <p>L’architecture distingue le socle et les ajouts. Vous décidez ensuite, pièce en main, ce qui part en déploiement.</p>
+    </div>
+    <div class="actions"><a class="btn" href="commander/">Concevoir mon architecture — 990 €</a></div>
+    <p class="micro">Livraison sous 7 jours ouvrés après réception du dossier complet. Déploiement et exploitation sur devis.</p>
+  </div>
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Architecture évolutive de votre entreprise","provider":{"@type":"Organization","name":"EXIOR","email":"exior.tech@gmail.com"},"description":"Conception de l’architecture évolutive d’une entreprise. 990 euros, paiement unique, 7 jours ouvrés après réception du dossier complet. Déploiement hors périmètre.","offers":{"@type":"Offer","price":"990","priceCurrency":"EUR"}}</script>
 
-  <section class="sec reveal" id="mouvements" aria-labelledby="h-methode">
-    <div class="wrap">
-      <p class="eyebrow">Méthode</p>
-      <h2 id="h-methode">Cinq questions, dans cet ordre.</h2>
-      <div class="method">
-        <article><p class="label">01</p><h3>Questionner</h3><p>La demande et le résultat utile sont écrits.</p></article>
-        <article><p class="label">02</p><h3>Supprimer</h3><p>Chaque étape doit justifier sa fonction.</p></article>
-        <article><p class="label">03</p><h3>Simplifier</h3><p>Les passages de relais restants sont raccourcis.</p></article>
-        <article><p class="label">04</p><h3>Accélérer</h3><p>Le délai de ce qui reste est réduit.</p></article>
-        <article><p class="label">05</p><h3>Automatiser</h3><p>L’automatisation vient après la simplification.</p></article>
-      </div>
-      <p class="attrib">Cette séquence reprend la méthode The Algorithm, associée à Elon Musk et décrite par Jon McNeill. EXIOR n’a aucune affiliation avec Tesla.</p>
-    </div>
-  </section>
-
-  <section class="sec reveal" id="offre" aria-labelledby="h-offre">
-    <div class="wrap">
-      <p class="eyebrow">Offre</p>
-      <h2 id="h-offre">Une architecture écrite, à prix ferme.</h2>
-      <div class="offre">
-        <div>
-          <p class="price-xl"><script>exior("prix")</script></p>
-          <p class="meta"><script>exior("paiement")</script>. <script>exior("delai")</script> <script>exior("declencheur")</script>.</p>
-          <a class="btn" href="#dossier"><script>exior("cta")</script></a>
-          <p class="fine"><script>exior("perimetre")</script> <script>exior("hors")</script></p>
-        </div>
-        <div class="livrables">
-          <h3>La conception remet</h3>
-          <ol>
-            <li><strong>Signal.</strong> Source, date et maturité.</li>
-            <li><strong>Contexte.</strong> Objectifs, ressources, processus, contraintes.</li>
-            <li><strong>Options.</strong> Comparaison et hypothèses écrites.</li>
-            <li><strong>Architecture cible.</strong> Rôle de chaque système.</li>
-            <li><strong>Contrôles.</strong> Règles, données, permissions, mesure.</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec reveal" id="faq" aria-labelledby="h-faq">
-    <div class="wrap">
-      <p class="eyebrow">Questions</p>
-      <h2 id="h-faq">Avant d’ouvrir le dossier.</h2>
-      <div class="faq">
-        <details>
-          <summary>Pour qui ?</summary>
-          <p>Pour le dirigeant d’une entreprise en activité. EXIOR part des outils déjà en place et conçoit l’architecture qui les relie.</p>
-        </details>
-        <details>
-          <summary>Que recevez-vous ?</summary>
-          <p>Cinq pièces écrites : signal, contexte, options, architecture cible et contrôles. Remise en <script>exior("delai")</script> <script>exior("declencheur")</script>.</p>
-        </details>
-        <details>
-          <summary>Que reste-t-il en dehors ?</summary>
-          <p><script>exior("hors")</script></p>
-        </details>
-        <details>
-          <summary>Qui décide ?</summary>
-          <p>Vous. Chaque étape nomme un responsable. Une règle tranche le cas simple. Une personne arbitre le reste.</p>
-        </details>
-        <details>
-          <summary>Que deviennent vos réponses ?</summary>
-          <p>Elles servent à préparer votre architecture. EXIOR ne demande aucun accès à vos systèmes. Le détail est dans la politique de confidentialité.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec reveal" id="dossier" aria-labelledby="h-dossier">
-    <div class="wrap">
-      <p class="eyebrow">Dossier</p>
-      <h2 id="h-dossier">Décrivez l’objectif.</h2>
-      <p class="sec-lead">Quatre questions. Le délai de <script>exior("delai")</script> part <script>exior("declencheur")</script>.</p>
-      <form class="fields" data-offre-form method="post" enctype="text/plain">
-        <div>
-          <label for="activite">Activité</label>
-          <input id="activite" name="activite" type="text" autocomplete="organization" required>
-        </div>
-        <div>
-          <label for="objectif">Objectif principal</label>
-          <input id="objectif" name="objectif" type="text" required>
-        </div>
-        <div>
-          <label for="difficulte">Difficulté</label>
-          <input id="difficulte" name="difficulte" type="text" required>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <button class="btn" type="submit"><script>exior("cta")</script></button>
-        <p class="data-note">Vos réponses servent à préparer votre architecture. L’envoi ouvre votre messagerie vers <script>exior("email")</script>. Aucun accès à vos systèmes n’est demandé.</p>
-      </form>
-    </div>
-  </section>
 </main>
-
 <footer class="foot">
   <div class="wrap foot-in">
-    <p><strong>EXIOR</strong> · <script>exior("produit")</script> · <script>exior("prix")</script></p>
+    <a class="brand" href="./" aria-label="EXIOR"><span class="logo"></span></a>
     <nav aria-label="Informations légales">
       <a href="mentions-legales/">Mentions légales</a>
       <a href="confidentialite/">Confidentialité</a>
@@ -242,53 +296,7 @@ document.write('<script type="application/ld+json">' + JSON.stringify(ld) + "<" 
     </nav>
   </div>
 </footer>
-
-<div class="sticky" role="region" aria-label="Dossier">
-  <a class="btn btn-full" href="#dossier"><script>exior("cta")</script></a>
-</div>
-
-<script>
-(function () {
-  var form = document.querySelector("[data-offre-form]");
-  if (form) form.action = "mailto:" + EXIOR_OFFRE.email;
-  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
-    a.href = "mailto:" + EXIOR_OFFRE.email;
-    if (a.textContent.indexOf("@") !== -1) a.textContent = EXIOR_OFFRE.email;
-  });
-
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduce && "IntersectionObserver" in window) {
-    document.querySelectorAll(".reveal").forEach(function (el) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          e.target.classList.add("on");
-          io.unobserve(e.target);
-        });
-      }, { threshold: 0.18 });
-      io.observe(el);
-    });
-    var states = document.querySelector(".states");
-    if (states) {
-      states.classList.add("armed");
-      var io2 = new IntersectionObserver(function (entries) {
-        if (!entries[0].isIntersecting) return;
-        states.classList.add("lit");
-        io2.disconnect();
-      }, { threshold: 0.35 });
-      io2.observe(states);
-    }
-  }
-
-  var sticky = document.querySelector(".sticky");
-  var heroBtn = document.querySelector(".hero .btn");
-  if (sticky && heroBtn && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      var e = entries[0];
-      sticky.classList.toggle("on", !e.isIntersecting && e.boundingClientRect.top < 0);
-    }, { threshold: 0 }).observe(heroBtn);
-  }
-})();
-</script>
+<div class="sticky"><a class="btn btn-full" href="commander/">Obtenir mon architecture — 990 €</a></div>
+<script src="assets/site.js"></script>
 </body>
 </html>

@@ -1,30 +1,24 @@
-/* Termes d’offre EXIOR. Seule source éditable.
-   Décision de Guillaume, 19.11.2026. */
+/* Termes d’offre EXIOR. Seule source des montants, du délai et du paiement.
+   Décision Guillaume, 19.11.2026. Le document 01 fixe les phrases publiques. */
 var EXIOR_OFFRE = {
   marque: "EXIOR",
-  produit: "Architecture personnalisée",
-  prix: "990\u00a0€ HT",
+  produit: "Architecture évolutive de votre entreprise",
+  prix: "990\u00a0€",
+  prixHt: "990\u00a0€ HT",
   prixMontant: "990",
   devise: "EUR",
   paiement: "paiement unique",
-  delai: "7\u00a0jours ouvrés",
+  delai: "7 jours ouvrés",
   declencheur: "après réception du dossier complet",
   perimetre: "Conception seulement.",
   hors: "Le déploiement, l’Espace EXIOR, l’hébergement et l’exploitation sont sur devis séparé.",
-  cta: "Obtenir mon architecture",
-  signature: "EXIOR transforme l’innovation mondiale en avantage compétitif.",
-  email: "exior.tech@gmail.com",
-  description: "EXIOR conçoit une architecture personnalisée. 990\u00a0€ HT, paiement unique, livrée en 7\u00a0jours ouvrés après réception du dossier complet. Conception seulement."
+  cta: "Obtenir mon architecture — 990 €",
+  stripe: "https://buy.stripe.com/fZu5kC0Zqenp5VF6h77IY05",
+  email: "exior.tech@gmail.com"
 };
 
 function exiorEsc(value) {
   return String(value).replace(/[&<>"']/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
   });
-}
-
-function exior(key) {
-  var value = EXIOR_OFFRE[key];
-  if (value == null) return;
-  document.write(exiorEsc(value));
 }
