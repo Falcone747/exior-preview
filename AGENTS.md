@@ -1,6 +1,6 @@
 # AGENTS.md — EXIOR
 
-Contrat court. Le visuel est dans `DESIGN.md`. Les procédures sont dans `.cursor/skills/`.
+Contrat court. Visuel dans `DESIGN.md`. Mouvement dans `MOTION.md`. Procédures dans `.cursor/skills/`.
 
 ## Priorité
 
@@ -39,8 +39,10 @@ Redémarre Cursor. Un seul canal. Tu observes la structure. Tu ne copies ni phra
 - Aucune preuve inventée.
 - Bouton identique partout.
 - Pages légales intactes.
+- Mouvement conforme à `MOTION.md`.
 
 ## Skills
 
 - `/construire-la-page`
+- `/ecrire-le-copy`
 - `/creer-un-agent-expert`
