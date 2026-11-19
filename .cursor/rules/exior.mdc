@@ -1,13 +1,14 @@
 ---
-description: Agent EXIOR. Offre figée, REA pour la grammaire, dépôt exior-preview.
-globs: "**/*"
+description: Offre EXIOR figée. Ne pas inventer de preuve. Ne pas toucher aux pages légales.
 alwaysApply: true
 ---
 
-Lis `AGENTS.md` à la racine avant toute modification. C’est la règle. `SPEC-EXIOR.md` est le même contrat, en spec. Tu ne les contredis pas.
+Lis `AGENTS.md` et `DESIGN.md` avant d’écrire.
 
-Tu travailles dans `Falcone747/exior-preview`. REA (`npx rea-agents@latest setup --client cursor`, skill `reverse-engineer-anything`) sert à observer la structure des références, jamais à copier leur texte, leurs chiffres ou leurs visages.
-
-Offre figée : 990 € une fois, 7 jours ouvrés après dossier complet, conception seulement, Meridian fictif, Espace = vision, bouton « Obtenir mon architecture ».
-
-Avant de dire que c’est fait : 1280 et 390, schéma lisible sans le texte, aucune preuve inventée, pages légales intactes.
+- 990 €, 7 jours ouvrés après dossier complet, conception seulement.
+- Meridian fictif. Espace = vision.
+- Bouton : « Obtenir mon architecture ».
+- Pas de client, chiffre ou visage inventé.
+- Pas de copie d’entrepreneurs.com, Zapier, Accenture.
+- Pages légales intactes.
+- Avant de livrer : 1280 et 390.
