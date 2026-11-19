@@ -34,12 +34,13 @@ Redémarre Cursor. Un seul canal.
 
 ## Séquence obligatoire
 
-1. `/observer-avec-rea` — structure, copy, UX d’une page réelle. Pas de copie.
-2. `/definir-le-design-system` — confirme ou écris `DESIGN.md`.
-3. `/construire-la-page` — construis selon le design system.
-4. `/verifier-la-page` — captures 1280 et 390 obligatoires.
-
-Ne dis pas que c’est fait tant que la liste de vérification est vide et que les captures sont collées.
+1. `/observer-avec-rea` — structure, copy, UX.
+2. `/definir-le-design-system` — confirme `DESIGN.md`.
+3. `/construire-la-page` — construis.
+4. `/animer-la-page` — selon `MOTION.md`.
+5. `/generer-les-visuels` — schémas WebP.
+6. `/tester-avec-playwright` — captures 1280 et 390.
+7. `/verifier-la-page` — liste vide avant de dire que c’est fait.
 
 ## Skills
 
@@ -47,5 +48,7 @@ Ne dis pas que c’est fait tant que la liste de vérification est vide et que l
 - `/definir-le-design-system`
 - `/construire-la-page`
 - `/ecrire-le-copy`
+- `/animer-la-page`
+- `/generer-les-visuels`
+- `/tester-avec-playwright`
 - `/verifier-la-page`
-- `/creer-un-agent-expert`

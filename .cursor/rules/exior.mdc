@@ -1,27 +1,34 @@
 ---
 alwaysApply: true
-description: Règles dures EXIOR. L’agent ne peut pas les contourner.
+description: Règles dures EXIOR.
 ---
 
 # EXIOR
 
 ## Offre
 
-990 €. 7 jours ouvrés. Conception seulement. Meridian fictif. Bouton : « Obtenir mon architecture ». Aucune preuve inventée.
+990 €. 7 jours. Conception seulement. Meridian fictif. Bouton : « Obtenir mon architecture ».
 
 ## Séquence
 
-1. Observe avec REA (`/observer-avec-rea`) : structure, copy, UX. Pas de copie.
-2. Confirme ou écris `DESIGN.md` (`/definir-le-design-system`).
-3. Construis (`/construire-la-page`).
-4. Vérifie avec captures 1280 et 390 (`/verifier-la-page`).
+1. REA.
+2. Design system.
+3. Construction.
+4. Animation selon MOTION.md.
+5. Visuels schéma WebP.
+6. Playwright 1280 et 390.
+7. Vérification.
 
-Ne dis pas que c’est fait sans les captures.
+Ne dis pas que c’est fait sans captures Playwright.
 
 ## Visuel
 
-Fond `#090a0b`. Pas de dégradé sur le texte. Pas de tableau. Pas de carte vide. Schéma large. Corps ≥ 16 px mobile.
+Fond `#090a0b`. Pas de dégradé sur texte. Pas de tableau. Pas de carte vide. Corps ≥ 16 px mobile.
+
+## Motion
+
+Transform et opacity seulement. Pas d’animation sur le LCP.
 
 ## Légal
 
-Ne touche pas aux pages `cgv/`, `mentions-legales/`, `confidentialite/`.
+Ne touche pas aux pages légales.
