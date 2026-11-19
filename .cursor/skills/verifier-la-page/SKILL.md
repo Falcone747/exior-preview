@@ -1,16 +1,18 @@
 ---
 name: verifier-la-page
-description: Vérifie la page EXIOR avant de dire que c’est fait.
+description: Vérifie la page EXIOR avant de dire que c’est fait. Contraste, formulaire, performance, mobile, preuves, captures.
 ---
 
 # Vérifier la page
 
+Ne dis pas que c’est fait tant que chaque ligne n’est pas vraie.
+
 ## Offre
 
 - 990 €, 7 jours ouvrés, conception seulement.
-- Meridian fictif.
-- Bouton identique.
-- Aucune preuve inventée.
+- Meridian marqué fictif.
+- Bouton « Obtenir mon architecture » partout.
+- Aucun client, chiffre ou visage inventé.
 
 ## Contraste
 
@@ -32,9 +34,15 @@ description: Vérifie la page EXIOR avant de dire que c’est fait.
 
 ## Performance
 
-- LCP ≤ 2.5 s. Pas d’opacité 0 hero.
+- LCP ≤ 2.5 s. Pas d’opacité 0 sur le hero.
 - CLS ≤ 0.1.
 - Images WebP < 200 Ko.
+
+## Preuve visuelle
+
+- Capture 1280 px : hero lisible, schéma large, bouton visible.
+- Capture 390 px : pas de débordement, bouton accessible sans zoom.
+- Colle les chemins des captures dans ta réponse.
 
 ## Légal
 

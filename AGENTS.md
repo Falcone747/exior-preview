@@ -32,12 +32,17 @@ npx rea-agents@latest setup --client cursor
 
 Redémarre Cursor. Un seul canal. Tu observes la structure. Tu ne copies ni phrase, ni chiffre, ni visage.
 
-## Avant de dire que c’est fait
+## Séquence obligatoire
 
-Lance `/verifier-la-page`. Ne dis pas que c’est fait tant que la liste est vide.
+1. `/definir-le-design-system` — confirme ou écris `DESIGN.md`.
+2. `/construire-la-page` — construis selon le design system.
+3. `/verifier-la-page` — captures 1280 et 390 obligatoires.
+
+Ne dis pas que c’est fait tant que la liste de vérification est vide et que les captures sont collées.
 
 ## Skills
 
+- `/definir-le-design-system`
 - `/construire-la-page`
 - `/ecrire-le-copy`
 - `/verifier-la-page`
