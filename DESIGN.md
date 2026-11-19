@@ -30,7 +30,11 @@ Signature : « EXIOR transforme l’innovation mondiale en avantage compétitif.
 
 Offre (décision du 19.11.2026, éditable uniquement dans `assets/offre.js`) : architecture personnalisée, 990 € HT, paiement unique, livrée en 7 jours ouvrés après réception du dossier complet. Conception seulement. Déploiement, Espace EXIOR, hébergement et exploitation : devis séparé.
 
-CTA permanent : « Obtenir mon architecture ».
+CTA principal : « Obtenir mon architecture — 990 € ». Secondaire : « Découvrir la méthode ». Fermeture : « Concevoir mon architecture — 990 € ».
+
+## Pages
+
+Accueil, architecture évolutive, comment ça marche, applications métiers, méthode, questions, commander.
 
 ## Interdit
 
@@ -38,7 +42,7 @@ Preuve inventée. Client inventé. Chiffre de gain non mesuré. Promesse de remb
 
 ## Parcours de l’accueil
 
-Hero (schéma monde → signal → contexte → décision → capacité, Meridian fictif). Quatre états du démonstrateur. Méthode. Offre. Questions. Dossier.
+Hero (outils et données → orchestration → exécution → validation humaine → action, Meridian fictif). Problème. Cinq leviers. Offre. Exemples. Contrôle. Fermeture.
 
 ## Démonstrateur
 
