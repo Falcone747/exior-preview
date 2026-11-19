@@ -30,18 +30,20 @@ Puis ouvre `http://127.0.0.1:8080` en 1280 et en 390.
 npx rea-agents@latest setup --client cursor
 ```
 
-Redémarre Cursor. Un seul canal. Tu observes la structure. Tu ne copies ni phrase, ni chiffre, ni visage.
+Redémarre Cursor. Un seul canal.
 
 ## Séquence obligatoire
 
-1. `/definir-le-design-system` — confirme ou écris `DESIGN.md`.
-2. `/construire-la-page` — construis selon le design system.
-3. `/verifier-la-page` — captures 1280 et 390 obligatoires.
+1. `/observer-avec-rea` — structure, copy, UX d’une page réelle. Pas de copie.
+2. `/definir-le-design-system` — confirme ou écris `DESIGN.md`.
+3. `/construire-la-page` — construis selon le design system.
+4. `/verifier-la-page` — captures 1280 et 390 obligatoires.
 
 Ne dis pas que c’est fait tant que la liste de vérification est vide et que les captures sont collées.
 
 ## Skills
 
+- `/observer-avec-rea`
 - `/definir-le-design-system`
 - `/construire-la-page`
 - `/ecrire-le-copy`

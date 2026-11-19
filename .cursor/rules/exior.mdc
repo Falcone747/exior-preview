@@ -11,9 +11,10 @@ description: Règles dures EXIOR. L’agent ne peut pas les contourner.
 
 ## Séquence
 
-1. Confirme ou écris `DESIGN.md` (`/definir-le-design-system`).
-2. Construis (`/construire-la-page`).
-3. Vérifie avec captures 1280 et 390 (`/verifier-la-page`).
+1. Observe avec REA (`/observer-avec-rea`) : structure, copy, UX. Pas de copie.
+2. Confirme ou écris `DESIGN.md` (`/definir-le-design-system`).
+3. Construis (`/construire-la-page`).
+4. Vérifie avec captures 1280 et 390 (`/verifier-la-page`).
 
 Ne dis pas que c’est fait sans les captures.
 
