@@ -1,14 +1,26 @@
 ---
-description: Offre EXIOR figée. Ne pas inventer de preuve. Ne pas toucher aux pages légales.
 alwaysApply: true
+description: Règles dures EXIOR. L’agent ne peut pas les contourner.
 ---
 
-Lis `AGENTS.md` et `DESIGN.md` avant d’écrire.
+# EXIOR
 
-- 990 €, 7 jours ouvrés après dossier complet, conception seulement.
-- Meridian fictif. Espace = vision.
-- Bouton : « Obtenir mon architecture ».
-- Pas de client, chiffre ou visage inventé.
-- Pas de copie d’entrepreneurs.com, Zapier, Accenture.
-- Pages légales intactes.
-- Avant de livrer : 1280 et 390.
+## Offre
+
+990 €. 7 jours ouvrés. Conception seulement. Meridian fictif. Bouton : « Obtenir mon architecture ». Aucune preuve inventée.
+
+## Séquence
+
+1. Confirme ou écris `DESIGN.md` (`/definir-le-design-system`).
+2. Construis (`/construire-la-page`).
+3. Vérifie avec captures 1280 et 390 (`/verifier-la-page`).
+
+Ne dis pas que c’est fait sans les captures.
+
+## Visuel
+
+Fond `#090a0b`. Pas de dégradé sur le texte. Pas de tableau. Pas de carte vide. Schéma large. Corps ≥ 16 px mobile.
+
+## Légal
+
+Ne touche pas aux pages `cgv/`, `mentions-legales/`, `confidentialite/`.
