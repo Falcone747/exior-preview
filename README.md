@@ -1,9 +1,9 @@
-# EXIOR — aperçu
+# Aperçu EXIOR
 
-Aperçu statique du site EXIOR, publié sur GitHub Pages.
+Prévisualisation publique de la nouvelle page d’accueil, **hors production**.
 
-- Adresse : https://falcone747.github.io/exior-preview/
-- Les commandes ne sont **pas** enregistrées.
-- `noindex` est activé ; ce dépôt peut être supprimé à tout moment.
+- Site officiel inchangé : https://exior.io
+- Les boutons et liens légaux (commander, CGV, mentions, confidentialité) pointent vers exior.io.
+- `noindex` : cette adresse n’est pas destinée à être indexée.
 
-Ce dépôt ne contient que les fichiers de l’aperçu, pas le code source du site.
+Pages : https://falcone747.github.io/exior-preview/
