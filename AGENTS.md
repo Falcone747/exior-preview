@@ -34,15 +34,11 @@ Redémarre Cursor. Un seul canal. Tu observes la structure. Tu ne copies ni phra
 
 ## Avant de dire que c’est fait
 
-- 1280 et 390 regardés.
-- Schéma lisible sans le paragraphe.
-- Aucune preuve inventée.
-- Bouton identique partout.
-- Pages légales intactes.
-- Mouvement conforme à `MOTION.md`.
+Lance `/verifier-la-page`. Ne dis pas que c’est fait tant que la liste est vide.
 
 ## Skills
 
 - `/construire-la-page`
 - `/ecrire-le-copy`
+- `/verifier-la-page`
 - `/creer-un-agent-expert`
