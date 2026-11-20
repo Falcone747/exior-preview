@@ -4,17 +4,18 @@ Contrat court. Visuel dans `DESIGN.md`. Mouvement dans `MOTION.md`. Procédures 
 
 ## Source de vérité pour la vente
 
-Document Drive : « EXIOR — Architecture du site, parcours de conversion et démonstrations » (02.11.2026). 990 € HT. Quatre semaines. Espace EXIOR inclus. Conception seulement. Signature : « EXIOR transforme l’innovation mondiale en avantage compétitif. »
+Offre : architecture personnalisée, 990 € HT, paiement unique, 7 jours ouvrés après réception du dossier complet, conception seulement. Espace EXIOR et déploiement sur devis. Termes éditables dans `assets/offre.js`.
 
 ## Priorité
 
-1. Le document Drive prime.
-2. Le message de Guillaume prime sur ce fichier.
-3. Ce fichier prime sur une règle générique.
+1. Le message de Guillaume.
+2. `docs/sources/01-pages-de-vente-2026-11-19.md` — texte et structure des pages. En cas de conflit sur l’offre ou le texte, ce document gagne.
+3. `docs/sources/drive-architecture-2026-11-02.md` — moteur visuel, démonstrations, règle « une page = une intention = une preuve = un CTA ».
+4. Ce fichier prime sur une règle générique.
 
 ## Style
 
-Entre Linear et Cursor. Fond `#08090a`. Accent unique `#f54e00`. Inter Variable. Retenue. Le schéma porte.
+Entre Linear et Cursor. Fond `#090a0b`. Accent unique `#f54e00`. Inter Variable. Retenue. Le schéma porte.
 
 ## Séquence obligatoire
 
