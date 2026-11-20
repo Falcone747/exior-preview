@@ -41,7 +41,7 @@
 <main id="contenu">
 
 <section class="hero">
-  <div class="wrap hero-in">
+  <div class="wrap hero-split">
     <div>
       <p class="eyebrow">EXIOR — Enterprise transformation</p>
       <h1>Transformez le fonctionnement de votre entreprise.</h1>
@@ -54,34 +54,14 @@
       </div>
       <p class="micro">Conception personnalisée. Déploiement technique et exploitation proposés séparément, sur devis.</p>
     </div>
-    <div>
-      <figure class="figure"><img src="assets/visuels/hero-accueil.webp" width="1280" height="720" alt="Réseau abstrait de blocs reliés, fond sombre, un nœud orangé. Aucune donnée réelle." fetchpriority="high"></figure>
-      <p class="label" style="margin-top:16px">Meridian · entreprise fictive</p>
-      <ol class="chain chain-live">
-<li>
-<div class="step"><span class="n">01</span><strong>Outils et données</strong></div>
-<p>Logiciels, dossiers et référentiels déjà en place chez Meridian.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">02</span><strong>Orchestration</strong></div>
-<p>L’événement ouvre un parcours : état, donnée qui fait foi, prochaine tâche.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">03</span><strong>Exécution</strong></div>
-<p>Un agent spécialisé, une règle ou un collaborateur reçoit la tâche permise.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">04</span><strong>Validation humaine</strong></div>
-<p>Décision, risque ou responsabilité : le flux s’arrête sur une personne.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">05</span><strong>Action</strong></div>
-<p>L’écriture part dans l’outil autorisé. Le journal garde la trace.</p>
-</li>
+    <div class="schema">
+      <p class="label">Meridian · entreprise fictive</p>
+      <ol class="rail live">
+<li><span class="k">01</span><div><strong>Outils et données</strong><p>Logiciels, dossiers et référentiels déjà en place chez Meridian.</p></div></li>
+<li><span class="k">02</span><div><strong>Orchestration</strong><p>L’événement ouvre un parcours : état, donnée qui fait foi, prochaine tâche.</p></div></li>
+<li><span class="k">03</span><div><strong>Exécution</strong><p>Un agent spécialisé, une règle ou un collaborateur reçoit la tâche permise.</p></div></li>
+<li><span class="k">04</span><div><strong>Validation humaine</strong><p>Décision, risque ou responsabilité : le flux s’arrête sur une personne.</p></div></li>
+<li><span class="k">05</span><div><strong>Action</strong><p>L’écriture part dans l’outil autorisé. Le journal garde la trace.</p></div></li>
 </ol>
       <p class="fine">Meridian n’est pas un client. La chaîne montre un fonctionnement conçu, pas un agent en production.</p>
     </div>
@@ -93,31 +73,12 @@
       <h2>Vos logiciels travaillent. Qui fait travailler l’ensemble&nbsp;?</h2>
       <p>Chaque outil accomplit sa fonction. La coordination entre eux reste souvent humaine. C’est dans le passage d’un système à l’autre que se forment ressaisies, attentes et dossiers sans statut.</p>
     </div>
-    <ol class="chain">
-<li>
-<div class="step"><span class="n">1</span><strong>Email reçu</strong></div>
-<p>L’événement entre. Rien n’est encore un dossier.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">2</span><strong>Dossier</strong></div>
-<p>La référence métier est cherchée à la main.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">3</span><strong>Logiciel métier</strong></div>
-<p>Une information est contrôlée dans un second outil.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">4</span><strong>Collègue</strong></div>
-<p>Une question part, sans file d’attente ni échéance.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">5</span><strong>Tableau</strong></div>
-<p>Le statut est recopié. La trace dépend de la personne.</p>
-</li>
+    <ol class="rail">
+<li><span class="k">1</span><div><strong>Email reçu</strong><p>L’événement entre. Rien n’est encore un dossier.</p></div></li>
+<li><span class="k">2</span><div><strong>Dossier</strong><p>La référence métier est cherchée à la main.</p></div></li>
+<li><span class="k">3</span><div><strong>Logiciel métier</strong><p>Une information est contrôlée dans un second outil.</p></div></li>
+<li><span class="k">4</span><div><strong>Collègue</strong><p>Une question part, sans file d’attente ni échéance.</p></div></li>
+<li><span class="k">5</span><div><strong>Tableau</strong><p>Le statut est recopié. La trace dépend de la personne.</p></div></li>
 </ol>
   </div>
 </section>
@@ -177,81 +138,32 @@
       <article>
         <figure class="figure"><img src="assets/visuels/ex-syndic.webp" width="960" height="720" alt="Flux abstrait de documents vers une forme bâtie. Scénario fictif, sans personne." loading="lazy"></figure>
         <h3 style="margin-top:14px">Cabinet de syndic</h3>
-        <ol class="chain">
-<li>
-<div class="step"><span class="n">1</span><strong>Document reçu</strong></div>
-<p>Email entrant.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">2</span><strong>Copropriété</strong></div>
-<p>Identification de la référence.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">3</span><strong>Pièces</strong></div>
-<p>Contrôle. Écart = exception.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">4</span><strong>Écriture</strong></div>
-<p>Préparation comptable.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">5</span><strong>Validation</strong></div>
-<p>Une personne autorise l’action finale.</p>
-</li>
+        <ol class="rail">
+<li><span class="k">1</span><div><strong>Document reçu</strong><p>Email entrant.</p></div></li>
+<li><span class="k">2</span><div><strong>Copropriété</strong><p>Identification de la référence.</p></div></li>
+<li><span class="k">3</span><div><strong>Pièces</strong><p>Contrôle. Écart = exception.</p></div></li>
+<li><span class="k">4</span><div><strong>Écriture</strong><p>Préparation comptable.</p></div></li>
+<li><span class="k">5</span><div><strong>Validation</strong><p>Une personne autorise l’action finale.</p></div></li>
 </ol>
       </article>
       <article>
         <figure class="figure"><img src="assets/visuels/ex-comptable.webp" width="960" height="720" alt="Dalles abstraites et bifurcation orangée. Scénario fictif de dossier comptable." loading="lazy"></figure>
         <h3 style="margin-top:14px">Cabinet comptable</h3>
-        <ol class="chain">
-<li>
-<div class="step"><span class="n">1</span><strong>Pièce manquante</strong></div>
-<p>Détection dans le dossier.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">2</span><strong>Demande</strong></div>
-<p>Le message est préparé, pas envoyé sans règle.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">3</span><strong>Suivi</strong></div>
-<p>Le dossier a un état.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">4</span><strong>Exception</strong></div>
-<p>Le collaborateur reçoit le cas, au moment utile.</p>
-</li>
+        <ol class="rail">
+<li><span class="k">1</span><div><strong>Pièce manquante</strong><p>Détection dans le dossier.</p></div></li>
+<li><span class="k">2</span><div><strong>Demande</strong><p>Le message est préparé, pas envoyé sans règle.</p></div></li>
+<li><span class="k">3</span><div><strong>Suivi</strong><p>Le dossier a un état.</p></div></li>
+<li><span class="k">4</span><div><strong>Exception</strong><p>Le collaborateur reçoit le cas, au moment utile.</p></div></li>
 </ol>
       </article>
       <article>
         <figure class="figure"><img src="assets/visuels/ex-services.webp" width="960" height="720" alt="Chemin abstrait entre blocs. Scénario fictif d’une demande de service." loading="lazy"></figure>
         <h3 style="margin-top:14px">Entreprise de services</h3>
-        <ol class="chain">
-<li>
-<div class="step"><span class="n">1</span><strong>Demande</strong></div>
-<p>Réception.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">2</span><strong>Devis</strong></div>
-<p>Préparé dans l’outil commercial.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">3</span><strong>Intervention</strong></div>
-<p>Planifiée. L’imprévu revient à une personne.</p>
-<div class="flow" aria-hidden="true"><i></i></div>
-</li>
-<li>
-<div class="step"><span class="n">4</span><strong>Facture</strong></div>
-<p>Après l’étape qui la déclenche.</p>
-</li>
+        <ol class="rail">
+<li><span class="k">1</span><div><strong>Demande</strong><p>Réception.</p></div></li>
+<li><span class="k">2</span><div><strong>Devis</strong><p>Préparé dans l’outil commercial.</p></div></li>
+<li><span class="k">3</span><div><strong>Intervention</strong><p>Planifiée. L’imprévu revient à une personne.</p></div></li>
+<li><span class="k">4</span><div><strong>Facture</strong><p>Après l’étape qui la déclenche.</p></div></li>
 </ol>
       </article>
     </div>
