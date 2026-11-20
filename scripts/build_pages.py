@@ -5,18 +5,11 @@ from pathlib import Path
 ROOT = Path("/workspace")
 
 def chain(steps, live=False):
-    cls = "chain chain-live" if live else "chain"
+    cls = "rail live" if live else "rail"
     parts = [f'<ol class="{cls}">']
-    for i, (n, title, text) in enumerate(steps):
-        parts.append("<li>")
-        parts.append(
-            f'<div class="step"><span class="n">{n}</span><strong>{title}</strong></div>'
-        )
-        if text:
-            parts.append(f"<p>{text}</p>")
-        if i < len(steps) - 1:
-            parts.append('<div class="flow" aria-hidden="true"><i></i></div>')
-        parts.append("</li>")
+    for n, title, text in steps:
+        body = f"<p>{text}</p>" if text else ""
+        parts.append(f"<li><span class=\"k\">{n}</span><div><strong>{title}</strong>{body}</div></li>")
     parts.append("</ol>")
     return "\n".join(parts)
 
@@ -118,7 +111,7 @@ home_chain = chain([
 
 home = f"""
 <section class="hero">
-  <div class="wrap hero-in">
+  <div class="wrap hero-split">
     <div>
       <p class="eyebrow">EXIOR — Enterprise transformation</p>
       <h1>Transformez le fonctionnement de votre entreprise.</h1>
@@ -131,9 +124,8 @@ home = f"""
       </div>
       <p class="micro">Conception personnalisée. Déploiement technique et exploitation proposés séparément, sur devis.</p>
     </div>
-    <div>
-      {figure(P, "hero-accueil.webp", 1280, 720, "Réseau abstrait de blocs reliés, fond sombre, un nœud orangé. Aucune donnée réelle.", True)}
-      <p class="label" style="margin-top:16px">Meridian · entreprise fictive</p>
+    <div class="schema">
+      <p class="label">Meridian · entreprise fictive</p>
       {home_chain}
       <p class="fine">Meridian n’est pas un client. La chaîne montre un fonctionnement conçu, pas un agent en production.</p>
     </div>
