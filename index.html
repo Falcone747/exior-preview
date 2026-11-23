@@ -81,13 +81,14 @@
                 </span>
               </div>
               <p class="feed-title">Activité des agents</p>
-              <ul class="feed">
+              <ul class="feed" data-live="feed">
                 <li><i class="dot"></i><span><strong>Finance</strong> — Clôture du mois préparée</span></li>
                 <li><i class="dot"></i><span><strong>Juridique</strong> — Contrat fournisseur analysé</span></li>
                 <li><i class="dot"></i><span><strong>Commercial</strong> — Relances clients envoyées en brouillon</span></li>
                 <li><i class="dot"></i><span><strong>Sécurité</strong> — Accès vérifiés</span></li>
               </ul>
-              <div class="ask"><span>Demander à EXIOR...</span></div>
+              <p class="bubble ag hero-reply" data-live="reply"><b>Finance</b><span>La clôture est préparée en brouillon. Elle attend une relecture.</span></p>
+              <div class="ask" data-live="ask" data-question="Prépare la clôture du mois."><span>Demander à EXIOR...</span></div>
             </section>
             <aside class="live">
               <div class="live-card">
@@ -109,29 +110,49 @@
   </section>
 
   <section class="sec" id="meta-os" data-shot="meta-os" data-reveal>
-    <div class="wrap cols">
-      <article>
-        <h2>Jumeau numérique</h2>
-        <p>EXIOR crée le jumeau numérique de l’entreprise : ses fonctions, ses flux, ses outils, ses responsabilités.</p>
-      </article>
-      <article>
-        <h2>Agents experts générés automatiquement</h2>
-        <p>Les agents naissent des fonctions de l’entreprise. Finance, juridique, commercial, et chaque fonction qui suit.</p>
-      </article>
-      <article>
-        <h2>Sécurité et permissions</h2>
-        <p>Chaque agent a un périmètre, des droits et une isolation. Une red team éprouve les accès.</p>
-      </article>
+    <div class="wrap">
+      <div class="cols stagger">
+        <article>
+          <h2>Jumeau numérique</h2>
+          <p>EXIOR crée le jumeau numérique de l’entreprise : ses fonctions, ses flux, ses outils, ses responsabilités.</p>
+        </article>
+        <article>
+          <h2>Agents experts générés automatiquement</h2>
+          <p>Les agents naissent des fonctions de l’entreprise. Finance, juridique, commercial, et chaque fonction qui suit.</p>
+        </article>
+        <article>
+          <h2>Sécurité et permissions</h2>
+          <p>Chaque agent a un périmètre, des droits et une isolation. Une red team éprouve les accès.</p>
+        </article>
+      </div>
+      <div class="term" data-live="code">
+        <div class="term-bar"><i></i><i></i><i></i><span>agent.exior</span></div>
+        <pre class="term-out">› exior.jumeau.ouvrir(entreprise)
+› exior.agent.generer("Finance")
+› exior.permission.limiter(agent, perimetre)
+› exior.isolation.verifier(agent)
+› exior.redteam.eprouver(acces)</pre>
+      </div>
     </div>
   </section>
 
   <section class="sec" id="agents" data-shot="agents" data-reveal>
     <div class="wrap">
-      <div class="sec-head">
-        <h2>Vos agents</h2>
-        <p class="lead">EXIOR génère les agents experts des fonctions de l’entreprise. Chacun tient le travail sur écran de sa fonction.</p>
+      <div class="showcase">
+        <div class="showcase-copy">
+          <h2>Vos agents</h2>
+          <p class="lead">EXIOR génère les agents experts des fonctions de l’entreprise. Chacun tient le travail sur écran de sa fonction.</p>
+        </div>
+        <div class="chat" data-live="chat">
+          <p class="bubble you"><b>Vous</b><span>Prépare la clôture du mois.</span></p>
+          <p class="bubble ag"><b>Finance</b><span>La clôture est préparée en brouillon. Elle attend une relecture.</span></p>
+          <p class="bubble you"><b>Vous</b><span>Où en est le contrat fournisseur ?</span></p>
+          <p class="bubble ag"><b>Juridique</b><span>Le contrat est analysé. La signature reste à une personne.</span></p>
+          <p class="bubble you"><b>Vous</b><span>Les relances clients peuvent-elles partir ?</span></p>
+          <p class="bubble ag"><b>Commercial</b><span>Les relances sont en brouillon. L’envoi attend une validation.</span></p>
+        </div>
       </div>
-      <div class="grid">
+      <div class="grid stagger">
         <article class="agent"><header><i class="av"></i><h3>Finance</h3></header><p class="task">Clôture du mois préparée</p><p class="meta"><i class="dot"></i>Brouillon pour relecture</p></article>
         <article class="agent"><header><i class="av"></i><h3>Juridique</h3></header><p class="task">Contrat fournisseur analysé</p><p class="meta"><i class="dot"></i>Signature laissée à une personne</p></article>
         <article class="agent"><header><i class="av"></i><h3>Commercial</h3></header><p class="task">Relances clients en brouillon</p><p class="meta"><i class="dot"></i>Envoi après validation</p></article>
@@ -151,6 +172,15 @@
         <h2>Connecteurs et intégrations</h2>
         <p class="lead">Les agents travaillent dans les outils de l’entreprise. Messagerie, documents, comptabilité, relation client, signature, annuaire.</p>
       </div>
+      <div class="term" data-live="code">
+        <div class="term-bar"><i></i><i></i><i></i><span>connecteurs.exior</span></div>
+        <pre class="term-out">› exior.connecteur.lier("Comptabilité")
+› exior.connecteur.lier("Documents")
+› exior.connecteur.lier("Relation client")
+› exior.connecteur.lier("Signature")
+› exior.permission.accorder(agent, outil)
+› exior.isolation.confirmer(agent)</pre>
+      </div>
       <div class="board" data-schema>
         <div class="board-h"><span>Agent</span><span>Outil</span><span>État</span></div>
         <div class="board-row"><p><span class="k">Agent</span>Finance</p><p><span class="k">Outil</span>Comptabilité</p><p><span class="k">État</span><i data-node></i>Écriture préparée</p></div>
@@ -164,19 +194,26 @@
   <section class="sec" id="comment" data-shot="comment" data-reveal>
     <div class="wrap">
       <h2>Comment ça marche</h2>
-      <div class="steps">
+      <div class="steps stagger">
         <article><span class="num">01</span><h3>Activez</h3><p>Vous activez EXIOR pour votre entreprise.</p></article>
         <article><span class="num">02</span><h3>EXIOR configure</h3><p>Le jumeau numérique, les agents, les connecteurs et les permissions se mettent en place.</p></article>
         <article><span class="num">03</span><h3>Vos agents travaillent</h3><p>Les agents tiennent le travail sur écran. La relation et la signature restent aux personnes.</p></article>
       </div>
       <p class="note">La mise en service suit l’architecture. Elle est sur devis.</p>
+      <div class="term" data-live="code">
+        <div class="term-bar"><i></i><i></i><i></i><span>parcours.exior</span></div>
+        <pre class="term-out">› exior.activer(entreprise)
+› exior.configurer(jumeau, agents, connecteurs, permissions)
+› exior.agents.travailler()
+› exior.signature.laisser(personne)</pre>
+      </div>
     </div>
   </section>
 
   <section class="sec" id="ressources" data-shot="ressources" data-reveal>
     <div class="wrap">
       <h2>Ressources</h2>
-      <div class="dir">
+      <div class="dir stagger">
         <a href="#meta-os"><strong>Meta OS</strong><span>Jumeau numérique, agents, permissions.</span></a>
         <a href="#agents"><strong>Agents</strong><span>Les fonctions de l’entreprise.</span></a>
         <a href="#connecteurs"><strong>Connecteurs</strong><span>Les outils, nommés simplement.</span></a>
@@ -189,7 +226,7 @@
   <section class="sec" id="tarifs" data-shot="tarifs" data-reveal>
     <div class="wrap">
       <h2>Tarifs</h2>
-      <div class="prices">
+      <div class="prices stagger">
         <article class="price">
           <h3 data-offre="produit">Architecture évolutive de votre entreprise</h3>
           <p class="amount" data-offre="prixHt">990&nbsp;€ HT</p>

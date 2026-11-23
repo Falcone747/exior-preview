@@ -53,6 +53,7 @@ for (const view of views) {
     }
     window.scrollTo(0, 0);
   });
+  await page.waitForTimeout(1800);
   await page.waitForFunction(() =>
     Array.from(document.querySelectorAll("[data-reveal]")).every((el) => el.classList.contains("in")),
     null,
@@ -89,7 +90,10 @@ for (const view of views) {
   await page.addStyleTag({ content: ".sticky{display:none !important}" });
   for (const id of shots) {
     const el = page.locator(`[data-shot="${id}"]`);
-    if (await el.count()) await el.screenshot({ path: path.join(dir, id + ".png") });
+    if (!(await el.count())) continue;
+    await el.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1600);
+    await el.screenshot({ path: path.join(dir, id + ".png") });
   }
   await page.close();
 }

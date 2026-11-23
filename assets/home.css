@@ -155,12 +155,15 @@ button, input, textarea { font: inherit; color: inherit; }
 }
 .land {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: -12%;
   width: 100%;
-  height: 100%;
+  height: 124%;
   max-width: none;
   object-fit: cover;
   object-position: 72% 42%;
+  will-change: transform;
 }
 .app {
   position: relative;
@@ -472,15 +475,123 @@ textarea { min-height: 96px; resize: vertical; }
 
 :focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
-.js [data-reveal] { opacity: 0; transform: translateY(8px); }
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+}
 .js [data-reveal].in {
   opacity: 1;
   transform: none;
-  transition: opacity var(--base) var(--ease), transform var(--base) var(--ease);
+  filter: none;
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease), filter var(--slow) var(--ease);
 }
+.js .stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(4px);
+}
+.js .in .stagger > *,
+.js .stagger.in > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease), filter var(--slow) var(--ease);
+}
+.js .stagger > *:nth-child(2),
+.js .in .stagger > *:nth-child(2) { transition-delay: 70ms; }
+.js .stagger > *:nth-child(3),
+.js .in .stagger > *:nth-child(3) { transition-delay: 140ms; }
+.js .stagger > *:nth-child(4),
+.js .in .stagger > *:nth-child(4) { transition-delay: 210ms; }
+.js .stagger > *:nth-child(n + 5),
+.js .in .stagger > *:nth-child(n + 5) { transition-delay: 260ms; }
 [data-node] { opacity: 0.4; }
 [data-node].on { opacity: 1; transition: opacity var(--slow) var(--ease); }
 
+.showcase {
+  display: grid;
+  gap: 28px;
+  align-items: start;
+}
+.chat, .term {
+  background: #0e0e11;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: transform 150ms var(--ease);
+}
+.chat:hover, .term:hover, .agent:hover, .price:hover { transform: translateY(-2px); }
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  min-height: 280px;
+}
+.bubble {
+  margin: 0;
+  max-width: min(100%, 440px);
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.bubble b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 560;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.bubble.you { align-self: flex-end; background: #18181c; }
+.bubble.ag { align-self: flex-start; background: #14121c; border-color: rgba(122, 69, 245, 0.45); }
+.bubble.ag b { color: #ddd4ff; }
+.hero-reply { display: block; margin: 12px 0 0; max-width: 100%; }
+.js .hero-reply { display: none; }
+.js .hero-reply.on { display: block; }
+.ask .on { color: var(--text); }
+.caret {
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 2px;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
+.term { margin-top: 28px; overflow: hidden; }
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+.term-bar i { width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; }
+.term-bar i:first-child { background: var(--accent); }
+.term-bar span { margin-left: 8px; }
+.term-out {
+  margin: 0;
+  min-height: 8.4em;
+  padding: 14px 16px 18px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e4e4e8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 981px) {
+  .showcase { grid-template-columns: minmax(0, 0.82fr) minmax(280px, 1.18fr); gap: 48px; }
+  .showcase-copy { position: sticky; top: 96px; }
+}
 @media (max-width: 980px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .app { grid-template-columns: 200px minmax(0, 1fr); }
@@ -578,6 +689,14 @@ textarea { min-height: 96px; resize: vertical; }
     transition: none !important;
   }
   html { scroll-behavior: auto; }
-  .js [data-reveal] { opacity: 1; transform: none; }
+  .js [data-reveal],
+  .js .stagger > *,
+  .js .in .stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: 0s;
+  }
   [data-node] { opacity: 1; }
+  .caret { animation: none; }
 }
