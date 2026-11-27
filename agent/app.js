@@ -1,13 +1,15 @@
 import {
-  MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin, hasOpenRouterKey,
-} from "./lib/agent.js?v=4";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=4";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=4";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=4";
-import { getOpenRouterKey, setOpenRouterKey } from "./lib/openrouter.js?v=4";
+  MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
+} from "./lib/agent.js?v=5";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=5";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=5";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=5";
+import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=5";
 
 const $ = (id) => document.getElementById(id);
 
+let lfm2 = null;
+let lfm2Device = null;
 let conversation = { id: newId(), messages: [], updatedAt: Date.now() };
 let abort = null;
 let mcpClients = new Map();
@@ -40,18 +42,11 @@ function renderMarkdown(src) {
 }
 
 function showEmpty() {
-  const ready = hasOpenRouterKey();
-  $("messages").innerHTML = ready
-    ? `
+  $("messages").innerHTML = `
     <div class="empty">
-      <h1>Agent EXIOR, branché sur vos apps</h1>
-      <p>Le modèle <strong>${escapeHtml(MODEL_LABEL)}</strong> répond tout de suite. Posez une question, ou ouvrez les connecteurs pour relier une app (GitHub, Notion, Linear…).</p>
-    </div>`
-    : `
-    <div class="empty">
-      <h1>Agent EXIOR, branché sur vos apps</h1>
-      <p>Collez une fois votre <strong>clé OpenRouter</strong> (gratuite) dans le champ ci-dessus. Elle reste dans ce navigateur et n’est envoyée qu’à OpenRouter. Ensuite le modèle ${escapeHtml(MODEL_LABEL)} répond sans téléchargement.</p>
-      <p>Créez une clé sur <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">openrouter.ai/keys</a>, puis reliez vos apps dans le panneau Connecteurs.</p>
+      <h1>Agent EXIOR, sur votre appareil</h1>
+      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
+      <p>Chargez le modèle, puis posez une question. L'agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP. Sans WebGPU, il fonctionne quand même, plus lentement.</p>
     </div>`;
 }
 
@@ -66,33 +61,18 @@ function appendMsg(role, html, { cls } = {}) {
   return el;
 }
 
+function setProgress(frac, text) {
+  const wrap = $("progress");
+  wrap.classList.toggle("hidden", !text && !frac);
+  $("prog-bar").style.width = `${Math.round((frac || 0) * 100)}%`;
+  $("prog-text").textContent = text || "";
+}
+
 function setReady(ready) {
   $("input").disabled = !ready;
   $("btn-send").disabled = !ready;
   if (ready) $("input").placeholder = "Écrivez votre message…";
-  else $("input").placeholder = "Collez d’abord votre clé OpenRouter…";
-}
-
-function thinkingPref() {
-  return $("thinking").value || "auto";
-}
-
-function renderKeyState() {
-  const state = $("key-state");
-  if (hasOpenRouterKey()) {
-    state.className = "key-state ok";
-    state.textContent = "Clé enregistrée dans ce navigateur. Vous pouvez écrire.";
-    $("or-key").placeholder = "••••••••  (déjà enregistrée — collez-en une autre pour la remplacer)";
-    $("or-key").value = "";
-    $("btn-save-key").textContent = "Mettre à jour";
-    setReady(true);
-  } else {
-    state.className = "key-state";
-    state.textContent = "";
-    $("or-key").placeholder = "sk-or-v1-… collée une seule fois";
-    $("btn-save-key").textContent = "Enregistrer";
-    setReady(false);
-  }
+  else $("input").placeholder = "Chargez d’abord le modèle…";
 }
 
 function renderBuiltins() {
@@ -252,6 +232,29 @@ async function addPreset(id) {
   await addConnector(connector, status);
 }
 
+async function loadEngine() {
+  $("btn-load").disabled = true;
+  setProgress(0.01, "Préparation de LFM2 1.2B…");
+  try {
+    const { generator, device } = await loadLFM2Engine((info) => {
+      setProgress(info.frac || 0, info.text || "Chargement…");
+    });
+    lfm2 = generator;
+    lfm2Device = device;
+    const mode = device === "webgpu" ? "WebGPU" : "WASM (plus lent, sans WebGPU)";
+    setProgress(1, "Modèle prêt. Vous pouvez écrire.");
+    setReady(true);
+    $("btn-load").textContent = "Modèle chargé";
+    appendMsg("system", `Modèle ${escapeHtml(MODEL_LABEL)} prêt (${mode}).`);
+    setTimeout(() => $("progress").classList.add("hidden"), 1600);
+  } catch (err) {
+    setProgress(0, "");
+    $("progress").classList.add("hidden");
+    $("btn-load").disabled = false;
+    appendMsg("system", `Impossible de charger le modèle : ${escapeHtml(err.message || err)}`, { cls: "error" });
+  }
+}
+
 async function newConversation() {
   conversation = { id: newId(), messages: [], updatedAt: Date.now() };
   await kvSet("currentConversation", conversation.id);
@@ -264,7 +267,7 @@ async function persist() {
 }
 
 async function send(text) {
-  if (!hasOpenRouterKey() || !text.trim()) return;
+  if (!lfm2 || !text.trim()) return;
   const userText = text.trim();
   $("input").value = "";
   autoSize();
@@ -291,11 +294,12 @@ async function send(text) {
   try {
     const history = conversation.messages.slice(0, -1);
     const result = await runAgentTurn({
+      lfm2,
       history,
       userText,
       toolDefs: toolCatalog(),
       executeTool,
-      thinkingPref: thinkingPref(),
+      thinkingPref: "off",
       signal: abort.signal,
       onPlan(plan) { bits.plan = plan; paint(); },
       onDelta(_d, full) { bits.body = full; paint(); },
@@ -330,7 +334,7 @@ async function send(text) {
     abort = null;
     $("btn-stop").classList.add("hidden");
     $("btn-send").classList.remove("hidden");
-    setReady(hasOpenRouterKey());
+    setReady(!!lfm2);
     $("input").focus();
   }
 }
@@ -356,7 +360,6 @@ function togglePanel(open) {
 async function init() {
   renderBuiltins();
   renderPresets();
-  renderKeyState();
   showEmpty();
   await renderNotes();
 
@@ -373,12 +376,8 @@ async function init() {
     appendMsg("system", "Connecteur « " + oauth.connector.name + " » autorisé.");
   }
 
-  const savedThink = await kvGet("thinkingPref");
-  if (savedThink) $("thinking").value = savedThink;
-  $("thinking").addEventListener("change", () => kvSet("thinkingPref", thinkingPref()));
-
   const convId = await kvGet("currentConversation");
-  if (convId && hasOpenRouterKey()) {
+  if (convId) {
     const existing = await getConversation(convId);
     if (existing?.messages?.length) {
       conversation = existing;
@@ -392,24 +391,7 @@ async function init() {
 
   await connectSaved();
 
-  $("key-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const typed = $("or-key").value;
-    if (!typed.trim() && hasOpenRouterKey()) {
-      renderKeyState();
-      return;
-    }
-    if (!typed.trim()) {
-      $("key-state").className = "key-state err";
-      $("key-state").textContent = "Collez une clé OpenRouter pour commencer.";
-      return;
-    }
-    setOpenRouterKey(typed);
-    $("or-key").value = "";
-    renderKeyState();
-    showEmpty();
-  });
-
+  $("btn-load").addEventListener("click", loadEngine);
   $("btn-new").addEventListener("click", newConversation);
   $("btn-panel").addEventListener("click", () => togglePanel());
   $("btn-panel-close").addEventListener("click", () => togglePanel(false));
