@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>EXIOR · Agent local</title>
+  <meta name="description" content="Agent IA local dans votre navigateur, avec outils et connecteurs MCP.">
+  <link rel="icon" href="../favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#input">Aller à la saisie</a>
+  <div id="gpu-banner" class="banner danger hidden" role="alert"></div>
+
+  <header class="top">
+    <a class="logo" href="../">EXIOR</a>
+    <span class="badge">Agent local</span>
+    <div class="top-actions">
+      <button id="btn-panel" type="button" class="btn-s" aria-expanded="false" aria-controls="panel">Connecteurs</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="chat-col">
+      <div class="toolbar">
+        <div class="model-pill" title="Qwen3-4B-q4f16_1-MLC">
+          <b>Qwen3 4B</b>
+          <span>dans votre navigateur · ~2,3 Go au premier chargement</span>
+        </div>
+        <label class="field">
+          <span>Réflexion</span>
+          <select id="thinking">
+            <option value="auto" selected>Auto</option>
+            <option value="off">Off (plus rapide)</option>
+            <option value="on">On</option>
+          </select>
+        </label>
+        <button id="btn-load" type="button" class="btn-p">Charger le modèle</button>
+        <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
+      </div>
+      <div id="progress" class="progress hidden">
+        <div class="bar" aria-hidden="true"><i id="prog-bar"></i></div>
+        <p id="prog-text"></p>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="composer" class="composer">
+        <label class="sr-only" for="input">Votre message</label>
+        <textarea id="input" rows="1" placeholder="Écrivez votre message…" disabled></textarea>
+        <button id="btn-send" type="submit" class="btn-p" disabled>Envoyer</button>
+        <button id="btn-stop" type="button" class="btn-s hidden">Arrêter</button>
+      </form>
+    </main>
+
+    <aside id="panel" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Outils et connecteurs</h2>
+        <button id="btn-panel-close" type="button" class="icon-btn" aria-label="Fermer">×</button>
+      </div>
+
+      <section>
+        <h3>Outils intégrés</h3>
+        <p class="hint">Toujours disponibles une fois le modèle chargé. Les notes restent dans ce navigateur.</p>
+        <ul id="builtin-list" class="tool-list"></ul>
+      </section>
+
+      <section>
+        <h3>Connecteurs MCP</h3>
+        <p class="hint">Reliez n’importe quel serveur MCP distant en HTTP streamable ou SSE. Le jeton, s’il y en a un, n’est stocké que dans ce navigateur (localStorage), jamais envoyé ailleurs que vers l’URL indiquée.</p>
+        <ul id="connector-list" class="connector-list"></ul>
+        <form id="connector-form" class="connector-form">
+          <h4>Ajouter un connecteur</h4>
+          <label class="field">
+            <span>Nom</span>
+            <input id="c-name" type="text" maxlength="80" placeholder="Mon serveur" required>
+          </label>
+          <label class="field">
+            <span>URL du serveur</span>
+            <input id="c-url" type="url" inputmode="url" placeholder="https://exemple.com/mcp" required>
+          </label>
+          <label class="field">
+            <span>Jeton bearer <em>(optionnel)</em></span>
+            <input id="c-token" type="password" autocomplete="off" placeholder="laissé vide si aucun">
+          </label>
+          <label class="check">
+            <input id="c-oauth" type="checkbox">
+            <span>Autoriser via OAuth (SDK MCP officiel)</span>
+          </label>
+          <button type="submit" class="btn-p">Ajouter et lister les outils</button>
+          <p id="c-status" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <section>
+        <h3>Notes locales</h3>
+        <div id="notes" class="notes"></div>
+      </section>
+
+      <p class="legal">Le modèle <strong>Qwen3 4B</strong> tourne sur <strong>votre appareil</strong> via WebGPU (WebLLM). Premier téléchargement : environ 2,3&nbsp;Go, puis il reste enregistré dans ce navigateur. Wi-Fi recommandé. Utilisez Chrome ou Edge à jour. Sur Android, ouvrez cette page dans Chrome. La réflexion longue est en auto&nbsp;: coupée pour le chat, activée pour le calcul et les tâches en plusieurs étapes.</p>
+    </aside>
+  </div>
+  <div id="backdrop" class="backdrop hidden"></div>
+</body>
+</html>
