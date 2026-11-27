@@ -1,4 +1,4 @@
-import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=10";
+import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=11";
 
 export const BUILTIN_TOOLS = [
   {
@@ -185,7 +185,8 @@ function searchVariants(q) {
     const t = String(s || "").replace(/\s+/g, " ").trim();
     if (t && !out.includes(t)) out.push(t);
   };
-  add(raw);
+  const looksLikeSentence = /[,.!?]|aujourd|avec la source|dis[- ]moi/i.test(raw) || raw.split(/\s+/).length > 8;
+  if (!looksLikeSentence) add(raw);
   const stop = new Set(("le la les un une des du de d l et ou a à au aux en y on je tu il elle nous vous ils elles mon ma mes ton ta tes son sa ses ce cet cette ces qui que quoi dont ou pour par pas plus moins tres très avec sans sur sous dans chez vers quel quelle quels quelles combien comment pourquoi quand est sont ai as avons avez ont ete été aujourd hui aujourd'hui aujourd’hui aujourdhui moi stp svp source sources merci voici voila voilà donc alors aussi bien encore deja déjà cours action actions prix cote cotee coté cotée cotation bourse ticker valeur valorisation cloture clôture market cap the of for today stock price with source").split(/\s+/));
   const tokens = raw.replace(/[«»"'’`.,;:!?()[\]]/g, " ").split(/\s+/).filter(Boolean);
   const kept = tokens.filter((tok) => {
@@ -203,7 +204,21 @@ function searchVariants(q) {
   } else if (names.length) {
     add(names.join(" "));
   }
+  if (!out.length) add(raw);
   return out.slice(0, 6);
+}
+
+function decodeEntities(s) {
+  return String(s || "").replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n))).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16))).replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&apos;/g, "'").replace(/&#039;/g, "'");
+}
+
+function resultScore(item, names) {
+  const hay = decodeEntities((item.title || "") + " " + (item.snippet || "")).toLowerCase();
+  let s = 0;
+  if (names.some((n) => n && hay.includes(String(n).toLowerCase()))) s += 4;
+  if (/\bipo\b|introduction en bourse|nasdaq|ticker|\bant\b|stock lists|trading live|initial public offering/.test(hay)) s += 6;
+  if (s === 0) return -1;
+  return s;
 }
 
 async function wikiSearch(q, lang = "en") {
@@ -244,7 +259,11 @@ async function webSearch({ query }) {
   const variants = searchVariants(query);
   if (!variants.length) throw new Error("Requête vide.");
   if (variants[0].length > 300) throw new Error("Requête trop longue.");
-  const blocks = [];
+  const names = variants
+    .join(" ")
+    .split(/\s+/)
+    .filter((w) => /^[A-ZÉÈÀÂÎÙÇ]/.test(w) || /anthropic|nvidia|microsoft|google|apple|meta|tesla|openai|amazon|nasdaq|\bant\b|ipo/i.test(w));
+  const scored = [];
   const seen = new Set();
   for (const v of variants) {
     for (const lang of ["en", "fr"]) {
@@ -252,8 +271,11 @@ async function webSearch({ query }) {
         const wiki = await wikiSearch(v, lang);
         for (const r of wiki) {
           if (seen.has(r.url)) continue;
+          const score = resultScore(r, names);
+          if (score < 0) continue;
           seen.add(r.url);
-          blocks.push("• " + r.title + "\n" + String(r.snippet || "").slice(0, 700) + "\nSource : " + r.url);
+          r.snippet = decodeEntities(r.snippet || "");
+          scored.push({ score, line: "• " + r.title + "\n" + String(r.snippet || "").slice(0, 700) + "\nSource : " + r.url });
         }
       } catch { /* continue */ }
     }
@@ -261,12 +283,15 @@ async function webSearch({ query }) {
       const news = await hnSearch(v);
       for (const r of news) {
         if (seen.has(r.url)) continue;
+        const score = resultScore(r, names);
+        if (score < 0) continue;
         seen.add(r.url);
-        blocks.push("• " + r.title + (r.snippet ? " (" + r.snippet + ")" : "") + "\nSource : " + r.url);
+        scored.push({ score, line: "• " + r.title + (r.snippet ? " (" + r.snippet + ")" : "") + "\nSource : " + r.url });
       }
     } catch { /* continue */ }
-    if (blocks.length >= 5) break;
   }
+  scored.sort((a, b) => b.score - a.score);
+  const blocks = scored.slice(0, 8).map((x) => x.line);
   if (!blocks.length) {
     try {
       const raw = await jinaSearch(variants[0]);
@@ -470,7 +495,7 @@ export async function runBuiltin(name, args = {}) {
       return `Note « ${n.title} » supprimée.`;
     }
     case "connect_app": {
-      const { connectApps } = await import("./mcp.js?v=10");
+      const { connectApps } = await import("./mcp.js?v=11");
       return connectApps(args.apps);
     }
     default:

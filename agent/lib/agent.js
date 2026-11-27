@@ -1,6 +1,6 @@
 import { streamText, generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle&deps=zod@4.1.8";
-import { createOpenRouterModel, PRIMARY_MODEL, MODEL_LABEL as OR_LABEL } from "./openrouter.js?v=10";
-import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=10";
+import { createOpenRouterModel, PRIMARY_MODEL, MODEL_LABEL as OR_LABEL } from "./openrouter.js?v=11";
+import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=11";
 
 export const MODEL_ID = PRIMARY_MODEL;
 export const MODEL_LABEL = OR_LABEL;
@@ -8,7 +8,17 @@ export const MAX_STEPS = 8;
 
 export { BUILTIN_TOOLS, runBuiltin, truncateText };
 
-export function needsFreshness(text) {
+export function todayFr() {
+  return new Date().toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/Paris",
+  });
+}
+
+function needsFreshness(text) {
   const t = String(text || "");
   if (!t.trim()) return false;
   return /(cours|cotation|cot[ée]e?s?|bourse|ticker|nasdaq|nyse|ipo|introduction en bourse|prix de l['’]?action|action d['’]?\w+|stock price|market cap|valorisation boursière|cl[oô]ture|actualité|à jour|aujourd['’]?hui|cette semaine|ce matin|hier|est[- ]ce que .+cot|société cotée|en bourse|qui a rachet|annonce officielle)/i.test(t);
@@ -23,7 +33,7 @@ export function looksComplex(text) {
 }
 
 function systemPrompt() {
-  return `Tu es EXIORBOT, l'assistant d'EXIOR. Tu réponds en français, de façon concise, précise et orientée action.
+  return `Aujourd'hui nous sommes le ${todayFr()} (heure de Paris). L'année 2026 est l'année en cours, pas un futur hypothétique ; une date de 2025 ou 2026 n'est pas fictive pour autant.\n\nTu es EXIORBOT, l'assistant d'EXIOR. Tu réponds en français, de façon concise, précise et orientée action.
 
 Tu es expert des systèmes d'exploitation métier des entreprises : ERP (SAP, Odoo, Sage, Cegid, Microsoft Dynamics, NetSuite, Pennylane, Cegid Loop, EBP, Quadratus), CRM (Salesforce, HubSpot, Pipedrive), comptabilité, paie, et la façon de les relier (API, webhooks, MCP, iPaaS, connecteurs). Tu expliques clairement comment connecter un outil à un autre, les prérequis, et les limites réelles.
 
@@ -116,7 +126,7 @@ export async function runAgentTurn({
     try {
       const content = truncateText(await executeTool("web_search", { query: userText }), 3500);
       hooks.onToolEnd?.({ name: "web_search", arguments: { query: userText }, content, isError: false });
-      extra = "\n\nRésultats web (à utiliser et citer, ne pas contredire de mémoire) :\n" + content;
+      extra = "\n\nRésultats web du " + todayFr() + " (à utiliser et citer ; une date de 2026 n'est pas dans le futur ; ne pas contredire ces sources de mémoire) :\n" + content;
     } catch (err) {
       const content = err.message || String(err);
       hooks.onToolEnd?.({ name: "web_search", arguments: { query: userText }, content, isError: true });
