@@ -1,142 +1,125 @@
-# Brief agent cloud Cursor : page EXIOR syndics + rapport offert + espace guide sécurisé
+# Brief agent cloud Cursor : page EXIOR syndics v3 + rapport offert + espace dossier sécurisé
 
-Repo : `Falcone747/exior-preview` (public). Branche de travail : `cursor/meta-os-marketing-9297` (PR #2). Site statique publié sur GitHub Pages : https://falcone747.github.io/exior-preview/
+Repo : `Falcone747/exior-preview` (public). Branche de travail : celle déjà ouverte pour les syndics (ex. `cursor/meta-os-marketing-9297` ou `syndics-sources`). Site statique : https://falcone747.github.io/exior-preview/
 Langue : français. Marque : EXIOR.
 
-Fichiers source fournis (à copier dans le repo par le coordinateur, sauf le guide en clair) :
-- `copy_syndics.md` : texte final de la page de vente, section par section. **Le texte fait foi** (version révisée du 27/11, voir `copy_changes.md`) : ne pas réécrire, ne pas ajouter de phrases. Conserver les espaces insécables U+00A0 (avant `: ; ? ! »`, après `«`, dans les montants et nombres) et les apostrophes typographiques ’ ; ne jamais les normaliser. Les balises `[À FOURNIR]` / `[À CONFIRMER]` ne doivent jamais apparaître sur la page : masquer l’élément concerné ou utiliser la variante neutre indiquée.
-- `rapport/index.html`, `rapport/logo.png`, `rapport/rapport-systeme-ia-souverain-syndic.pdf` : rapport offert (14 pages A4), déjà mis en page.
-- `guide/index.md` (sommaire, 10 parties, 112 chapitres) et `guide/NN-partie/NN-chapitre.md` : contenu du guide. **Le guide en clair ne doit jamais être commité** (le repo est public). Voir §4.
+**Offre unique (27/11/2026, décision Guillaume). À appliquer immédiatement, même si une version antérieure du copy a déjà été poussée.**
 
----
+On ne vend qu’une chose : **l’architecture complète du système IA souverain**, **690 €**, paiement unique. **TVA non applicable, art. 293 B du CGI.** Jamais les mentions TTC ni HT, nulle part. Le client achète le dossier complet (112 chapitres, 10 parties), livré dans l’espace sécurisé dès la confirmation du paiement. Un rapport offert de 14 pages sert d’aimant (sans inscription).
 
-## 1. Routes à créer
+**Retirer de la page, s’ils existent déjà :** cartes 990 €, 2 990 €, 990 € par mois, 9 900 €, 11 880 € ; formulaires de devis ; onglets déploiement ; section « mise en place » vendue comme un service ; abonnement ; clé en main ; le mot « guide » (remplacé par « dossier d’architecture », « votre architecture », « le dossier ») ; tout CTA autre que « Obtenir mon architecture · 690 € » et « Lire le rapport offert ».
+
+Le texte fait foi : `copy_syndics.md` v3, **section 5 uniquement**. Ne pas réécrire, ne pas ajouter de phrases. Conserver les espaces insécables U+00A0 et les apostrophes typographiques ’. Aucun crochet visible.
+
+Fichiers source :
+- `copy_syndics.md` (v3)
+- `rapport/index.html`, `rapport/logo.png`, `rapport/rapport-systeme-ia-souverain-syndic.pdf`
+- `guide/index.md` et `guide/NN-partie/NN-chapitre.md` : contenu du dossier. **Le dossier en clair ne doit jamais être commité** (repo public). Voir §4. Dans l’interface publique, ne plus l’appeler « guide ».
+
+## 1. Routes
 
 | Route | Contenu | Accès |
 |---|---|---|
-| `/syndics/` | Page de vente (copy_syndics.md) | Public |
-| `/syndics/rapport/` | Rapport offert (HTML fourni) + PDF téléchargeable | Public, sans inscription |
-| `/syndics/sommaire/` | Sommaire public du guide : 10 parties, titres et descriptions des chapitres (depuis `guide/index.md`), sans le contenu | Public |
-| `/syndics/espace/` | Espace guide : écran d’accès, puis lecteur du guide | Code d’accès |
-| `/syndics/merci/` | Page de retour après paiement Stripe du guide | Publique mais non liée (noindex) |
+| `/syndics/` | Page de vente (copy v3, section 5) | Public |
+| `/syndics/rapport/` | Rapport offert (HTML + PDF fournis) | Public, sans inscription |
+| `/syndics/sommaire/` | Sommaire public du dossier : 10 parties, titres et descriptions (depuis `guide/index.md`), sans le contenu | Public |
+| `/syndics/espace/` | Espace du dossier : écran d’accès, puis lecteur | Code d’accès |
+| `/syndics/merci/` | Retour après paiement Stripe | Publique mais non liée (noindex) |
 
-Toutes les pages : `<html lang="fr">`, title et meta description propres, favicon existant, `noindex` sur `/syndics/espace/` et `/syndics/merci/`. Ajouter un lien « Syndics » dans la nav du site principal seulement si Guillaume le demande (par défaut : non).
+`<html lang="fr">`, title et meta propres, favicon existant, `noindex` sur `/syndics/espace/` et `/syndics/merci/`. Lien « Syndics » dans la nav du site principal : seulement si Guillaume le demande (par défaut : non).
 
-## 2. Design : réutiliser l’existant, ne rien réinventer
+## 2. Design
 
-Reprendre tel quel le système du site live : `assets/home.css` (tokens `--bg #0a0a0b`, `--surface`, `--panel`, `--text`, `--muted`, `--line`, `--accent #7a45f5`, `--wrap 1120px`, police Inter locale `assets/fonts/inter-latin.woff2`), et `assets/home.js` (reveal au scroll `data-reveal`/`.stagger`, `data-live="code"` terminal tapé, `data-live="chat"` bulles tapées, `data-live="feed"` + `data-live="ask"` + `data-live="reply"` du héros, `data-schema`/`data-node` allumage progressif, `.sticky` CTA mobile, `prefers-reduced-motion` respecté).
-- Créer `assets/syndics.css` pour les seuls ajouts (démo boîte syndic, cartes d’offre à 3 colonnes, formulaires, lecteur du guide). Pas de nouvelle couleur : graphite + métal brossé, violet électrique **en accent uniquement** (filets, points actifs, focus, bouton actif), jamais en aplat de section.
-- Typographie et rythme Linear / Cursor / x.ai : titres 560-620, interlettrage négatif, beaucoup d’air, texte secondaire `--muted`.
-- Interdit : robots, mascottes, photos d’ambiance, illustrations génériques, dégradés arc-en-ciel, emojis, faux logos clients, faux compteurs.
-- Visuels autorisés : composants d’interface (fenêtre Espace EXIOR, terminal, tableaux d’état, schéma d’architecture en SVG/HTML), tous animés sobrement.
-- Mention « Démonstration, données fictives » sous chaque démo.
+Réutiliser le système du site live : `assets/home.css` (tokens `--bg #0a0a0b`, `--accent #7a45f5` en accent seulement, Inter locale), `assets/home.js` (reveal, `data-live="code"`, `data-live="chat"`, `data-live="feed"` / `ask` / `reply`, `data-schema` / `data-node`, `.sticky`, `prefers-reduced-motion`).
+- `assets/syndics.css` pour les seuls ajouts (démo boîte syndic, **une** carte d’offre, lecteur). Pas de nouvelle couleur. Graphite + métal brossé, violet en filets, points, focus.
+- Interdit : robots, mascottes, photos d’ambiance, illustrations génériques, emojis, faux logos, faux compteurs, dégradés arc-en-ciel.
+- Visuels autorisés : fenêtre Espace EXIOR, terminal, tableaux d’état, schéma d’architecture en SVG/HTML.
+- Mention « Démonstration, données fictives. Extrait de l’architecture. » sous chaque démo.
 
-## 3. Page `/syndics/` : ordre des sections et composants
+## 3. Page `/syndics/` : ordre des sections
 
-Suivre `copy_syndics.md` §5 dans cet ordre exact :
+Suivre `copy_syndics.md` §5, dans cet ordre exact. **Ne pas rajouter les sections devis, mise en place commerciale, ou une grille de tarifs à plusieurs cartes.**
 
-0. **Nav** : logo EXIOR (lien vers `/exior-preview/`), ancres Agents · Démo · Souveraineté · Guide · Offre · Devis · Questions, bouton « Accéder au guide » (`data-stripe-guide`). Menu mobile `details.drawer` existant.
-1. **Héros** (`#hero`) : H1, sous-titre, CTA principal guide 690 € TTC, CTA secondaire `#devis`, lien rapport. Visuel = composant `.window` du héros actuel avec `data-live="feed"` (5 lignes du copy) + question/réponse `data-live="ask"`/`reply`. Sidebar de la fenêtre : Boîte syndic, Comptabilité, AG, Sinistres, Travaux, Copropriétaires.
-2. **Constat** (`#constat`) : titre retenu + 3 cartes (`.grid` ou `.cols`).
-3. **Démo** (`#demo`) — **nouveau composant `data-live="triage"`** (à ajouter dans `assets/syndics.js`) :
-   - Colonne gauche « Boîte syndic » : 4 messages (expéditeur, objet, extrait) qui arrivent l’un après l’autre (fade + slide 8px, 900 ms d’écart).
-   - Pour chaque message : un trait animé vers la colonne droite, où une carte « Agent » se remplit (nom de l’agent, champs extraits tapés avec la fonction `typeText` existante, puis pastille d’état « À valider » qui s’allume en violet).
-   - Boucle après 3 s de pause ; arrêt hors écran (IntersectionObserver comme `watch()`); avec `prefers-reduced-motion`, afficher l’état final statique.
-   - Données : tableau du copy §3 (remplacer toute vraie marque par un nom fictif, ex. « Ascenseurs Dupont »).
-   - Mobile : les deux colonnes s’empilent, le trait devient une flèche verticale.
-4. **Agents** (`#agents`) : grille de 16 cartes titre + ligne d’état (réutiliser le style des 8 cartes « Vos agents » du site), note sous la grille.
-5. **Connecteurs** (`#connecteurs`) : terminal `data-live="code"` (fichier `connecteurs.syndic`, 6 lignes du copy) + tableau `.board` `data-schema` 4 lignes + ligne de détail.
-6. **Architecture** (`#architecture`) : schéma 4 colonnes en HTML/SVG (Entrées → Agents et mémoire → Validation [bordure accent, libellé « bloquant »] → Logiciel de copropriété + journal), nœuds `data-node` allumés en séquence, flèches fines.
-7. **Espace EXIOR** (`#espace`) : chat `data-live="chat"` (6 bulles du copy) + 3 points + encart guide.
-7 bis. **Guide** (`#guide`) : 10 parties en grille ou accordéon ; **le nombre de chapitres par partie est généré au build depuis `guide/index.md`** (ne pas l’écrire en dur) ; aperçu public des 3 premiers paragraphes du chapitre 1.1 avec dégradé de fondu + CTA guide.
-8. **Souveraineté** (`#souverainete`) : titre, sous-titre, comparatif 2 colonnes (Serveur du cabinet / Infrastructure dédiée OVHcloud), 6 cartes, ligne de détail.
-9. **Mise en place** (`#mise-en-place`) : `.steps` 4 étapes + note. Le titre du copy est déjà le titre neutre : ne pas écrire « quatre semaines ».
-10. **Offre** (`#offre`) : 3 cartes (Guide 690 € TTC · Architecture 990 € HT · Clé en main 2 990 € HT puis 990 € HT/mois, badge « Recommandée » sur la 3e), note annuelle 9 900 € HT. Sur desktop : 3 colonnes égales ; mobile : pile, carte recommandée en premier.
-10 bis. **Devis** (`#devis`) : 2 onglets accessibles (role="tablist") avec les 2 formulaires du copy (voir §5).
-10 ter. **Rapport offert** (`#rapport`) : bloc court + 2 boutons (`/syndics/rapport/`, PDF).
-11. **FAQ** (`#questions`) : `<details>` natifs, 13 questions du copy §11, dans l’ordre et la numérotation du copy.
-12. **CTA final** (`#demarrer`) : réutiliser `.sec.final`.
-13. **Pied de page** : celui du site (CGV, Mentions légales, Confidentialité, e-mail, © 2026 EXIOR).
+0. **Nav** : logo EXIOR, ancres Agents · Démo · Souveraineté · Le dossier · Offre · Questions, bouton « Obtenir mon architecture », lien Rapport offert, Connexion → `/syndics/espace/`.
+1. **Héros** (`#hero`) : H1, sous-titre, CTA 690 €, lien rapport, microcopy TVA. Visuel `.window` + `data-live="feed"` (fil du copy) + question/réponse. Sidebar : Boîte syndic, Comptabilité, AG, Sinistres, Travaux, Copropriétaires.
+2. **Constat** (`#constat`) : titre + 3 cartes.
+3. **Démo** (`#demo`) : composant `data-live="triage"` (boîte syndic → cartes agents, 4 messages du copy, noms fictifs, boucle, `prefers-reduced-motion` = état final statique).
+4. **Agents** (`#agents`) : 16 cartes titre + ligne d’état + note.
+5. **Connecteurs** (`#connecteurs`) : terminal `data-live="code"` + tableau `.board` `data-schema` + ligne de détail.
+6. **Architecture** (`#architecture`) : schéma 4 colonnes, nœuds `data-node`, validation avec filet accent et libellé « bloquant ».
+7. **Espace EXIOR** (`#espace`) : chat `data-live="chat"` + 3 points. Présenté comme une partie de l’architecture décrite dans le dossier, pas comme un abonnement.
+8. **Souveraineté** (`#souverainete`) : titre, sous-titre, comparatif 2 colonnes, 6 cartes, ligne de détail.
+9. **Le dossier** (`#dossier`) : 10 parties (nombre de chapitres lu depuis le sommaire au build), aperçu public des 3 premiers paragraphes du chapitre 1.1, CTA 690 €. Ancienne ancre `#guide` : rediriger vers `#dossier`.
+10. **Offre** (`#offre`) : **une seule carte**, 690 €, puces et microcopy du copy. Pas de badge « recommandée », pas de seconde ou troisième carte.
+11. **Rapport offert** (`#rapport`) : bloc court + 2 boutons (`/syndics/rapport/`, PDF).
+12. **FAQ** (`#questions`) : `<details>` natifs, **8 questions** du copy, dans cet ordre.
+13. **CTA final** (`#demarrer`) : `.sec.final`, un bouton, un lien rapport.
+14. **Pied** : CGV, Mentions légales, Confidentialité, e-mail, © 2026 EXIOR. Aucun autre tarif.
+
+S’il reste dans le HTML déjà produit des blocs #devis, #mise-en-place, cartes d’abonnement ou anciens prix : les supprimer, ne pas les masquer.
 
 ### Source unique des prix et liens
-Créer `assets/offre-syndics.js` sur le modèle d’`assets/offre.js` (qui reste inchangé) :
+`assets/offre-syndics.js`, et seulement ceci :
+
 ```js
 var EXIOR_OFFRE_SYNDICS = {
-  guidePrix: "690\u00a0€ TTC",
-  guideStripe: "https://buy.stripe.com/14AaEW37yfrt3Nxaxn7IY0a", // lien Stripe 690 € TTC (confirmation Stripe affiche le code et le lien vers /syndics/espace/)
-  architecturePrix: "990\u00a0€ HT",
-  architectureStripe: "https://buy.stripe.com/fZu5kC0Zqenp5VF6h77IY05", // lien existant du site
-  cleEnMainPrix: "2\u00a0990\u00a0€ HT",
-  mensuelPrix: "990\u00a0€ HT par mois",
-  annuelPrix: "9\u00a0900\u00a0€ HT",
-  engagement: "6 mois",
-  delaiArchitecture: "7 jours ouvrés",
-  email: "exior.tech@gmail.com"   // même adresse que le site live ; Guillaume peut la remplacer par gbauchart.pro@gmail.com
+  produit: "L’architecture complète de votre système IA souverain",
+  prix: "690\u00a0€",
+  prixMontant: "690",
+  devise: "EUR",
+  paiement: "paiement unique",
+  tva: "TVA non applicable, art. 293 B du CGI",
+  cta: "Obtenir mon architecture",
+  stripe: "https://buy.stripe.com/14AaEW37yfrt3Nxaxn7IY0a",
+  email: "exior.tech@gmail.com"
 };
 ```
-Tous les prix et liens de la page sont injectés depuis cet objet via des attributs `data-offre-s="clé"`, `data-stripe-guide`, `data-stripe-architecture`, `data-mail`. **Aucun autre montant ne doit apparaître** (en particulier aucun montant de déploiement séparé).
 
-## 4. Espace guide sécurisé `/syndics/espace/`
+Tous les prix et liens passent par `data-offre-s`, `data-stripe`, `data-mail`. **Le seul montant affiché sur tout le parcours syndics (page, rapport, merci, espace) est 690 €.**
 
-### 4.1 Lecteur
-- Mise en page 3 zones : barre latérale gauche (parties repliables → chapitres, chapitre actif surligné avec filet violet, progression « lu » stockée en `localStorage`), contenu central (largeur de lecture ~68ch, typographie du site), sommaire de page à droite (H2 du chapitre) sur desktop.
-- Barre de recherche plein texte en haut de la sidebar : index construit au build (titre + H2 + texte) **chiffré avec le reste**, déchiffré en mémoire après connexion ; recherche côté client (MiniSearch ou implémentation simple), résultats avec extrait surligné, raccourci `/`.
-- Navigation précédent / suivant en bas de chaque chapitre, fil d’Ariane « Partie N › Chapitre », URL par chapitre en hash (`#/05-agents/07-preparation-ag`) pour partage interne et retour arrière.
-- Rendu des encadrés : une citation Markdown commençant par `**En pratique.**` → encadré neutre ; `**Point de vigilance.**` → encadré avec filet accent ; `## À retenir` → bloc résumé. Tableaux Markdown stylés comme `.board`.
-- Page d’accueil de l’espace = sommaire complet (10 parties, cartes) + « Reprendre la lecture ».
-- Impression propre d’un chapitre (`@media print`).
-- Bouton « Se déconnecter » (efface la clé en sessionStorage).
+## 4. Espace sécurisé `/syndics/espace/`
 
-### 4.2 Protection : méthode honnête pour un site statique
-Le site est statique et le repo est **public** : tout fichier commité est lisible par n’importe qui. Il n’existe donc pas de vraie authentification sans serveur. Méthode retenue :
+Même lecteur qu’au brief précédent (sidebar, recherche chiffrée, prev/next, hash par chapitre, encadrés « En pratique » / « Point de vigilance », « À retenir »), avec ces libellés publics :
+- « Votre dossier d’architecture » (plus « guide »)
+- Écran d’accès : « Entrez votre code d’accès pour ouvrir votre dossier. »
 
-1. **Chiffrement du contenu au build, hors du repo.** Écrire `tools/encrypt-guide.mjs` (Node, sans dépendance payante) :
-   - lit `guide/` en clair depuis un dossier local passé en argument (jamais dans le repo, ajouter `guide-src/` au `.gitignore`) ;
-   - convertit le Markdown en HTML (marked ou markdown-it), construit l’index de recherche et le manifeste (parties, chapitres, titres, nombre de mots) ;
-   - chiffre chaque chapitre et l’index en **AES-256-GCM** avec une clé de contenu aléatoire K ;
-   - pour chaque code d’accès fourni (`--codes codes.txt`, non commité), dérive une clé par **PBKDF2-SHA256 (≥ 310 000 itérations, sel aléatoire)** et enveloppe K → `syndics/espace/data/keys.json` (liste d’enveloppes, sans les codes) ;
-   - écrit `syndics/espace/data/manifest.public.json` (titres et descriptions seulement, pour le sommaire public) et `syndics/espace/data/c/<id>.bin` (chapitres chiffrés).
-2. **Déchiffrement côté navigateur** avec WebCrypto : l’utilisateur saisit son code, le script essaie les enveloppes, récupère K, déchiffre à la demande chaque chapitre. Clé gardée en `sessionStorage` (pas de `localStorage`).
-3. **Codes d’accès** : un code fort (≥ 16 caractères aléatoires) par acheteur ou, à défaut, un code par période. Révoquer = relancer le script sans ce code (nouvelle clé K, nouveau chiffrement) et republier.
-4. **L’agent cloud ne reçoit pas le guide en clair** : il livre le lecteur, le script et un jeu de 3 chapitres factices (`tools/sample-guide/`) chiffrés avec un code de test documenté dans le README. Le coordinateur (box EXIOR) lance ensuite le script avec le vrai guide et les vrais codes, et commite seulement `syndics/espace/data/`.
+Protection inchangée (site statique, repo public) :
+1. Chiffrer le contenu au build, hors repo (`tools/encrypt-guide.mjs`, AES-256-GCM, PBKDF2-SHA256 ≥ 310 000 itérations). Le dossier en clair (`guide/`) ne se commite jamais.
+2. Déchiffrement WebCrypto, clé en `sessionStorage`.
+3. Codes d’accès forts, un par période ou par acheteur. Révoquer = rechiffrer et republier.
+4. L’agent cloud ne reçoit pas le dossier en clair : 3 chapitres factices dans `tools/sample-guide/`. Le coordinateur chiffre le vrai dossier sur la box et ne commite que `syndics/espace/data/`.
 
-**Limites à écrire dans le README et à ne pas maquiller** : un code partagé donne accès à qui le reçoit ; la révocation demande un nouveau chiffrement ; la force dépend de la longueur du code ; le chiffrement protège contre la lecture du repo, pas contre un acheteur qui copie le texte. Une vraie authentification par compte demanderait un service serveur (par exemple un worker serverless qui vérifie le paiement Stripe et délivre un jeton), à proposer à Guillaume comme étape 2, sans souscrire aucun service payant sans son accord.
+Limites à écrire dans le README, sans les maquiller : un code partagé ouvre l’accès à qui le possède ; la révocation demande un nouveau chiffrement ; un acheteur peut copier le texte. Une authentification par compte exigerait un service serveur, à proposer plus tard, sans souscrire aucun service sans l’accord de Guillaume.
 
-### 4.3 Accès automatique après paiement (690 € TTC)
-Niveau 1, sans serveur (à livrer) :
-- Le lien de paiement Stripe du guide (créé par le coordinateur avec l’accord de Guillaume, pas par l’agent cloud) est configuré pour, après paiement, **rediriger vers `/syndics/merci/`**. La page merci affiche : confirmation, lien vers `/syndics/espace/`, et le texte « Votre code d’accès figure dans le message de confirmation Stripe et dans votre e-mail de reçu ».
-- Le code d’accès de la période est placé dans le **message de confirmation personnalisé** du lien de paiement (option Stripe « afficher un message de confirmation ») et/ou dans la description du produit reprise sur le reçu. → l’acheteur le reçoit automatiquement, sans intervention.
-- Si la redirection est utilisée à la place du message, la page merci ne doit **pas** afficher le code en dur (elle serait publique) : elle renvoie vers le reçu.
-Niveau 2 (à proposer, non livré) : webhook `checkout.session.completed` → worker serverless → génération d’un code unique, ajout de son enveloppe, e-mail à l’acheteur. Nécessite un service serveur et un service d’envoi d’e-mails : accord explicite de Guillaume requis.
+Après paiement (lien Stripe déjà créé) : redirection vers `/syndics/merci/`. La page merci confirme l’achat du dossier d’architecture, renvoie vers `/syndics/espace/`, et indique que le code figure dans le message de confirmation Stripe et le reçu. **Ne pas afficher le code en dur sur la page merci** (elle est publique). Ne pas modifier les fichiers de `secrets/`.
 
-## 5. Formulaires de devis (statique)
-- Deux formulaires du copy §10 bis, champs et libellés exacts, champs obligatoires marqués `*`, validation HTML5 (`required`, `type="email"`), messages d’erreur en français sous chaque champ, focus visible violet.
-- Envoi : comme le formulaire « Démarrer » du site live, **composition d’un `mailto:`** vers l’e-mail de `EXIOR_OFFRE_SYNDICS.email`, objet « Devis déploiement syndic — {Cabinet} » ou « Devis sur mesure syndic — {Cabinet} », corps = champs en lignes `Libellé : valeur`, encodés. Puis affichage du message de confirmation du copy.
-- Ne jamais demander de mot de passe, d’identifiant, de coordonnées bancaires. Pas de service tiers de formulaires (ni Formspree, ni Google Forms) sans accord de Guillaume.
+## 5. Rapport offert `/syndics/rapport/`
 
-## 6. Rapport offert `/syndics/rapport/`
-- Copier `rapport/index.html`, `logo.png` et le PDF tels quels. Ajouter seulement la nav/footer minimale du site si cela ne casse pas la mise en page A4 (sinon garder un lien retour « ← Page syndics » en haut, masqué à l’impression).
-- Le bouton flottant « Télécharger le PDF » existe déjà dans le HTML.
+Copier `rapport/index.html`, `logo.png` et le PDF v3 tels quels (dernière page = offre unique 690 €, TVA non applicable). Lien retour « ← Page syndics » en haut, masqué à l’impression, s’il ne casse pas la mise en page A4. Le bouton « Télécharger le PDF » existe déjà.
 
-## 7. Contraintes non négociables (vérifier avant la PR)
-- Aucun chiffre inventé, témoignage, logo client, étude de cas, compteur décoratif.
-- Ne jamais mentionner un client (aucun nom de cabinet réel). Noms de démo fictifs uniquement.
-- Ne jamais écrire : `RGPD`, `hébergement UE` (ni variantes « hébergé dans l’UE »), `exior.io`, `recette`, `Grok`, `xAI`, `GTA`, `Rockstar`, `chatbot`.
-- Pas de coût de supervision humaine.
-- Pas de montant autre que 690 € TTC, 990 € HT, 2 990 € HT, 990 € HT par mois, 9 900 € HT (et 11 880 € HT dans la note annuelle). Le formulaire de devis n’a plus de champ « budget » : ne pas le réintroduire.
-- Émetteur / marque : « EXIOR ».
-- Aucun texte `[À FOURNIR]` / `[À CONFIRMER]` visible.
-- Accessibilité : contrastes AA, navigation clavier (onglets, accordéons, lecteur), `aria-live` discret pour les démos ou `aria-hidden` + texte alternatif statique, `prefers-reduced-motion`.
-- Performance : pas de framework lourd ; JS vanilla comme le site ; images en SVG/HTML ; Lighthouse ≥ 90 mobile sur `/syndics/`.
+## 6. Contraintes (vérifier avant la PR)
 
-Commande de contrôle à lancer et coller dans la PR :
+- Une offre, un prix : 690 €. TVA non applicable, art. 293 B du CGI.
+- Jamais TTC, jamais HT, jamais 990, 2 990, 9 900, 11 880.
+- Jamais « guide » dans l’interface (sauf éventuels chemins de fichiers internes).
+- Pas de devis, pas d’abonnement, pas de clé en main, pas de déploiement vendu.
+- Pas de chiffre inventé, témoignage, logo client, étude de cas, compteur décoratif.
+- Aucun client réel nommé. Démo : Ascenseurs Dupont, Résidence Les Ormes, M. Martin, Mme Leroy, Entreprise Durand.
+- Interdits : `RGPD`, `hébergement UE` (et « hébergé dans l’UE »), `exior.io`, `recette`, `Grok`, `xAI`, `GTA`, `Rockstar`, `chatbot`.
+- Émetteur : EXIOR. Pas de coût de supervision humaine.
+- Accessibilité : contrastes AA, clavier, `prefers-reduced-motion`. Lighthouse ≥ 90 mobile sur `/syndics/`. JS vanilla, pas de framework lourd.
+
+Commande à lancer et coller dans la PR :
+
 ```
-grep -rniE 'rgpd|h[ée]bergement ue|dans l.ue|exior\.io|recette|ll gestion|grok|\bxai\b|gta|rockstar|chatbot|À FOURNIR|À CONFIRMER' syndics/ assets/syndics* assets/offre-syndics.js
+grep -rniE 'rgpd|h[ée]bergement ue|dans l.ue|exior\.io|recette|ll gestion|grok|\bxai\b|gta|rockstar|chatbot|\bttc\b|\bht\b|2.?990|9.?900|11.?880|abonnement|clé en main|À FOURNIR|À CONFIRMER' syndics/ assets/syndics* assets/offre-syndics.js
 ```
-Résultat attendu : aucune ligne.
 
-## 8. Livrables de la PR
+Ignorer un « 990 » seulement s’il apparaît dans un commentaire de code rappelant l’interdiction. Résultat attendu sur le HTML publié : aucune ligne.
+
+## 7. Livrables de la PR
+
 - `syndics/index.html`, `syndics/rapport/`, `syndics/sommaire/index.html`, `syndics/espace/index.html` (+ `data/` d’exemple), `syndics/merci/index.html`
-- `assets/syndics.css`, `assets/syndics.js` (démo triage + onglets + formulaires), `assets/offre-syndics.js`, `assets/guide-reader.js` (lecteur + recherche + déchiffrement)
-- `tools/encrypt-guide.mjs`, `tools/sample-guide/`, `README-syndics.md` (build, codes, limites)
-- Captures desktop 1440 px et mobile 390 px de chaque section de `/syndics/`, du rapport et de l’espace (écran d’accès, sommaire, un chapitre, recherche).
+- `assets/syndics.css`, `assets/syndics.js`, `assets/offre-syndics.js`, `assets/guide-reader.js` (le lecteur peut garder ce nom de fichier)
+- `tools/encrypt-guide.mjs`, `tools/sample-guide/`, `README-syndics.md`
+- Captures desktop 1440 px et mobile 390 px de chaque section, du rapport et de l’espace
