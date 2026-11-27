@@ -5,7 +5,7 @@ export const LFM2_DTYPE_WEBGPU = "q4";
 export const LFM2_DTYPE_WASM = "q8";
 export const LFM2_DTYPE = LFM2_DTYPE_WEBGPU;
 export const LFM2_LABEL = "LFM2 1.2B";
-export const LFM2_SIZE_LABEL = "environ 850 Mo avec WebGPU, 1,5 Go sans";
+export const LFM2_SIZE_LABEL = "environ 850 Mo avec WebGPU, 1,2 Go sans";
 export const TRANSFORMERS_VERSION = "4.3.2";
 
 function toLfmTool(t) {
@@ -193,16 +193,25 @@ export async function loadLFM2Engine(onProgress) {
   const progress_callback = (p) => {
     try { onProgress?.(formatLfm2Progress(p), p); } catch { /* ignore */ }
   };
-  const tryLoad = (device, dtype) => pipeline("text-generation", LFM2_MODEL_ID, {
-    dtype,
-    device,
+  const tryLoadWebgpuQ4 = () => pipeline("text-generation", LFM2_MODEL_ID, {
+    dtype: LFM2_DTYPE_WEBGPU,
+    device: "webgpu",
+    progress_callback,
+  });
+  // Transformers.js maps dtype "q8" to model_quantized.onnx, which still uses
+  // GatherBlockQuantized (WebGPU-only). The real WASM-safe export is model_q8.onnx
+  // (plain Gather + MatMulInteger). dtype "fp32" only selects an empty filename suffix.
+  const tryLoadWasmQ8 = () => pipeline("text-generation", LFM2_MODEL_ID, {
+    dtype: "fp32",
+    device: "wasm",
+    model_file_name: "model_q8",
+    use_external_data_format: { "model_q8.onnx": 1 },
     progress_callback,
   });
   const errors = [];
-  // q4 uses GatherBlockQuantized, a WebGPU-only ONNX operator. WASM must use q8.
   if (await webgpuAvailable()) {
     try {
-      const generator = await tryLoad("webgpu", LFM2_DTYPE_WEBGPU);
+      const generator = await tryLoadWebgpuQ4();
       return { generator, device: "webgpu", dtype: LFM2_DTYPE_WEBGPU };
     } catch (err) {
       console.warn("LFM2 WebGPU q4 indisponible, repli sur WASM q8", err);
@@ -210,7 +219,7 @@ export async function loadLFM2Engine(onProgress) {
     }
   }
   try {
-    const generator = await tryLoad("wasm", LFM2_DTYPE_WASM);
+    const generator = await tryLoadWasmQ8();
     return { generator, device: "wasm", dtype: LFM2_DTYPE_WASM };
   } catch (err) {
     errors.push("wasm/q8: " + (err && err.message ? err.message : String(err)));

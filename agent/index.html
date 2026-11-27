@@ -6,9 +6,9 @@
   <title>EXIOR · Agent</title>
   <meta name="description" content="Agent EXIOR local dans votre navigateur, avec outils et connecteurs MCP vers vos apps.">
   <link rel="icon" href="../favicon.svg">
-  <link rel="stylesheet" href="./styles.css?v=6">
+  <link rel="stylesheet" href="./styles.css?v=7">
   <script>window.addEventListener("error",e=>{var b=document.getElementById("gpu-banner");if(b){b.className="banner danger";b.textContent="Erreur : "+(e.message||e);}});</script>
-  <script type="module" src="./app.js?v=6"></script>
+  <script type="module" src="./app.js?v=7"></script>
 </head>
 <body>
   <a class="skip" href="#input">Aller à la saisie</a>
@@ -27,7 +27,7 @@
       <div class="toolbar">
         <div class="model-pill" title="onnx-community/LFM2-1.2B-ONNX">
           <b>LFM2 1.2B</b>
-          <span>sur votre appareil · ~850 Mo (WebGPU) ou ~1,5 Go (sans)</span>
+          <span>sur votre appareil · ~850 Mo (WebGPU) ou ~1,2 Go (sans)</span>
         </div>
         <button id="btn-load" type="button" class="btn-p">Charger le modèle</button>
         <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
@@ -96,7 +96,7 @@
         <div id="notes" class="notes"></div>
       </section>
 
-      <p class="legal">Le modèle <strong>LFM2 1.2B</strong> de Liquid AI tourne sur <strong>votre appareil</strong> (Transformers.js). Avec WebGPU, les poids q4 pèsent environ 850&nbsp;Mo. Sans WebGPU (y compris sur un téléphone), un mode plus lent (WASM, poids q8, environ 1,5&nbsp;Go) prend le relais. Le fichier reste ensuite enregistré dans ce navigateur. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
+      <p class="legal">Le modèle <strong>LFM2 1.2B</strong> de Liquid AI tourne sur <strong>votre appareil</strong> (Transformers.js). Avec WebGPU, les poids q4 pèsent environ 850&nbsp;Mo. Sans WebGPU (y compris sur un téléphone), un mode plus lent (WASM, poids q8, environ 1,2&nbsp;Go) prend le relais. Le fichier reste ensuite enregistré dans ce navigateur. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
     </aside>
   </div>
   <div id="backdrop" class="backdrop hidden"></div>

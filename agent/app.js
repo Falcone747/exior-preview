@@ -1,10 +1,10 @@
 import {
   MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
-} from "./lib/agent.js?v=6";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=6";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=6";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=6";
-import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=6";
+} from "./lib/agent.js?v=7";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=7";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=7";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=7";
+import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=7";
 
 const $ = (id) => document.getElementById(id);
 
@@ -45,7 +45,7 @@ function showEmpty() {
   $("messages").innerHTML = `
     <div class="empty">
       <h1>Agent EXIOR, sur votre appareil</h1>
-      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo avec WebGPU, ou 1,5&nbsp;Go sans), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
+      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo avec WebGPU, ou 1,2&nbsp;Go sans), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
       <p>Chargez le modèle, puis posez une question. L'agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP. Sans WebGPU, il fonctionne quand même, plus lentement.</p>
     </div>`;
 }
