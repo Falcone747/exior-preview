@@ -1,9 +1,11 @@
 import { createOpenAICompatible } from "https://esm.sh/@ai-sdk/openai-compatible@3.0.96?bundle&deps=zod@4.1.8";
 
 export const LFM2_MODEL_ID = "onnx-community/LFM2-1.2B-ONNX";
-export const LFM2_DTYPE = "q4";
+export const LFM2_DTYPE_WEBGPU = "q4";
+export const LFM2_DTYPE_WASM = "q8";
+export const LFM2_DTYPE = LFM2_DTYPE_WEBGPU;
 export const LFM2_LABEL = "LFM2 1.2B";
-export const LFM2_SIZE_LABEL = "environ 850 Mo, une seule fois";
+export const LFM2_SIZE_LABEL = "environ 850 Mo avec WebGPU, 1,5 Go sans";
 export const TRANSFORMERS_VERSION = "4.3.2";
 
 function toLfmTool(t) {
@@ -167,6 +169,19 @@ export function formatLfm2Progress(p = {}) {
   return { frac, text: `Téléchargement de ${label}… ${pct ? pct + " %" : ""}`.trim() };
 }
 
+export async function webgpuAvailable() {
+  if (typeof navigator === "undefined" || !navigator.gpu) return false;
+  try {
+    const adapter = await Promise.race([
+      navigator.gpu.requestAdapter(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 2500)),
+    ]);
+    return !!adapter;
+  } catch {
+    return false;
+  }
+}
+
 export async function loadLFM2Engine(onProgress) {
   const mod = await import(`https://cdn.jsdelivr.net/npm/@huggingface/transformers@${TRANSFORMERS_VERSION}/+esm`);
   const { pipeline, env } = mod;
@@ -178,25 +193,27 @@ export async function loadLFM2Engine(onProgress) {
   const progress_callback = (p) => {
     try { onProgress?.(formatLfm2Progress(p), p); } catch { /* ignore */ }
   };
-  const tryLoad = (device) => pipeline("text-generation", LFM2_MODEL_ID, {
-    dtype: LFM2_DTYPE,
+  const tryLoad = (device, dtype) => pipeline("text-generation", LFM2_MODEL_ID, {
+    dtype,
     device,
     progress_callback,
   });
-  const hasGPU = typeof navigator !== "undefined" && !!navigator.gpu;
-  if (hasGPU) {
+  const errors = [];
+  // q4 uses GatherBlockQuantized, a WebGPU-only ONNX operator. WASM must use q8.
+  if (await webgpuAvailable()) {
     try {
-      const generator = await tryLoad("webgpu");
-      return { generator, device: "webgpu" };
+      const generator = await tryLoad("webgpu", LFM2_DTYPE_WEBGPU);
+      return { generator, device: "webgpu", dtype: LFM2_DTYPE_WEBGPU };
     } catch (err) {
-      console.warn("LFM2 WebGPU indisponible, repli sur WASM", err);
+      console.warn("LFM2 WebGPU q4 indisponible, repli sur WASM q8", err);
+      errors.push("webgpu/q4: " + (err && err.message ? err.message : String(err)));
     }
   }
   try {
-    const generator = await tryLoad("wasm");
-    return { generator, device: "wasm" };
+    const generator = await tryLoad("wasm", LFM2_DTYPE_WASM);
+    return { generator, device: "wasm", dtype: LFM2_DTYPE_WASM };
   } catch (err) {
-    const generator = await tryLoad("cpu");
-    return { generator, device: "cpu" };
+    errors.push("wasm/q8: " + (err && err.message ? err.message : String(err)));
+    throw new Error(errors.join(" | "));
   }
 }

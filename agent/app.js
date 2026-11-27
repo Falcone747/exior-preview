@@ -1,10 +1,10 @@
 import {
   MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
-} from "./lib/agent.js?v=5";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=5";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=5";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=5";
-import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=5";
+} from "./lib/agent.js?v=6";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=6";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=6";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=6";
+import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=6";
 
 const $ = (id) => document.getElementById(id);
 
@@ -45,7 +45,7 @@ function showEmpty() {
   $("messages").innerHTML = `
     <div class="empty">
       <h1>Agent EXIOR, sur votre appareil</h1>
-      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
+      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo avec WebGPU, ou 1,5&nbsp;Go sans), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
       <p>Chargez le modèle, puis posez une question. L'agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP. Sans WebGPU, il fonctionne quand même, plus lentement.</p>
     </div>`;
 }
@@ -236,12 +236,14 @@ async function loadEngine() {
   $("btn-load").disabled = true;
   setProgress(0.01, "Préparation de LFM2 1.2B…");
   try {
-    const { generator, device } = await loadLFM2Engine((info) => {
+    const { generator, device, dtype } = await loadLFM2Engine((info) => {
       setProgress(info.frac || 0, info.text || "Chargement…");
     });
     lfm2 = generator;
     lfm2Device = device;
-    const mode = device === "webgpu" ? "WebGPU" : "WASM (plus lent, sans WebGPU)";
+    const mode = device === "webgpu"
+      ? `WebGPU, ${dtype || "q4"}`
+      : `WASM ${dtype || "q8"} (plus lent, sans WebGPU)`;
     setProgress(1, "Modèle prêt. Vous pouvez écrire.");
     setReady(true);
     $("btn-load").textContent = "Modèle chargé";
