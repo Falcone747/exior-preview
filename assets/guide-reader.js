@@ -143,7 +143,7 @@
   }
 
   function renderHome() {
-    document.title = "Votre architecture — EXIOR";
+    document.title = "Votre dossier d\u2019architecture — EXIOR";
     var last = localStorage.getItem(LAST);
     var lastCh = last ? chapterById(last) : null;
     var resume = lastCh
@@ -152,7 +152,7 @@
     var cards = manifest.parts.map(function (part) {
       return '<a class="home-card" href="#/' + part.chapters[0].id + '"><span class="num">' + String(part.num).padStart(2, "0") + '</span><strong>' + escapeText(part.title) + "</strong><span>" + part.chapters.length + " chapitres</span></a>";
     }).join("");
-    document.getElementById("chapter").innerHTML = '<h1>Votre architecture</h1><p class="crumb">Dossier d’architecture. Dix parties. Le chapitre s’ouvre après le déchiffrement dans votre navigateur.</p>' + resume + '<div class="home-grid">' + cards + "</div>";
+    document.getElementById("chapter").innerHTML = '<h1>Votre dossier d\u2019architecture</h1><p class="crumb">Dix parties. Le chapitre s\u2019ouvre après le déchiffrement dans votre navigateur.</p>' + resume + '<div class="home-grid">' + cards + "</div>";
     document.getElementById("crumb").textContent = "";
     document.getElementById("pager").innerHTML = "";
     document.getElementById("page-toc").innerHTML = "";

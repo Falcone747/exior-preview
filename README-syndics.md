@@ -8,9 +8,9 @@ Marque : EXIOR. Contact : `exior.tech@gmail.com`.
 
 ## Prix
 
-Une seule offre, une seule source : `assets/offre-syndics.js`.
+Texte publié : section 5 de `_sources/syndics/copy_syndics.md` (v3). Une seule offre, une seule source de lien : `assets/offre-syndics.js`.
 
-L’architecture complète de votre système IA souverain : 690 €. TVA non applicable, art. 293 B du CGI. Aucun autre montant. Ne pas écrire TTC ni HT.
+L’architecture complète de votre système IA souverain : 690 €. TVA non applicable, art. 293 B du CGI. Aucun autre montant. Ne pas écrire TTC ni HT. Ne pas écrire « guide » dans l’interface.
 
 Le paiement ouvre le dossier (112 chapitres) dans `/syndics/espace/`. Le rapport de 14 pages, `/syndics/rapport/`, reste offert et sans paiement.
 

@@ -12,21 +12,19 @@
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/home.css">
 <link rel="stylesheet" href="../../assets/syndics.css">
-<style>
-@page { size: A4; margin: 0; }
-</style>
+<style>@page { size: A4; margin: 0; }</style>
 </head>
 <body class="syndics report-body">
 <a class="skip noprint" href="#rapport">Aller au rapport</a>
 <header class="top noprint">
   <div class="wrap top-in">
     <a class="brand" href="../../" aria-label="EXIOR, accueil"><img src="../../assets/brand/logo-nav.png" width="288" height="96" alt="EXIOR"></a>
-    <a class="btn btn-primary" data-stripe href="https://buy.stripe.com/14AaEW37yfrt3Nxaxn7IY0a" rel="noopener">Obtenir l’architecture</a>
+    <a class="text-link" href="../">← Page syndics</a>
   </div>
 </header>
 <div class="wrap report-tools noprint">
   <a href="../">← Page syndics</a>
-  <a class="btn btn-primary" id="print-pdf" href="../../assets/syndics/rapport-systeme-ia-souverain-syndic.pdf">Télécharger en PDF</a>
+  <a class="btn btn-primary" id="print-pdf" href="../../assets/syndics/rapport-systeme-ia-souverain-syndic.pdf">Télécharger le PDF</a>
 </div>
 <main id="rapport" class="doc">
 <!-- 1 COUVERTURE -->
@@ -240,7 +238,7 @@ file_validation.ajouter(proposition, piece=facture_pdf)
   <p class="lead">Une facture d’ascensoriste arrive en pièce jointe dans la boîte comptabilité. Voici ce que fait le système, étape par étape. Données fictives.</p>
   <div class="flow">
     <div><b>1. Réception</b>Ascenseurs Dupont, facture n° 8841, PDF reçu sur la boîte comptabilité.</div>
-    <div><b>2. Lecture</b>Le modèle extrait : fournisseur, numéro, date, montants de la facture, adresse de l’immeuble, période.</div>
+    <div><b>2. Lecture</b>Le modèle extrait : fournisseur, numéro, date, montants hors taxe et toutes taxes comprises, adresse de l’immeuble, période.</div>
     <div><b>3. Contrôles</b>Copropriété Résidence Les Ormes trouvée ; contrat d’entretien actif ; aucun doublon ; montant conforme au contrat.</div>
     <div class="gate"><b>4. Validation</b>Imputation proposée sur la clé ascenseur du bâtiment B, avec la pièce et la justification. Le comptable valide.</div>
   </div>
@@ -323,12 +321,17 @@ file_validation.ajouter(proposition, piece=facture_pdf)
 <section class="page">
   <div class="run"><span>EXIOR</span><span>12. Aller plus loin</span></div>
   <div class="eyebrow">Aller plus loin</div>
-  <h2>Aller plus loin avec EXIOR</h2>
-  <p class="lead">L’architecture complète de votre système IA souverain : le dossier de 112 chapitres, dans un espace sécurisé.</p>
-  <p class="price">690 €</p>
-  <p>TVA non applicable, art. 293 B du CGI.</p>
-  <p>Lien et code d’accès affichés dès la confirmation du paiement. Le rapport que vous lisez est offert, sans paiement.</p>
-  <div class="box"><b>Contact</b>Page syndics : falcone747.github.io/exior-preview/syndics/<br>E-mail : exior.tech@gmail.com</div>
+  <h2>L’architecture complète de votre système IA souverain</h2>
+  <p class="lead">Ce rapport vous en donne la vue d’ensemble. Le dossier d’architecture va plus loin : plus de 100 chapitres, écrits pour un cabinet de syndic, livrés dans un espace sécurisé dès la confirmation du paiement.</p>
+  <table>
+    <tr><th></th><th>Ce rapport, offert</th><th>Le dossier d’architecture</th></tr>
+    <tr><td><b>Volume</b></td><td>14 pages</td><td>Plus de 100 chapitres, en 10 parties</td></tr>
+    <tr><td><b>Contenu</b></td><td>Ce qu’est un agent, un harness, le moindre privilège ; cinq processus ; un exemple de facture ; les questions à poser</td><td>Cartographie, architecture technique, connecteurs, agents processus par processus, Espace EXIOR, sécurité, mise en place, exploitation, décision</td></tr>
+    <tr><td><b>Accès</b></td><td>Lecture en ligne ou PDF, sans inscription</td><td>Espace sécurisé, lien et code affichés dès la confirmation du paiement</td></tr>
+    <tr><td><b>Prix</b></td><td>Offert</td><td class="price">690 €</td></tr>
+  </table>
+  <p>690 €, paiement unique. TVA non applicable, art. 293 B du CGI.</p>
+  <div class="box"><b>Obtenir le dossier</b>Page syndics : falcone747.github.io/exior-preview/syndics/<br>Paiement : buy.stripe.com/14AaEW37yfrt3Nxaxn7IY0a<br>E-mail : exior.tech@gmail.com</div>
   <p class="small">EXIOR. Les exemples de ce rapport utilisent des noms et des données fictifs. Les textes juridiques cités doivent être vérifiés dans leur version en vigueur. Ce document ne constitue pas un conseil juridique.</p>
   <div class="foot-page"><span>EXIOR</span><span>14</span></div>
 </section>
@@ -345,8 +348,6 @@ file_validation.ajouter(proposition, piece=facture_pdf)
     <p>© 2026 EXIOR</p>
   </div>
 </footer>
-<script src="../../assets/offre-syndics.js"></script>
-<script src="../../assets/syndics.js"></script>
 <script>
 (function () {
   var btn = document.getElementById("print-pdf");

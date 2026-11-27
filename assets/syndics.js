@@ -25,7 +25,7 @@
     });
   });
 
-  var sticky = document.querySelector(".sticky-guide");
+  var sticky = document.querySelector(".sticky-buy");
   var heroBtn = document.querySelector(".hero .btn-primary");
   if (sticky && heroBtn && "IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
