@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Système IA souverain pour syndic de copropriété · Rapport EXIOR</title>
+<meta name="description" content="Rapport offert par EXIOR : ce qu'un agent IA peut préparer dans un cabinet de syndic, comment le contrôler et où tournent les données.">
+<style>
+@page { size: A4; margin: 0; }
+:root { --ink:#111114; --muted:#5d5d66; --line:#e3e3e8; --soft:#f5f5f7; --accent:#7a45f5; }
+* { box-sizing: border-box; }
+html,body { margin:0; background:#e9e9ee; color:var(--ink); font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 10.6pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width:210mm; height:297mm; margin:12mm auto; background:#fff; padding:20mm 20mm 18mm; position:relative; overflow:hidden; box-shadow:0 2px 18px rgba(0,0,0,.08); page-break-after: always; break-after: page; }
+.page:last-child { page-break-after: auto; break-after: auto; }
+@media print { html,body{background:#fff} .page{margin:0;box-shadow:none} .noprint{display:none} }
+.run { position:absolute; top:9mm; left:20mm; right:20mm; display:flex; justify-content:space-between; font-size:8pt; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; }
+.foot { position:absolute; bottom:9mm; left:20mm; right:20mm; display:flex; justify-content:space-between; font-size:8pt; color:var(--muted); border-top:1px solid var(--line); padding-top:3mm; }
+h1 { font-size: 30pt; line-height:1.08; letter-spacing:-.025em; font-weight:620; margin:0 0 6mm; }
+h2 { font-size: 18pt; line-height:1.15; letter-spacing:-.015em; font-weight:620; margin:2mm 0 5mm; }
+h3 { font-size: 11.5pt; margin:5mm 0 1.5mm; font-weight:640; }
+p { margin:0 0 3mm; }
+.eyebrow { font-size:8.5pt; font-weight:650; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; margin-bottom:2mm; }
+.lead { font-size:12pt; color:#33333a; }
+ul,ol { margin:0 0 3mm; padding-left:5mm; } li { margin-bottom:1.2mm; }
+.box { border:1px solid var(--line); border-left:3px solid var(--accent); background:var(--soft); padding:4mm 5mm; margin:4mm 0; border-radius:2mm; }
+.box b { display:block; margin-bottom:1mm; }
+table { width:100%; border-collapse:collapse; margin:3mm 0 4mm; font-size:9.4pt; }
+th,td { text-align:left; vertical-align:top; padding:2.2mm 2.5mm; border-bottom:1px solid var(--line); }
+th { font-size:8.2pt; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:650; }
+.cover { background:#0a0a0b; color:#f4f5f6; }
+.cover .logo { width:52mm; filter: invert(1); }
+.cover h1 { font-size:36pt; margin-top:55mm; max-width:150mm; }
+.cover .lead { color:#b9b9c2; max-width:140mm; }
+.cover .meta { position:absolute; bottom:22mm; left:20mm; right:20mm; color:#9b9ba3; font-size:9pt; border-top:1px solid #26262c; padding-top:4mm; display:flex; justify-content:space-between; }
+.cover .bar { width:28mm; height:2px; background:var(--accent); margin:8mm 0; }
+.toc li { display:flex; justify-content:space-between; border-bottom:1px dotted var(--line); padding:2mm 0; margin:0; list-style:none; }
+.toc { padding:0; }
+.flow { display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; margin:5mm 0; }
+.flow div { border:1px solid var(--line); border-radius:2mm; padding:3mm; font-size:9pt; min-height:30mm; }
+.flow div b { display:block; font-size:8pt; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; margin-bottom:1.5mm; }
+.flow div.gate { border-color:var(--accent); }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:6mm; }
+.code { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace; font-size:8.6pt; background:#0f0f12; color:#e8e8ee; padding:4mm 5mm; border-radius:2mm; white-space:pre; line-height:1.55; margin:3mm 0; }
+.code .c { color:#8f8f99; } .code .a { color:#b79bff; }
+.price { font-size:15pt; font-weight:650; }
+.small { font-size:8.6pt; color:var(--muted); }
+.dl { position:fixed; right:16px; bottom:16px; background:#111114; color:#fff; padding:10px 16px; border-radius:999px; text-decoration:none; font-size:14px; z-index:9; }
+</style>
+</head>
+<body>
+<a class="dl noprint" href="rapport-systeme-ia-souverain-syndic.pdf" download>Télécharger le PDF</a>
+
+<!-- 1 COUVERTURE -->
+<section class="page cover">
+  <img class="logo" src="logo.png" alt="EXIOR">
+  <h1>Système IA souverain pour syndic de copropriété</h1>
+  <div class="bar"></div>
+  <p class="lead">Ce qu'un agent IA peut préparer dans votre cabinet, comment le contrôler, et où tournent les données de vos copropriétés.</p>
+  <div class="meta"><span>Rapport offert par EXIOR</span><span>Édition novembre 2026</span></div>
+</section>
+
+<!-- 2 SOMMAIRE -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>Système IA souverain pour syndic</span></div>
+  <div class="eyebrow">Sommaire</div>
+  <h2>Ce que contient ce rapport</h2>
+  <ul class="toc">
+    <li><span>1. Le travail d'un cabinet de syndic se joue dans la boîte mail</span><span>3</span></li>
+    <li><span>2. Ce qu'est un agent IA, concrètement</span><span>4</span></li>
+    <li><span>3. Le harness : ce qui rend un agent fiable</span><span>5</span></li>
+    <li><span>4. Le moindre privilège appliqué à un syndic</span><span>6</span></li>
+    <li><span>5. Souveraineté : serveur local ou infrastructure en France</span><span>7</span></li>
+    <li><span>6. Les modèles ouverts et les AI Endpoints</span><span>8</span></li>
+    <li><span>7. Cinq processus de syndic qu'un agent peut préparer</span><span>9</span></li>
+    <li><span>8. Une facture fournisseur, de bout en bout</span><span>10</span></li>
+    <li><span>9. Validation humaine, calculs et journal</span><span>11</span></li>
+    <li><span>10. Les questions à poser à tout prestataire IA</span><span>12</span></li>
+    <li><span>11. Votre plan d'action en cinq étapes</span><span>13</span></li>
+    <li><span>12. Aller plus loin avec EXIOR</span><span>14</span></li>
+  </ul>
+  <div class="box"><b>À qui s'adresse ce rapport</b>Aux dirigeants et gestionnaires de cabinets de syndic de copropriété qui veulent comprendre ce que l'IA peut faire pour leur cabinet, sans jargon inutile et sans exposer les données de leurs copropriétaires.</div>
+  <p class="small">Ce rapport est un document d'information. Il ne constitue pas un conseil juridique. Les textes cités doivent être vérifiés dans leur version en vigueur sur Legifrance. Les exemples utilisent des noms et des données fictifs.</p>
+  <div class="foot"><span>EXIOR</span><span>2</span></div>
+</section>
+
+<!-- 3 CONSTAT -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>1. Le constat</span></div>
+  <div class="eyebrow">1. Le constat</div>
+  <h2>Le travail d'un cabinet de syndic se joue dans la boîte mail</h2>
+  <p class="lead">Demandes de copropriétaires, devis de prestataires, factures, avis de virement, déclarations de sinistre, questions des notaires : presque tout arrive par écrit, sans ordre, dans les mêmes boîtes.</p>
+  <p>Un gestionnaire commence souvent sa journée par du tri. Il faut reconnaître l'immeuble derrière une adresse incomplète, retrouver le lot d'un copropriétaire qui n'a pas signé son mail, distinguer la fuite urgente de la question sur un appel de fonds, rattacher une facture à son contrat. Ce travail est indispensable, mais il ne demande pas l'expertise du gestionnaire.</p>
+  <p>Pendant ce temps, les échéances légales avancent. La loi du 10 juillet 1965 et le décret du 17 mars 1967 fixent un cadre précis :</p>
+  <ul>
+    <li>la convocation de l'assemblée générale est notifiée au moins 21 jours avant la réunion, sauf exceptions prévues par les textes ;</li>
+    <li>certaines pièces doivent être jointes à la convocation selon les questions inscrites ;</li>
+    <li>les copropriétaires opposants ou défaillants peuvent contester une décision dans les deux mois suivant la notification du procès-verbal ;</li>
+    <li>le syndic tient la comptabilité de chaque syndicat et gère des fonds qui ne lui appartiennent pas.</li>
+  </ul>
+  <h3>Deux natures de travail mélangées</h3>
+  <p>Dans un cabinet, deux types de travail coexistent. Le premier est très réglé : répartir une charge selon les tantièmes, calculer un appel de fonds à partir du budget voté, vérifier qu'une facture n'a pas déjà été saisie. Le second demande de la lecture et de l'interprétation : comprendre ce que veut dire un copropriétaire, identifier le sujet d'un mail, résumer un rapport d'expertise.</p>
+  <p>Le premier se confie à des programmes de calcul. Le second se confie, depuis peu, à des modèles de langage. Un système IA bien conçu pour un syndic combine les deux, et laisse la décision à l'équipe.</p>
+  <div class="box"><b>Ce que ce rapport ne promet pas</b>Aucun pourcentage de gain, aucun chiffre de marché. Le temps gagné dépend de vos volumes et de vos outils, et se mesure sur vos propres pièces. Le chapitre 11 explique comment.</div>
+  <div class="foot"><span>EXIOR</span><span>3</span></div>
+</section>
+
+<!-- 4 AGENT -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>2. Agent</span></div>
+  <div class="eyebrow">2. Les notions</div>
+  <h2>Ce qu'est un agent IA, concrètement</h2>
+  <p class="lead">Un agent est un programme qui lit une information, consulte des outils, et prépare une action. Il ne s'agit ni d'un robot ni d'une fenêtre de discussion.</p>
+  <h3>Les trois composants d'un agent</h3>
+  <ol>
+    <li><b>Un modèle de langage</b>, qui lit et rédige du texte. Il comprend un mail libre et en extrait une structure : copropriété, lot, sujet, urgence.</li>
+    <li><b>Des outils</b>, c'est-à-dire des accès limités à des logiciels : lire une fiche copropriété dans votre logiciel métier, chercher un contrat dans la GED, consulter un relevé bancaire.</li>
+    <li><b>Des règles</b> : ce que l'agent a le droit de faire, ce qu'il doit vérifier, et à quel moment il doit s'arrêter pour demander une validation.</li>
+  </ol>
+  <h3>Ce qu'un agent fait, ce qu'il ne fait pas</h3>
+  <table>
+    <tr><th>Un agent bien encadré</th><th>Un agent bien encadré ne fait jamais seul</th></tr>
+    <tr><td>Lit et classe les messages par copropriété</td><td>Envoyer un courrier ou un mail</td></tr>
+    <tr><td>Retrouve l'historique d'un dossier</td><td>Passer une écriture dans la comptabilité officielle</td></tr>
+    <tr><td>Prépare une réponse avec les pièces utiles</td><td>Ordonner un paiement</td></tr>
+    <tr><td>Propose une imputation comptable justifiée</td><td>Signer un ordre de service</td></tr>
+    <tr><td>Signale ce qui lui semble incertain</td><td>Décider d'une mise en demeure</td></tr>
+  </table>
+  <h3>Un agent par processus</h3>
+  <p>Plutôt qu'un assistant unique qui sait tout faire, un système pour syndic utilise plusieurs agents spécialisés : un agent pour la boîte mail, un pour les factures, un pour la banque, un pour les AG, un pour les sinistres. Chacun connaît les règles de son processus et n'accède qu'aux données dont il a besoin. Un orchestrateur répartit le travail entre eux.</p>
+  <div class="box"><b>Exemple</b>M. Martin écrit : « De l'eau coule du plafond de ma salle de bain depuis ce matin. » L'agent accueil identifie la Résidence Les Ormes, le lot 3B, classe le message en sinistre urgent et le transmet à l'agent sinistres, qui prépare la déclaration et un message au copropriétaire du dessus. Le gestionnaire relit et valide.</div>
+  <div class="foot"><span>EXIOR</span><span>4</span></div>
+</section>
+
+<!-- 5 HARNESS -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>3. Harness</span></div>
+  <div class="eyebrow">2. Les notions</div>
+  <h2>Le harness : ce qui rend un agent fiable</h2>
+  <p class="lead">Un modèle de langage seul peut se tromper ou inventer. Le harness est le cadre de code qui l'entoure et qui impose les règles, quoi que le modèle « pense ».</p>
+  <p>Le mot vient de l'anglais et désigne un harnais. Dans un système IA de production, le harness comprend cinq éléments :</p>
+  <ol>
+    <li><b>La boucle</b> : l'ordre des étapes (lire, extraire, vérifier, proposer, attendre la validation), toujours le même.</li>
+    <li><b>Les outils autorisés</b> : la liste fermée des actions possibles, chacune avec ses paramètres contrôlés.</li>
+    <li><b>La mémoire</b> : le référentiel du cabinet (copropriétés, lots, tantièmes, clés, contrats) et les règles déjà validées par l'équipe, injectées au bon moment.</li>
+    <li><b>Les garde-fous</b> : contrôles automatiques avant toute proposition (le lot existe-t-il ? la facture est-elle un doublon ? le montant est-il cohérent ?).</li>
+    <li><b>La validation</b> : un point d'arrêt bloquant avant tout effet extérieur.</li>
+  </ol>
+  <div class="code"><span class="c"># Ce que le harness impose à l'agent factures (extrait simplifié)</span>
+proposition = modele.extraire(facture_pdf, schema=<span class="a">Imputation</span>)
+verifier_copropriete(proposition.copropriete)       <span class="c"># existe dans le référentiel</span>
+verifier_doublon(proposition.fournisseur, proposition.numero)
+montant = moteur_calcul.repartir(proposition, cles)  <span class="c"># calcul déterministe</span>
+si proposition.confiance &lt; seuil: marquer("à vérifier")
+file_validation.ajouter(proposition, piece=facture_pdf)
+<span class="c"># aucune écriture tant qu'un collaborateur n'a pas validé</span></div>
+  <h3>Pourquoi c'est indispensable</h3>
+  <p>Sans harness, la qualité dépend de la formulation de chaque demande et de l'humeur du modèle. Avec un harness, le comportement est reproductible, contrôlé et tracé. C'est la différence entre un outil de démonstration et un système qu'un cabinet peut utiliser sur les comptes de ses syndicats.</p>
+  <div class="box"><b>À retenir</b>Les règles importantes ne sont jamais confiées au modèle. Elles sont écrites dans le code du harness, qui les applique à chaque fois.</div>
+  <div class="foot"><span>EXIOR</span><span>5</span></div>
+</section>
+
+<!-- 6 MOINDRE PRIVILEGE -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>4. Moindre privilège</span></div>
+  <div class="eyebrow">2. Les notions</div>
+  <h2>Le moindre privilège appliqué à un syndic</h2>
+  <p class="lead">Chaque agent reçoit exactement les accès nécessaires à son processus, et rien de plus. C'est la règle de sécurité la plus importante d'un système multi-agents.</p>
+  <p>Dans un cabinet, le principe existe déjà pour les personnes : un assistant n'a pas les mêmes droits bancaires que le dirigeant. Le moindre privilège applique la même logique aux agents, de façon plus stricte encore, car un agent peut être trompé par un mail piégé.</p>
+  <table>
+    <tr><th>Agent</th><th>Peut lire</th><th>Peut préparer</th><th>N'a pas accès à</th></tr>
+    <tr><td>Accueil</td><td>Boîtes mail, référentiel des lots</td><td>Classement, transmission</td><td>Comptabilité, banque</td></tr>
+    <tr><td>Factures</td><td>Boîte factures, contrats, référentiel des clés</td><td>Imputation proposée</td><td>Banque, coordonnées des copropriétaires</td></tr>
+    <tr><td>Banque</td><td>Relevés (lecture seule)</td><td>Rapprochement proposé</td><td>Tout ordre de paiement</td></tr>
+    <tr><td>AG</td><td>Comptes, budget, devis, liste des copropriétaires</td><td>Ordre du jour, convocation</td><td>Banque</td></tr>
+    <tr><td>Sinistres</td><td>Dossiers sinistres, contrats d'entretien</td><td>Déclaration, relances</td><td>Comptabilité</td></tr>
+  </table>
+  <h3>Comment c'est mis en œuvre</h3>
+  <ul>
+    <li>Un compte technique distinct par agent et par outil, avec des droits limités.</li>
+    <li>Les connecteurs bancaires en lecture seule : aucun identifiant de paiement n'est stocké dans le système.</li>
+    <li>Les données sensibles (coordonnées bancaires, éléments d'identité) masquées quand l'agent n'en a pas besoin.</li>
+    <li>Des tentatives de détournement avant l'ouverture : mails piégés, instructions cachées dans une pièce jointe.</li>
+  </ul>
+  <div class="box"><b>Le cas du faux changement de coordonnées bancaires</b>Un mail annonce que « l'entreprise Durand change de banque ». Dans un système bien conçu, l'agent factures n'a aucun droit sur les coordonnées des fournisseurs : il signale le message comme sensible et le transmet à un collaborateur habilité, avec un rappel de la procédure de vérification par téléphone.</div>
+  <div class="foot"><span>EXIOR</span><span>6</span></div>
+</section>
+
+<!-- 7 SOUVERAINETE -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>5. Souveraineté</span></div>
+  <div class="eyebrow">3. Les données</div>
+  <h2>Souveraineté : serveur local ou infrastructure en France</h2>
+  <p class="lead">Un système IA est souverain quand le cabinet sait où tournent ses programmes, décide de ce que font les agents, et peut partir avec ses données.</p>
+  <p>Beaucoup d'outils grand public fonctionnent en envoyant vos textes sur les serveurs d'un éditeur d'IA, dont vous ne maîtrisez ni l'emplacement ni les conditions de conservation. Pour un syndic, qui traite les données personnelles des copropriétaires et les comptes de syndicats, deux architectures évitent ce problème.</p>
+  <div class="two">
+    <div class="box"><b>Option 1 · Serveur du cabinet</b>Un serveur installé dans vos locaux fait tourner des modèles ouverts. Les données ne quittent pas le cabinet. Il faut un matériel adapté (en particulier une carte graphique suffisante pour les modèles choisis), une alimentation fiable et des sauvegardes. Les mises à jour se font à distance.</div>
+    <div class="box"><b>Option 2 · Infrastructure dédiée en France</b>Le système tourne chez OVHcloud, société française, sur des serveurs en France. Les modèles de langage sont appelés via OVHcloud AI Endpoints, qui propose des modèles ouverts (par exemple ceux de Mistral). Aucun matériel à acheter, montée en charge simple.</div>
+  </div>
+  <h3>Dans les deux cas</h3>
+  <ul>
+    <li>Les données de vos copropriétés ne sont pas envoyées à un fournisseur d'IA tiers.</li>
+    <li>Votre logiciel de copropriété reste la comptabilité officielle.</li>
+    <li>Les règles, les référentiels construits et le journal sont stockés dans des formats ouverts, récupérables à tout moment.</li>
+  </ul>
+  <h3>Comment choisir</h3>
+  <table>
+    <tr><th>Critère</th><th>Serveur du cabinet</th><th>Infrastructure en France</th></tr>
+    <tr><td>Investissement initial</td><td>Achat du matériel</td><td>Aucun matériel</td></tr>
+    <tr><td>Données</td><td>Restent dans les locaux</td><td>Restent sur des serveurs en France</td></tr>
+    <tr><td>Choix des modèles</td><td>Limité par le matériel</td><td>Catalogue AI Endpoints</td></tr>
+    <tr><td>Continuité</td><td>Dépend de vos locaux</td><td>Infrastructure d'un hébergeur</td></tr>
+  </table>
+  <div class="foot"><span>EXIOR</span><span>7</span></div>
+</section>
+
+<!-- 8 OPEN WEIGHTS -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>6. Modèles ouverts</span></div>
+  <div class="eyebrow">3. Les données</div>
+  <h2>Les modèles ouverts et les AI Endpoints</h2>
+  <p class="lead">Un modèle « ouvert » (open weights) est un modèle dont les paramètres sont publiés. Il peut tourner sur le serveur de votre choix, au lieu de rester enfermé chez son éditeur.</p>
+  <h3>Pourquoi c'est la base de la souveraineté</h3>
+  <p>Avec un modèle fermé, vous envoyez vos données à l'éditeur pour obtenir une réponse. Avec un modèle ouvert, c'est le modèle qui vient à vos données : il est installé sur votre serveur ou sur une infrastructure que vous choisissez. Vous pouvez aussi changer de modèle sans changer de système, car le harness et la mémoire du cabinet restent les mêmes.</p>
+  <h3>Les AI Endpoints</h3>
+  <p>Faire tourner soi-même un grand modèle demande du matériel coûteux. OVHcloud AI Endpoints propose une solution intermédiaire : des modèles ouverts déjà installés sur l'infrastructure d'OVHcloud, appelés à la demande, avec une facturation à l'usage. Le système du cabinet les interroge comme un service, sans gérer de carte graphique.</p>
+  <h3>Choisir la bonne taille de modèle</h3>
+  <ul>
+    <li><b>Petits modèles</b> : suffisants pour classer un mail, extraire les champs d'une facture, détecter une langue ou une urgence. Rapides et peu coûteux.</li>
+    <li><b>Modèles plus grands</b> : utiles pour rédiger une réponse nuancée, résumer un rapport d'expertise, préparer un projet de résolution.</li>
+    <li><b>Escalade</b> : le harness commence par le petit modèle et ne fait appel au plus grand que lorsque la confiance est insuffisante.</li>
+  </ul>
+  <div class="box"><b>Le modèle ne calcule pas les montants</b>Quelle que soit sa taille, le modèle de langage ne produit pas les chiffres. Les répartitions par tantièmes, les totaux et les appels de fonds sortent de moteurs de calcul déterministes, qui donnent toujours le même résultat pour les mêmes données.</div>
+  <p class="small">Le catalogue de modèles et les conditions d'OVHcloud AI Endpoints évoluent : consultez la page officielle d'OVHcloud pour l'offre en vigueur.</p>
+  <div class="foot"><span>EXIOR</span><span>8</span></div>
+</section>
+
+<!-- 9 PROCESSUS -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>7. Processus</span></div>
+  <div class="eyebrow">4. Le cabinet</div>
+  <h2>Cinq processus de syndic qu'un agent peut préparer</h2>
+  <table>
+    <tr><th>Processus</th><th>Ce que l'agent prépare</th><th>Ce que l'équipe valide</th></tr>
+    <tr><td><b>Boîte mail et copropriétaires</b></td><td>Classement par copropriété, lot et sujet ; réponse préparée avec les pièces du dossier (budget voté, dernier appel, procès-verbal)</td><td>Chaque réponse avant envoi ; les sujets sensibles sont routés vers le gestionnaire</td></tr>
+    <tr><td><b>Factures fournisseurs</b></td><td>Identification du fournisseur, de la copropriété, du contrat et de la clé de répartition ; contrôle des doublons</td><td>L'imputation avant intégration dans le logiciel de copropriété</td></tr>
+    <tr><td><b>Banque et rapprochement</b></td><td>Rapprochement des relevés avec les appels et les factures ; file des virements non identifiés</td><td>Chaque affectation ; les règlements restent faits par l'équipe</td></tr>
+    <tr><td><b>Assemblées générales</b></td><td>Projet d'ordre du jour, majorité indiquée pour chaque résolution, liste des pièces à joindre, date limite d'envoi de la convocation, projet de procès-verbal</td><td>L'ordre du jour, la convocation, le procès-verbal</td></tr>
+    <tr><td><b>Sinistres</b></td><td>Déclaration, rassemblement des pièces, suivi des interventions, relances en brouillon</td><td>La déclaration et chaque courrier</td></tr>
+  </table>
+  <h3>Et ensuite</h3>
+  <p>Les mêmes principes s'appliquent aux autres processus d'un cabinet : travaux et ordres de service, prestataires et contrats, appels de fonds, recouvrement amiable, mutations et pré-états datés, clôture d'exercice, conseil syndical, conformité (immatriculation, fiche synthétique, plan pluriannuel de travaux), veille réglementaire et tableau de bord du dirigeant.</p>
+  <div class="box"><b>Par où commencer</b>Choisissez d'abord un processus fréquent, à risque limité, et dont les pièces sont faciles à récupérer. La boîte mail et les factures fournisseurs remplissent souvent ces trois conditions. Les processus engageants, comme le recouvrement, viennent après, une fois la validation rodée.</div>
+  <div class="foot"><span>EXIOR</span><span>9</span></div>
+</section>
+
+<!-- 10 FACTURE -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>8. Exemple</span></div>
+  <div class="eyebrow">4. Le cabinet</div>
+  <h2>Une facture fournisseur, de bout en bout</h2>
+  <p class="lead">Une facture d'ascensoriste arrive en pièce jointe dans la boîte comptabilité. Voici ce que fait le système, étape par étape. Données fictives.</p>
+  <div class="flow">
+    <div><b>1. Réception</b>Ascenseurs Dupont, facture n° 8841, PDF reçu sur la boîte comptabilité.</div>
+    <div><b>2. Lecture</b>Le modèle extrait : fournisseur, numéro, date, montants HT et TTC, adresse de l'immeuble, période.</div>
+    <div><b>3. Contrôles</b>Copropriété Résidence Les Ormes trouvée ; contrat d'entretien actif ; aucun doublon ; montant conforme au contrat.</div>
+    <div class="gate"><b>4. Validation</b>Imputation proposée sur la clé ascenseur du bâtiment B, avec la pièce et la justification. Le comptable valide.</div>
+  </div>
+  <h3>Ce que voit le comptable</h3>
+  <table>
+    <tr><th>Champ</th><th>Proposition</th><th>Source</th></tr>
+    <tr><td>Copropriété</td><td>Résidence Les Ormes</td><td>Adresse sur la facture + référentiel</td></tr>
+    <tr><td>Contrat</td><td>Entretien ascenseurs</td><td>GED, contrat en cours</td></tr>
+    <tr><td>Clé de répartition</td><td>Ascenseur bâtiment B</td><td>Règle validée lors d'une facture précédente</td></tr>
+    <tr><td>Doublon</td><td>Aucun</td><td>Fournisseur + numéro + montant</td></tr>
+    <tr><td>Confiance</td><td>Élevée</td><td>Tous les contrôles passés</td></tr>
+  </table>
+  <p>Après validation, l'écriture est transmise au logiciel de copropriété, par son API quand l'éditeur en propose une, ou par un fichier d'import. La validation, son auteur et son heure sont inscrits au journal. Si le comptable corrige la clé, la correction devient une règle proposée pour les factures suivantes du même fournisseur.</p>
+  <div class="box"><b>Si quelque chose cloche</b>Facture déjà reçue, copropriété introuvable, montant hors contrat : la proposition est marquée « à vérifier » et placée en tête de file, avec la raison affichée. L'agent ne force jamais une imputation incertaine.</div>
+  <div class="foot"><span>EXIOR</span><span>10</span></div>
+</section>
+
+<!-- 11 VALIDATION -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>9. Contrôle</span></div>
+  <div class="eyebrow">5. Le contrôle</div>
+  <h2>Validation humaine, calculs et journal</h2>
+  <p class="lead">Trois mécanismes rendent un système IA acceptable pour un syndic : l'équipe valide, les montants sont calculés, chaque action est tracée.</p>
+  <h3>1. La validation humaine bloquante</h3>
+  <p>Aucune écriture comptable, aucun courrier, aucun mail sortant, aucun ordre de service, aucune mise en demeure ne part sans qu'un collaborateur habilité l'ait validé. La validation est nominative et alignée sur les habilitations du cabinet : un assistant peut valider une réponse simple, seul un gestionnaire valide une mise en demeure. Les agents n'ont aucun droit de paiement.</p>
+  <h3>2. Des montants calculés, jamais générés</h3>
+  <p>Les montants, tantièmes, répartitions et appels de fonds sont produits par des moteurs de calcul déterministes, à partir du règlement de copropriété, du budget voté et des données du logiciel métier. Le modèle de langage lit, classe et rédige ; il ne produit pas les chiffres.</p>
+  <h3>3. Un journal complet</h3>
+  <p>Chaque lecture de pièce, proposition, validation, correction et refus est enregistré avec son auteur et son horodatage. En cas de question d'un copropriétaire, du conseil syndical ou d'un contrôle, le cabinet retrouve qui a décidé quoi, sur quelle pièce.</p>
+  <div class="box"><b>La responsabilité reste au cabinet</b>Le système prépare, l'équipe décide. Comme pour un courrier rédigé par un collaborateur, c'est la validation qui engage le cabinet. Le système aide à valider en affichant la pièce source, la justification et les points d'incertitude.</div>
+  <h3>Une amélioration continue, sous contrôle</h3>
+  <p>Chaque correction de l'équipe peut devenir une règle. La règle n'est pas apprise en silence : elle est proposée, validée, datée et consultable. Le système colle ainsi de plus en plus aux habitudes du cabinet, sans perdre la traçabilité.</p>
+  <div class="foot"><span>EXIOR</span><span>11</span></div>
+</section>
+
+<!-- 12 QUESTIONS -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>10. Questions</span></div>
+  <div class="eyebrow">6. Choisir</div>
+  <h2>Les questions à poser à tout prestataire IA</h2>
+  <p class="lead">Avant de confier les données de vos copropriétés à un outil ou à un prestataire, posez ces questions et exigez des réponses écrites.</p>
+  <ol>
+    <li><b>Où tournent les modèles et où sont stockées les données ?</b> Nom de l'hébergeur, pays des serveurs, éventuels sous-traitants.</li>
+    <li><b>Les données sont-elles envoyées à un fournisseur d'IA tiers ?</b> Si oui, lequel, et à quelles conditions de conservation ?</li>
+    <li><b>Les modèles sont-ils ouverts ?</b> Peut-on changer de modèle sans tout reconstruire ?</li>
+    <li><b>Qui calcule les montants ?</b> Le modèle de langage, ou des moteurs de calcul vérifiables ?</li>
+    <li><b>Que peut faire un agent sans validation ?</b> La réponse attendue pour un syndic : rien qui engage le cabinet.</li>
+    <li><b>Les agents ont-ils un droit de paiement ?</b> La réponse attendue : non.</li>
+    <li><b>Comment sont limités les accès de chaque agent ?</b> Comptes techniques, lecture seule, masquage.</li>
+    <li><b>Comment le système résiste-t-il aux mails piégés ?</b> Des tests de détournement ont-ils été menés avant l'ouverture ?</li>
+    <li><b>Que contient le journal, et qui y a accès ?</b></li>
+    <li><b>Comment se connecte-t-on à notre logiciel de copropriété ?</b> API, import/export, ou opérateur sous contrôle, et avec quelles limites ?</li>
+    <li><b>Comment sont mesurés les résultats ?</b> Des critères d'acceptation écrits avant le déploiement ?</li>
+    <li><b>Que récupère-t-on en fin de contrat ?</b> Données, règles, journal, et dans quels formats ?</li>
+  </ol>
+  <div class="box"><b>Signal d'alerte</b>Un prestataire qui promet un pourcentage de gain avant d'avoir vu vos pièces, ou qui ne sait pas dire où tournent ses modèles, ne connaît pas encore votre cabinet.</div>
+  <div class="foot"><span>EXIOR</span><span>12</span></div>
+</section>
+
+<!-- 13 PLAN -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>11. Plan d'action</span></div>
+  <div class="eyebrow">6. Choisir</div>
+  <h2>Votre plan d'action en cinq étapes</h2>
+  <h3>1. Mesurer une période témoin</h3>
+  <p>Pendant deux semaines, comptez ce qui arrive : mails par boîte, factures, demandes d'intervention, sinistres ouverts, questions de notaires. Notez le temps passé sur quelques tâches types. Ces chiffres seront votre point de comparaison, sans estimation inventée.</p>
+  <h3>2. Lister vos outils et vos accès</h3>
+  <p>Logiciel de copropriété et version, messageries, banques des syndicats, GED, extranet, tableurs. Pour chaque outil, demandez à l'éditeur s'il propose une API ou des exports.</p>
+  <h3>3. Choisir un premier processus</h3>
+  <p>Fréquent, à risque limité, facile à connecter. Écrivez sa fiche : déclencheur, pièces d'entrée, règles, sortie attendue, qui valide, exceptions.</p>
+  <h3>4. Écrire les critères d'acceptation</h3>
+  <p>Par exemple : part des propositions validées sans correction, nombre d'erreurs bloquantes, délai de traitement. Fixez les seuils avant les tests, pas après.</p>
+  <h3>5. Tester en lecture seule sur vos pièces</h3>
+  <p>Les agents travaillent sur de vraies pièces sans rien écrire. L'équipe compare avec son propre traitement, corrige, et le processus n'ouvre que s'il remplit les critères.</p>
+  <div class="box"><b>Durée réaliste</b>Le cadrage se fait en quelques jours si les accès sont prêts. Le déploiement avance processus par processus : mieux vaut un processus bien ouvert que cinq à moitié.</div>
+  <div class="foot"><span>EXIOR</span><span>13</span></div>
+</section>
+
+<!-- 14 EXIOR -->
+<section class="page">
+  <div class="run"><span>EXIOR</span><span>12. Aller plus loin</span></div>
+  <div class="eyebrow">Aller plus loin</div>
+  <h2>Aller plus loin avec EXIOR</h2>
+  <p class="lead">EXIOR installe et exploite des systèmes IA souverains pour les cabinets de syndic : agents par processus, connectés à vos outils, validés par votre équipe, sur votre serveur ou en France chez OVHcloud.</p>
+  <table>
+    <tr><th>Offre</th><th>Contenu</th><th>Prix</th></tr>
+    <tr><td><b>Guide « Votre système IA souverain »</b></td><td>Plus de 100 chapitres en ligne : notions, cartographie, architecture, connecteurs, agents processus par processus, sécurité, déploiement, exploitation, décision. Accès envoyé après le paiement.</td><td class="price">690 € TTC</td></tr>
+    <tr><td><b>Architecture syndic</b></td><td>Cartographie de vos outils et processus, dossier d'architecture, règles de validation, critères d'acceptation. Livré en 7 jours ouvrés après réception du dossier complet.</td><td class="price">990 € HT</td></tr>
+    <tr><td><b>Clé en main</b></td><td>Architecture, infrastructure, connecteurs, tous les agents, Espace EXIOR, tests, formation, exploitation mensuelle. Engagement de 6 mois.</td><td class="price">2 990 € HT<br><span class="small">puis 990 € HT par mois</span></td></tr>
+  </table>
+  <p class="small">Exploitation annuelle prépayée possible : 9 900 € HT pour 12 mois. Devis de déploiement sur votre propre infrastructure et devis sur mesure disponibles sur la page EXIOR dédiée aux syndics.</p>
+  <div class="box"><b>Contact</b>Page syndics : falcone747.github.io/exior-preview/syndics/<br>E-mail : exior.tech@gmail.com</div>
+  <p class="small">EXIOR. Les exemples de ce rapport utilisent des noms et des données fictifs. Les textes juridiques cités doivent être vérifiés dans leur version en vigueur. Ce document ne constitue pas un conseil juridique.</p>
+  <div class="foot"><span>EXIOR</span><span>14</span></div>
+</section>
+</body>
+</html>
