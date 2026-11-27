@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Votre dossier d’architecture — EXIOR</title>
+<meta name="description" content="Lecture du dossier d’architecture EXIOR. Accès par code.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="../../assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch.png">
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/home.css">
+<link rel="stylesheet" href="../../assets/syndics.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body class="syndics dossier-body">
+<a class="skip" href="#lecture">Aller au contenu</a>
+<div id="gate" class="gate">
+  <form id="gate-form" class="gate-card">
+    <a class="brand" href="../../" aria-label="EXIOR, accueil"><img src="../../assets/brand/logo-nav.png" width="288" height="96" alt="EXIOR"></a>
+    <h1>Votre dossier d’architecture</h1>
+    <p class="lead">Entrez votre code d’accès pour ouvrir votre dossier.</p>
+    <div class="field">
+      <label for="code">Code d'accès</label>
+      <input id="code" name="code" type="password" autocomplete="off" spellcheck="false" required>
+      <p class="field-error" id="gate-error" role="alert" hidden></p>
+    </div>
+    <button class="btn btn-primary" type="submit">Entrer</button>
+    <p class="micro"><a href="../">Retour à la page syndics</a></p>
+  </form>
+</div>
+<div id="shell" hidden>
+  <header class="top shell-top">
+    <div class="wrap top-in">
+      <a class="brand" href="../" aria-label="Page syndics"><img src="../../assets/brand/logo-nav.png" width="288" height="96" alt="EXIOR"></a>
+      <form class="reader-search" role="search" action="#" onsubmit="return false">
+        <label class="sr-only" for="q">Rechercher dans le dossier</label>
+        <input id="q" type="search" placeholder="Rechercher  /" autocomplete="off">
+      </form>
+      <div class="reader-tools noprint">
+        <button type="button" class="ghost-btn" id="print-chapter">Imprimer</button>
+        <button type="button" class="ghost-btn" id="logout">Se déconnecter</button>
+      </div>
+    </div>
+  </header>
+  <p id="search-status" class="sr-only" aria-live="polite"></p>
+  <div class="reader">
+    <aside class="reader-side">
+      <div id="search-results" class="search-hits" hidden></div>
+      <nav id="toc" aria-label="Chapitres"></nav>
+    </aside>
+    <main id="lecture">
+      <p id="crumb" class="crumb"></p>
+      <article id="chapter" class="prose"></article>
+      <nav id="pager" class="pager" aria-label="Chapitres précédent et suivant"></nav>
+    </main>
+    <aside id="page-toc" class="page-toc" aria-label="Dans ce chapitre"></aside>
+  </div>
+</div>
+<noscript><p class="wrap">Le lecteur déchiffre le dossier dans votre navigateur. Activez JavaScript pour saisir votre code.</p></noscript>
+<script src="../../assets/guide-reader.js"></script>
+</body>
+</html>

@@ -1,9 +1,7 @@
-# Aperçu EXIOR
+# EXIOR
 
-Prévisualisation publique de la nouvelle page d’accueil, **hors production**.
+Site marketing du Meta OS. Émetteur : EXIOR.
 
-- Site officiel inchangé : https://exior.io
-- Les boutons et liens légaux (commander, CGV, mentions, confidentialité) pointent vers exior.io.
-- `noindex` : cette adresse n’est pas destinée à être indexée.
+Adresse publique : https://falcone747.github.io/exior-preview/
 
-Pages : https://falcone747.github.io/exior-preview/
+L’offre chiffrée est dans `assets/offre.js`. Le bouton de paiement reprend le lien Stripe de ce fichier. La mise en service reste sur devis.
