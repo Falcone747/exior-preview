@@ -27,7 +27,7 @@ Statut : 112/112 chapitres écrits ✅ · environ 73 000 mots (vérification de 
 8. ✅ `02-cartographier/08-calendrier-annuel.md` — Le calendrier annuel d'un syndic : saison des AG, clôtures, appels trimestriels, contrats, échéances réglementaires.
 9. ✅ `02-cartographier/09-prioriser-flux.md` — Prioriser les flux à confier aux agents : impact, risque, facilité de connexion.
 10. ✅ `02-cartographier/10-fiche-processus.md` — Rédiger une fiche processus exploitable : déclencheur, entrées, règles, sorties, validation, exceptions.
-11. ✅ `02-cartographier/11-dossier-architecture.md` — Le dossier d'architecture : contenu, livrables, critères d'acceptation, ce qu'il permet de décider.
+11. ✅ `02-cartographier/11-dossier-architecture.md` — Le document d'architecture interne : contenu, livrables, critères d'acceptation, ce qu'il permet de décider.
 
 ## Partie 3 — L'architecture technique souveraine (`03-architecture/`)
 1. ✅ `03-architecture/01-vue-ensemble-couches.md` — Vue d'ensemble : entrées, agents et mémoire, validation, logiciel officiel, journal.

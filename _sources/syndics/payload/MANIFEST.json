@@ -1,0 +1,1310 @@
+{
+  "branch": "syndics-sources",
+  "note": "Each unsplitted *.b64 is a single-line base64 payload plus a trailing newline. For split files, concatenate parts in numeric order (no extra separators, no newlines) then base64 -d. Decode destination is the decode_to path in the site repo. guide-index.md is plain markdown at _sources/syndics/guide-index.md.",
+  "files": [
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/01-systeme-ia-souverain.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/01-systeme-ia-souverain.bin",
+      "sha256": "080ee32a3d60928c1a3b5814cdb0fe15bbbd08d4616d1d8c0272aeec1c88d9ad",
+      "bytes": 5177,
+      "b64_chars": 6904,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/01-systeme-ia-souverain.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/02-pourquoi-le-syndic.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/02-pourquoi-le-syndic.bin",
+      "sha256": "fac58ed492fa03985faf071f5fe04bd30ec56f3a48194963a9b65a882f66b8c5",
+      "bytes": 5244,
+      "b64_chars": 6992,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/02-pourquoi-le-syndic.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/03-cadre-legal-1965-1967.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/03-cadre-legal-1965-1967.bin",
+      "sha256": "6b694b0966e517e36254cc7566f5f5a1fd3d3a97fe60b312a0a01c0c84ec2e63",
+      "bytes": 6067,
+      "b64_chars": 8092,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/03-cadre-legal-1965-1967.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/04-hoguet-fonds-mandants.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/04-hoguet-fonds-mandants.bin",
+      "sha256": "5f290907f1b8f351f72b0a0281d98bf17eada47aedfc875fe381cabd2d1c8cb4",
+      "bytes": 5064,
+      "b64_chars": 6752,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/04-hoguet-fonds-mandants.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/05-alur-elan-extranet.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/05-alur-elan-extranet.bin",
+      "sha256": "92479644178c1b737357e732a36a38f7e507f4cba78fa3958b142a01224f6a36",
+      "bytes": 6192,
+      "b64_chars": 8256,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/05-alur-elan-extranet.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/06-vocabulaire-ia.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/06-vocabulaire-ia.bin",
+      "sha256": "3c9b11594c639364c7885bb0b63c18715aa244ca1524d2c41bcda10348c95162",
+      "bytes": 5028,
+      "b64_chars": 6704,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/06-vocabulaire-ia.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/07-vocabulaire-copropriete.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/07-vocabulaire-copropriete.bin",
+      "sha256": "c870b52c4b6bb7a772e15bf009213275d0ec5a65da719a9597802164a3676903",
+      "bytes": 4667,
+      "b64_chars": 6224,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/07-vocabulaire-copropriete.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/08-agent-ce-quil-fait.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/08-agent-ce-quil-fait.bin",
+      "sha256": "a262a7ec2a54bcf0b0729548b0b04c0b328fa856a41cdb93d1bdea2ded9dda40",
+      "bytes": 4098,
+      "b64_chars": 5464,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/08-agent-ce-quil-fait.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/09-trois-modes-interfacage.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/09-trois-modes-interfacage.bin",
+      "sha256": "ff38aea6cc41dcfc925948e9eda729a7eb89045d1971bfaf0f41d5547dbc5741",
+      "bytes": 4167,
+      "b64_chars": 5556,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/09-trois-modes-interfacage.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/10-principes-non-negociables.bin.b64",
+      "decode_to": "syndics/espace/data/c/01-comprendre/10-principes-non-negociables.bin",
+      "sha256": "a3873033ecdf627545d847796f9c746c7b1394075ccc4fa927336581b4f66375",
+      "bytes": 4011,
+      "b64_chars": 5348,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/01-comprendre/10-principes-non-negociables.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/01-methode-cartographie.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/01-methode-cartographie.bin",
+      "sha256": "254c2357e7c63490b35cb7606af0accea53ce68069fca8dcc779168213c16da9",
+      "bytes": 3643,
+      "b64_chars": 4860,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/01-methode-cartographie.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/02-inventaire-outils.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/02-inventaire-outils.bin",
+      "sha256": "cc0511d7ae9e76f2df18700cbfe92e62be06ecc7d697c042d02f32533c945ad7",
+      "bytes": 4089,
+      "b64_chars": 5452,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/02-inventaire-outils.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/03-inventaire-donnees.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/03-inventaire-donnees.bin",
+      "sha256": "dcbb9488180e3b84f914c5781dd67c3fac45565a207c78ba44497c9856ea539b",
+      "bytes": 4106,
+      "b64_chars": 5476,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/03-inventaire-donnees.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/04-mesurer-volumes.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/04-mesurer-volumes.bin",
+      "sha256": "2c0d2c6dd244494e8653a62cae3035f206a867811cd4c7f8fa4f5494069953ab",
+      "bytes": 4047,
+      "b64_chars": 5396,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/04-mesurer-volumes.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/05-goulots.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/05-goulots.bin",
+      "sha256": "b722950502bcbd291e62f5d96524647015d88378fa01d712fe96fafd37248c98",
+      "bytes": 3504,
+      "b64_chars": 4672,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/05-goulots.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/06-regles-vs-jugement.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/06-regles-vs-jugement.bin",
+      "sha256": "ae7a871821a6e991a2d61de1f6b3fc1522e09ee1d99fbe8a7f3d462589b87ad0",
+      "bytes": 3997,
+      "b64_chars": 5332,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/06-regles-vs-jugement.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/07-roles-du-cabinet.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/07-roles-du-cabinet.bin",
+      "sha256": "bafc542260d9115e4d8b3a3db2bb0fc36835dc0bc7e482548662b148b4057248",
+      "bytes": 4254,
+      "b64_chars": 5672,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/07-roles-du-cabinet.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/08-calendrier-annuel.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/08-calendrier-annuel.bin",
+      "sha256": "44fe532738f8a2797b66df82c93cf373b27ddaf2bc4f1604d3ea9afc10a69ec9",
+      "bytes": 3880,
+      "b64_chars": 5176,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/08-calendrier-annuel.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/09-prioriser-flux.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/09-prioriser-flux.bin",
+      "sha256": "ba3a6c6b6d48785b5022f62e409d53fe3668641177136106f528279e36f40721",
+      "bytes": 3955,
+      "b64_chars": 5276,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/09-prioriser-flux.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/10-fiche-processus.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/10-fiche-processus.bin",
+      "sha256": "712a45f0ecbad2e2618f1bffd9e092f84bf1bdd07b0bfbc55044639f58a0d240",
+      "bytes": 4018,
+      "b64_chars": 5360,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/10-fiche-processus.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/11-dossier-architecture.bin.b64",
+      "decode_to": "syndics/espace/data/c/02-cartographier/11-dossier-architecture.bin",
+      "sha256": "6081ab37ec3c474a12b41f2c5de773f6939359929fae80b195a04d97f9666684",
+      "bytes": 4414,
+      "b64_chars": 5888,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/02-cartographier/11-dossier-architecture.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/01-vue-ensemble-couches.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/01-vue-ensemble-couches.bin",
+      "sha256": "b874610d994c9c63ef363d374fc8f479d225ce12ea95f9e2f2ddfc61cd1db861",
+      "bytes": 4092,
+      "b64_chars": 5456,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/01-vue-ensemble-couches.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/02-local-ou-serveur.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/02-local-ou-serveur.bin",
+      "sha256": "a9a19c3524bd7614c0bee20a37fc2b9dbc1a7789a406a6a3871097bb63350a5b",
+      "bytes": 4477,
+      "b64_chars": 5972,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/02-local-ou-serveur.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/03-ovhcloud-france.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/03-ovhcloud-france.bin",
+      "sha256": "91732c1de70c0a89c949382068cb179f40e6654a99e1843f9d7d72d43cd43e1e",
+      "bytes": 3979,
+      "b64_chars": 5308,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/03-ovhcloud-france.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/04-ai-endpoints-open-weights.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/04-ai-endpoints-open-weights.bin",
+      "sha256": "8fa3d5d26675dbbf49b7c435834cfeed66b5ac2740a12ac385c5899b6df533d6",
+      "bytes": 4488,
+      "b64_chars": 5984,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/04-ai-endpoints-open-weights.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/05-taille-des-modeles.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/05-taille-des-modeles.bin",
+      "sha256": "67e51ee0702037bdccc94a23a9beb34363dde8a7f643cb5838fe2e0dbabc28ad",
+      "bytes": 4078,
+      "b64_chars": 5440,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/05-taille-des-modeles.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/06-deterministe-vs-llm.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/06-deterministe-vs-llm.bin",
+      "sha256": "db1c26d84d9300ccd95c5622651af70e300135e52e1c00dbdc613a6d681d995a",
+      "bytes": 4755,
+      "b64_chars": 6340,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/06-deterministe-vs-llm.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/07-memoire-metier.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/07-memoire-metier.bin",
+      "sha256": "bd7384f5783a41f142eda3b91a539518105a714c39c33e38cf6f41c52bd5fa7f",
+      "bytes": 4682,
+      "b64_chars": 6244,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/07-memoire-metier.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/08-harness.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/08-harness.bin",
+      "sha256": "be02f2e8952cefea11b103e2509265a56af7c1d3dfa514c2ab84f98249aa062a",
+      "bytes": 5702,
+      "b64_chars": 7604,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/08-harness.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/09-orchestrateur-agents.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/09-orchestrateur-agents.bin",
+      "sha256": "1beb541a2ec29e0e1ff56f0cf67cd7f891e7865a9b74d0b2a5a797ccf25cded3",
+      "bytes": 4233,
+      "b64_chars": 5644,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/09-orchestrateur-agents.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/10-sorties-structurees.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/10-sorties-structurees.bin",
+      "sha256": "3740947734726b480d9c7af2a3b22ba5ecc895b0b15a90ff3a5dfabe4ecd4de2",
+      "bytes": 4106,
+      "b64_chars": 5476,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/10-sorties-structurees.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/11-journal-audit.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/11-journal-audit.bin",
+      "sha256": "0317989d38d1936da1ad6371e8ef9b89c06060e4bb82b93327e5138e018ec3de",
+      "bytes": 4246,
+      "b64_chars": 5664,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/11-journal-audit.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/12-isolation-cabinet.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/12-isolation-cabinet.bin",
+      "sha256": "dba39a72dd94c830003d2d8427e0ccc6e9c422520cd6ebaf9d0fd6e72964c17e",
+      "bytes": 4203,
+      "b64_chars": 5604,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/12-isolation-cabinet.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/03-architecture/13-couts-infrastructure.bin.b64",
+      "decode_to": "syndics/espace/data/c/03-architecture/13-couts-infrastructure.bin",
+      "sha256": "587063ca81bbb8a2f5d85b20835aee4718a6010fdb4841904f33548f03611b55",
+      "bytes": 4430,
+      "b64_chars": 5908,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/03-architecture/13-couts-infrastructure.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/01-logiciel-copropriete.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/01-logiciel-copropriete.bin",
+      "sha256": "29b78e5542a433058461fce66a5d796e779796d0d374beaa8e1d15d2b35d4af2",
+      "bytes": 4685,
+      "b64_chars": 6248,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/01-logiciel-copropriete.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/02-sans-api.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/02-sans-api.bin",
+      "sha256": "99220577142873e53cca8e0aa5cc7905f2ab74e14b19899ed4da5e9736a0d9f6",
+      "bytes": 4904,
+      "b64_chars": 6540,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/02-sans-api.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/03-messagerie.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/03-messagerie.bin",
+      "sha256": "0c2d3d46dffcadc9bbe2b9522a73cb4b4573d73c0f5e0e5bf402f64b2f7cac27",
+      "bytes": 4501,
+      "b64_chars": 6004,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/03-messagerie.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/04-banque.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/04-banque.bin",
+      "sha256": "c8fbcdfe6fe5de5c5790d5832c9d699555a00d69c82aa06e9750e714b8831bf5",
+      "bytes": 4309,
+      "b64_chars": 5748,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/04-banque.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/05-ged-documents.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/05-ged-documents.bin",
+      "sha256": "3d4f4dc1b5f4757a6ab818bdd4601f2b2741d7dc5c71d38c356fd4fe844e401a",
+      "bytes": 4245,
+      "b64_chars": 5660,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/05-ged-documents.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/06-extranet.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/06-extranet.bin",
+      "sha256": "dcfbae609bfe034fe71396301aeb7cd3fe68f189b6cb01b213970b0e659fd8b8",
+      "bytes": 4656,
+      "b64_chars": 6208,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/06-extranet.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/07-telephonie.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/07-telephonie.bin",
+      "sha256": "50b456d3fa0e04b9c14a52ab1cd3cff342bbfb93c540202d2b626c15f0cbdf94",
+      "bytes": 4347,
+      "b64_chars": 5796,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/07-telephonie.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/08-recommande-electronique.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/08-recommande-electronique.bin",
+      "sha256": "4eecc3111c0f5c167d300ca87e6e0e9f448261b2a1e644f444f712700463e9fa",
+      "bytes": 4521,
+      "b64_chars": 6028,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/08-recommande-electronique.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/09-tableurs.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/09-tableurs.bin",
+      "sha256": "19c2355ca3f8a8deaafb87a93f9c98f11da62f6debb1785df27b46e49ce87080",
+      "bytes": 4426,
+      "b64_chars": 5904,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/09-tableurs.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/10-comptes-techniques.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/10-comptes-techniques.bin",
+      "sha256": "fd99e21a6f679c26e0bc7e26f86ec3a064b9bea3027b93df1f74b345cec188a1",
+      "bytes": 4719,
+      "b64_chars": 6292,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/10-comptes-techniques.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/11-tester-lecture-seule.bin.b64",
+      "decode_to": "syndics/espace/data/c/04-connecteurs/11-tester-lecture-seule.bin",
+      "sha256": "e80b04e3455a99d0fa75cb1187b7b3e94135d26696778650ae7fd6af2c80b6cb",
+      "bytes": 4362,
+      "b64_chars": 5816,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/04-connecteurs/11-tester-lecture-seule.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/01-accueil-boite-mail.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/01-accueil-boite-mail.bin",
+      "sha256": "e0b815436c50413dd1a062858e3be99c21c9ac18cb8f64b78c8ccd8a326b3505",
+      "bytes": 4341,
+      "b64_chars": 5788,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/01-accueil-boite-mail.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/02-relation-coproprietaires.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/02-relation-coproprietaires.bin",
+      "sha256": "5a9ece41c7c374986a6c187aecac531408ccab1a4154ef632b9d0f302202cc8e",
+      "bytes": 4135,
+      "b64_chars": 5516,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/02-relation-coproprietaires.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/03-gestion-courante.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/03-gestion-courante.bin",
+      "sha256": "ca00bd5adabd00f9cac2c3e6547bf0c08e11080f507606c6c39cc23fd7bdbbc8",
+      "bytes": 4437,
+      "b64_chars": 5916,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/03-gestion-courante.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/04-prestataires-contrats.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/04-prestataires-contrats.bin",
+      "sha256": "c6681af2d7bd49ea64519f9d7ba03e0d7a541bdf2197a9cbcfa366bbace0c15b",
+      "bytes": 4239,
+      "b64_chars": 5652,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/04-prestataires-contrats.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/05-sinistres.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/05-sinistres.bin",
+      "sha256": "adacde4458427cc7cf8d9257ee13ed081366331b19e95c2048767935fa70a894",
+      "bytes": 4380,
+      "b64_chars": 5840,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/05-sinistres.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/06-travaux.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/06-travaux.bin",
+      "sha256": "34e6f6adeafe0834eb0cd22a3618fe19547298573cc9f65079551c77193957ac",
+      "bytes": 5143,
+      "b64_chars": 6860,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/06-travaux.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/07-preparation-ag.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/07-preparation-ag.bin",
+      "sha256": "8372307859aa4fd4eb50c301b05e5cee945b3af3f856f93a2dd254bd62d06f4d",
+      "bytes": 4771,
+      "b64_chars": 6364,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/07-preparation-ag.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/08-tenue-ag.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/08-tenue-ag.bin",
+      "sha256": "9c395d1ec2eba77eade8b8a14727e80bb6bddde6f2e76b6b6d0083eaac9c75c7",
+      "bytes": 4810,
+      "b64_chars": 6416,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/08-tenue-ag.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/09-apres-ag.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/09-apres-ag.bin",
+      "sha256": "70f4b92b4676ac5218c5d0fe19c41a5edeb4b31cb6dfb93692f71fa024cd67c9",
+      "bytes": 4495,
+      "b64_chars": 5996,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/09-apres-ag.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/10-conseil-syndical.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/10-conseil-syndical.bin",
+      "sha256": "00aa4ae4eb06f4dac6065ae1142f155cd26e918c6d2cbb2b6b67646572e810e5",
+      "bytes": 4684,
+      "b64_chars": 6248,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/10-conseil-syndical.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/11-factures-fournisseurs.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/11-factures-fournisseurs.bin",
+      "sha256": "a7958307f49d27e58ee13eada7c7ed33e2a00bb9b5e8a31dae19eefb63a84a11",
+      "bytes": 4731,
+      "b64_chars": 6308,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/11-factures-fournisseurs.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/12-banque-rapprochement.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/12-banque-rapprochement.bin",
+      "sha256": "e54fc0e45d2068913dd2b99ca591fdc563d5410c3d398433d96d5a2c9affc576",
+      "bytes": 4424,
+      "b64_chars": 5900,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/12-banque-rapprochement.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/13-appels-de-fonds.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/13-appels-de-fonds.bin",
+      "sha256": "ef8ee09a692831d19bd1aada84daa09df364997fd57d62e10c3ec4a5f7bc620d",
+      "bytes": 5116,
+      "b64_chars": 6824,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/13-appels-de-fonds.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/14-recouvrement-amiable.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/14-recouvrement-amiable.bin",
+      "sha256": "9626248416f385754346a30bce1a0b63a2d9ce1694a8fbb6e5a57c9849f73243",
+      "bytes": 5156,
+      "b64_chars": 6876,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/14-recouvrement-amiable.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/15-mutations-etat-date.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/15-mutations-etat-date.bin",
+      "sha256": "444d4ae8822625ad11cea6bcde2a633b34b776a81b22e068e81d0191c7969f12",
+      "bytes": 4838,
+      "b64_chars": 6452,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/15-mutations-etat-date.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/16-cloture-exercice.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/16-cloture-exercice.bin",
+      "sha256": "3986a8e95f2168c31b05bf3c4583790259d2240e231df736cfbe04acf8188438",
+      "bytes": 5084,
+      "b64_chars": 6780,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/16-cloture-exercice.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/17-conformite.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/17-conformite.bin",
+      "sha256": "41f9adfdcb696301e299941c69435ebd19668d17c7753ed485ed069eb5931213",
+      "bytes": 4782,
+      "b64_chars": 6376,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/17-conformite.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/18-veille-reglementaire.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/18-veille-reglementaire.bin",
+      "sha256": "1b522dedb93ff3543b3132a5e384b97fe59ef2718cc9854cdac917acd3c3bc64",
+      "bytes": 4616,
+      "b64_chars": 6156,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/18-veille-reglementaire.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/05-agents/19-direction.bin.b64",
+      "decode_to": "syndics/espace/data/c/05-agents/19-direction.bin",
+      "sha256": "0be4dd01fc2f6279976c95295517a94bab1d8d6d4bc3ee068739c39e488a69fb",
+      "bytes": 4624,
+      "b64_chars": 6168,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/05-agents/19-direction.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/01-role-espace.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/01-role-espace.bin",
+      "sha256": "7c2d1457a191cb36a581c5e90aab1a31128517eb76b377153e36b2e030e6195e",
+      "bytes": 5288,
+      "b64_chars": 7052,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/01-role-espace.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/02-file-validation.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/02-file-validation.bin",
+      "sha256": "ac1077145d827c0a6842052759e187edc7246814825e58dba8c50f31f3e2f9ca",
+      "bytes": 5346,
+      "b64_chars": 7128,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/02-file-validation.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/03-fiche-action.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/03-fiche-action.bin",
+      "sha256": "6494bfe50a0b5eb206824a0f36bab319525754b86b6917be935bfb5f730bba79",
+      "bytes": 4909,
+      "b64_chars": 6548,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/03-fiche-action.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/04-vue-copropriete.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/04-vue-copropriete.bin",
+      "sha256": "e4ee29f894c379dcbda6e4385a366a5af7dc025c029a85a5a55883027a2327bc",
+      "bytes": 4921,
+      "b64_chars": 6564,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/04-vue-copropriete.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/05-journal-consultable.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/05-journal-consultable.bin",
+      "sha256": "9f4ad07fe861dd8cca7ee38d5ffecc62ca7f4f8c92fd5f97f0782263cb56cb65",
+      "bytes": 5199,
+      "b64_chars": 6932,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/05-journal-consultable.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/06-droits-collaborateurs.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/06-droits-collaborateurs.bin",
+      "sha256": "cd26ae8f866b2d4482f2ba91f345b58e0bc0805002a3487dac37a04160a1b6e2",
+      "bytes": 5536,
+      "b64_chars": 7384,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/06-droits-collaborateurs.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/07-mobile-notifications.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/07-mobile-notifications.bin",
+      "sha256": "a3276a1585c777b6c03654cbccf17bb2d687d023212c1503c5e18d1e2ea0bd87",
+      "bytes": 5463,
+      "b64_chars": 7284,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/07-mobile-notifications.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/08-parametrer-regles.bin.b64",
+      "decode_to": "syndics/espace/data/c/06-espace-exior/08-parametrer-regles.bin",
+      "sha256": "c10c905456a237ec9827e12d8c130868e99d699e4838c52eec89d93356bc6c6c",
+      "bytes": 5253,
+      "b64_chars": 7004,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/06-espace-exior/08-parametrer-regles.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/01-modele-de-menace.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/01-modele-de-menace.bin",
+      "sha256": "28fc720ee7ddf06641e77a88618b6ffc88afee0d9a13e1c089b6402cfc96ad08",
+      "bytes": 5907,
+      "b64_chars": 7876,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/01-modele-de-menace.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/02-moindre-privilege.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/02-moindre-privilege.bin",
+      "sha256": "aadaa5e9ef18e38c25d4c3335f624b79a1a9e925a06bf0bb6a1cf035dad27a23",
+      "bytes": 6113,
+      "b64_chars": 8152,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/02-moindre-privilege.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/03-masquage-donnees.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/03-masquage-donnees.bin",
+      "sha256": "42afb4b4ef5ab5892db9d1ce6a90558c827e43e34cd286d66b3bfeca07b91ba5",
+      "bytes": 6149,
+      "b64_chars": 8200,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/03-masquage-donnees.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/04-injection-prompt.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/04-injection-prompt.bin",
+      "sha256": "868a461b74de01acf8fba77d0c97894a74fc19991119e982c05e0ceacb78a4f1",
+      "bytes": 5662,
+      "b64_chars": 7552,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/04-injection-prompt.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/05-red-team.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/05-red-team.bin",
+      "sha256": "b6eeaadcd20a6089ef5ca5827dad1e96de1f47ba1b84283e1deba0f3b070572d",
+      "bytes": 5311,
+      "b64_chars": 7084,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/05-red-team.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/06-secrets.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/06-secrets.bin",
+      "sha256": "862fe350eeb8363922a899c7148f95a6309affafb2d6897415e0869580f75cf0",
+      "bytes": 5530,
+      "b64_chars": 7376,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/06-secrets.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/07-sauvegardes-reversibilite.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/07-sauvegardes-reversibilite.bin",
+      "sha256": "391dc925353fded949ef5e55df2fa2039e108386ea5f4133f547f35eb2a57718",
+      "bytes": 5557,
+      "b64_chars": 7412,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/07-sauvegardes-reversibilite.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/08-donnees-personnelles.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/08-donnees-personnelles.bin",
+      "sha256": "915a58ca5dc2085281a5ef2abc4c69f38d7d172e1f418b9b05a04ea5cf70c1bf",
+      "bytes": 6639,
+      "b64_chars": 8852,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/08-donnees-personnelles.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/09-charte-usage.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/09-charte-usage.bin",
+      "sha256": "d61a717460b390e9ae4527d4ba0eb2a6e27c80b4d9c66f42605fda2a7510605c",
+      "bytes": 4885,
+      "b64_chars": 6516,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/09-charte-usage.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/10-responsabilite.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/10-responsabilite.bin",
+      "sha256": "aac2b8b85596673993867c35c00d6e22b32214c3c86ccad7f9aa0eb6a8a7d768",
+      "bytes": 5553,
+      "b64_chars": 7404,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/10-responsabilite.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/07-securite/11-incident.bin.b64",
+      "decode_to": "syndics/espace/data/c/07-securite/11-incident.bin",
+      "sha256": "22cf0444bd90cbfbcab13a6cbfd32f7d5e7cc6fbdddc10fad1a88c7cfe7d1ef2",
+      "bytes": 6315,
+      "b64_chars": 8420,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/07-securite/11-incident.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/01-plan-quatre-semaines.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/01-plan-quatre-semaines.bin",
+      "sha256": "c7dfeeef576c64adb73584ba60a36df7f7746b3337bbc31f1179e45bde620fbe",
+      "bytes": 5845,
+      "b64_chars": 7796,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/01-plan-quatre-semaines.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/02-acces-lecture-seule.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/02-acces-lecture-seule.bin",
+      "sha256": "f691cc56834bf913c723d612058bf5330a615d680e283571cf604a6e8216abd5",
+      "bytes": 5508,
+      "b64_chars": 7344,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/02-acces-lecture-seule.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/03-bac-a-sable.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/03-bac-a-sable.bin",
+      "sha256": "8a6f5902130dbbf5e95cd2e58af4d76d836539fbd26c6df10c308e0414cf9f13",
+      "bytes": 5594,
+      "b64_chars": 7460,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/03-bac-a-sable.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/04-tests-validation.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/04-tests-validation.bin",
+      "sha256": "8d1f56ad533157812b6fdbadc6266bbfa8d48c3882c726b78e832901b41c7408",
+      "bytes": 5395,
+      "b64_chars": 7196,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/04-tests-validation.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/05-ouverture-progressive.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/05-ouverture-progressive.bin",
+      "sha256": "7815439ea8cb78d2e49302ed9d2c599e08b531074d8a67b717bcf73e4f364539",
+      "bytes": 5505,
+      "b64_chars": 7340,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/05-ouverture-progressive.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/06-criteres-acceptation.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/06-criteres-acceptation.bin",
+      "sha256": "ef516e08b8a8b8856f6178d8d3fba176c38139e503590862491d39d9d0c5a21b",
+      "bytes": 5639,
+      "b64_chars": 7520,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/06-criteres-acceptation.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/07-former-equipes.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/07-former-equipes.bin",
+      "sha256": "8b1e5517553cc6e56ed9a4474ff725c3ef322ab7c2d066175e9276ce7b2ebeb3",
+      "bytes": 5555,
+      "b64_chars": 7408,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/07-former-equipes.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/08-conduite-changement.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/08-conduite-changement.bin",
+      "sha256": "f078d4d11eabc3e93e075c15b51c85c4d7673d5cafb5cd04a7da9566a57687cf",
+      "bytes": 5821,
+      "b64_chars": 7764,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/08-conduite-changement.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/09-communiquer.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/09-communiquer.bin",
+      "sha256": "e19449fb61ff70186b4b8baa5447fdd127c29e25d8f95ddb7f1866b243520e14",
+      "bytes": 5708,
+      "b64_chars": 7612,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/09-communiquer.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/08-deployer/10-erreurs-frequentes.bin.b64",
+      "decode_to": "syndics/espace/data/c/08-deployer/10-erreurs-frequentes.bin",
+      "sha256": "10ed797c39cc244523b435431053b83f8b419e8bde4f7aeac3c8b24d4add9617",
+      "bytes": 6183,
+      "b64_chars": 8244,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/08-deployer/10-erreurs-frequentes.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/01-exploitation-mensuelle.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/01-exploitation-mensuelle.bin",
+      "sha256": "4866ce96142770004b0435e0fefa62f15a8ce9c938d6f5ce5c9fa28f6dc5fdf5",
+      "bytes": 5297,
+      "b64_chars": 7064,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/01-exploitation-mensuelle.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/02-indicateurs.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/02-indicateurs.bin",
+      "sha256": "63d8ec2e21417d950b059b72f719c0b72b093049bf35e8e4ca56a9d4c88c9438",
+      "bytes": 6392,
+      "b64_chars": 8524,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/02-indicateurs.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/03-memoire-regles.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/03-memoire-regles.bin",
+      "sha256": "2831d4b75cb41c446183b374899f04a3144da08f14d26d0e9af363946e38c7d7",
+      "bytes": 6277,
+      "b64_chars": 8372,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/03-memoire-regles.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/04-ajouter-agent.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/04-ajouter-agent.bin",
+      "sha256": "6e42e2e297d862aeab107b5a5f3d502ac90554b5be3cfa2dbb9a45bddfdbe745",
+      "bytes": 6025,
+      "b64_chars": 8036,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/04-ajouter-agent.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/05-mises-a-jour-reglementaires.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/05-mises-a-jour-reglementaires.bin",
+      "sha256": "8f57cf8140bf7373da202806857d888e6dd427d737bcf4e44d207949cf4a8b73",
+      "bytes": 5899,
+      "b64_chars": 7868,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/05-mises-a-jour-reglementaires.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/06-maintenance-connecteurs.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/06-maintenance-connecteurs.bin",
+      "sha256": "066b0cf4e23e7f03ce7096ac0ba05540e435752cb9c667f46e1b27da568b8957",
+      "bytes": 5793,
+      "b64_chars": 7724,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/06-maintenance-connecteurs.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/07-revue-trimestrielle.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/07-revue-trimestrielle.bin",
+      "sha256": "8eb261f2d716858c2e1af36be1c00aaed3bb56fcf285c23bdba78a8f25f11515",
+      "bytes": 5541,
+      "b64_chars": 7388,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/07-revue-trimestrielle.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/08-changer-de-modele.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/08-changer-de-modele.bin",
+      "sha256": "4327df757510f77b4cdd5b131f25b1f34969ab9a5649bf38888ec0c33de1967d",
+      "bytes": 6426,
+      "b64_chars": 8568,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/08-changer-de-modele.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/09-fin-de-contrat.bin.b64",
+      "decode_to": "syndics/espace/data/c/09-exploiter/09-fin-de-contrat.bin",
+      "sha256": "aea788b3085a10832e0eff0bfdecfca2cd5003bcf68520d53e9286ef55184c7f",
+      "bytes": 5947,
+      "b64_chars": 7932,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/09-exploiter/09-fin-de-contrat.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/01-cout-complet.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/01-cout-complet.bin",
+      "sha256": "397e29fa77bc0cc797dab7d2fad482416088070e799e5b04a6e520c8c35d95d5",
+      "bytes": 6300,
+      "b64_chars": 8400,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/01-cout-complet.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/02-mesurer-temps-gagne.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/02-mesurer-temps-gagne.bin",
+      "sha256": "33f4eef9bc8416129a9d627838f789aca78a2c6f3c504074d18c58a6ea36e01e",
+      "bytes": 5386,
+      "b64_chars": 7184,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/02-mesurer-temps-gagne.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/03-comparer-alternatives.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/03-comparer-alternatives.bin",
+      "sha256": "790b02ff0263a1f41d67ab67adbe74e086d5dd68111c98a310f50216f5b3aa6e",
+      "bytes": 6290,
+      "b64_chars": 8388,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/03-comparer-alternatives.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/04-business-case.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/04-business-case.bin",
+      "sha256": "b14f67f879071bebfd5583ad183311cdba99e184a6dabb1ffabe2ac8c130731a",
+      "bytes": 5562,
+      "b64_chars": 7416,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/04-business-case.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/05-questions-prestataire.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/05-questions-prestataire.bin",
+      "sha256": "ea12845d8dbd006e20671c84087b12b2f59e7d22bd4bc9e48099ae94574136ef",
+      "bytes": 5969,
+      "b64_chars": 7960,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/05-questions-prestataire.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/06-faire-soi-meme.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/06-faire-soi-meme.bin",
+      "sha256": "f1ba4dc088d47662c98c9e92f499d82a37583cffe617f496e8a546d27031c76b",
+      "bytes": 6201,
+      "b64_chars": 8268,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/06-faire-soi-meme.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/07-checklist-decision.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/07-checklist-decision.bin",
+      "sha256": "be6cc2623b2c8ffab8e5936761e3f9ab3eca24e0c26a40669f9c00cc515e5616",
+      "bytes": 5861,
+      "b64_chars": 7816,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/07-checklist-decision.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/08-glossaire.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/08-glossaire.bin",
+      "sha256": "1d799c26fd7e1e57dee3722737fa49e2ea2aa2f303236c8c8b88742170a1d9b7",
+      "bytes": 7348,
+      "b64_chars": 9800,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/08-glossaire.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/09-faq.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/09-faq.bin",
+      "sha256": "81dd66a239b8a9248b13123725ee3830a06a562b37e9665254b721bf53d7f08d",
+      "bytes": 5698,
+      "b64_chars": 7600,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/09-faq.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/10-decider/10-ressources-officielles.bin.b64",
+      "decode_to": "syndics/espace/data/c/10-decider/10-ressources-officielles.bin",
+      "sha256": "46f202c74911045829fcb4bb7400c94e661a66e406f6b2a0e748d2016cfed1fc",
+      "bytes": 6584,
+      "b64_chars": 8780,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/10-decider/10-ressources-officielles.bin.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64",
+      "decode_to": "syndics/espace/data/c/index.bin",
+      "sha256": "39863add2871ad2c90fcc2a38d09f36632c2253865be16572ab1366c13cb6343",
+      "bytes": 534457,
+      "b64_chars": 712612,
+      "split": true,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part01",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part02",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part03",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part04",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part05",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part06",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part07",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part08",
+        "_sources/syndics/payload/syndics/espace/data/c/index.bin.b64.part09"
+      ],
+      "join": "cat index.bin.b64.part01 index.bin.b64.part02 index.bin.b64.part03 index.bin.b64.part04 index.bin.b64.part05 index.bin.b64.part06 index.bin.b64.part07 index.bin.b64.part08 index.bin.b64.part09 | base64 -d",
+      "join_note": "Concatenate parts in order (part01, part02, \u2026) with no extra separators, then base64 -d. Parts contain raw base64 with no newlines."
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/keys.json.b64",
+      "decode_to": "syndics/espace/data/keys.json",
+      "sha256": "e247d0989df011b17d8a1bd88568711eabe38a7604758e01ebc9d18449556c2a",
+      "bytes": 291,
+      "b64_chars": 388,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/keys.json.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/syndics/espace/data/manifest.public.json.b64",
+      "decode_to": "syndics/espace/data/manifest.public.json",
+      "sha256": "64859b8b4ccb52a8a89cc72377f701f1df3a1eda45ffbcfd616624d115846945",
+      "bytes": 25608,
+      "b64_chars": 34144,
+      "parts": [
+        "_sources/syndics/payload/syndics/espace/data/manifest.public.json.b64"
+      ],
+      "split": false
+    },
+    {
+      "repo_path": "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64",
+      "decode_to": "assets/syndics/rapport-systeme-ia-souverain-syndic.pdf",
+      "sha256": "1c6825d07ac666940165ad4870e476729056b9cfa881f94ab126e73c1eebe693",
+      "bytes": 479441,
+      "b64_chars": 639256,
+      "split": true,
+      "parts": [
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part01",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part02",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part03",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part04",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part05",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part06",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part07",
+        "_sources/syndics/payload/assets/syndics/rapport-systeme-ia-souverain-syndic.pdf.b64.part08"
+      ],
+      "join": "cat rapport-systeme-ia-souverain-syndic.pdf.b64.part01 rapport-systeme-ia-souverain-syndic.pdf.b64.part02 rapport-systeme-ia-souverain-syndic.pdf.b64.part03 rapport-systeme-ia-souverain-syndic.pdf.b64.part04 rapport-systeme-ia-souverain-syndic.pdf.b64.part05 rapport-systeme-ia-souverain-syndic.pdf.b64.part06 rapport-systeme-ia-souverain-syndic.pdf.b64.part07 rapport-systeme-ia-souverain-syndic.pdf.b64.part08 | base64 -d",
+      "join_note": "Concatenate parts in order (part01, part02, \u2026) with no extra separators, then base64 -d. Parts contain raw base64 with no newlines."
+    }
+  ],
+  "guide_index": {
+    "repo_path": "_sources/syndics/guide-index.md",
+    "sha256": "2ebffd5a708b437f67d9ea5d4482fafac1871eabde20e194512b21200b0d0914",
+    "bytes": 15583
+  },
+  "counts": {
+    "payload_files": 116,
+    "chapter_bins": 112
+  }
+}
