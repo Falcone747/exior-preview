@@ -3,103 +3,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>EXIOR · Agent</title>
-  <meta name="description" content="Agent EXIOR dans votre navigateur, avec outils et connecteurs MCP vers vos apps.">
+  <title>EXIORBOT</title>
+  <meta name="description" content="EXIORBOT — assistant expert des systèmes d'exploitation métier, avec outils et connecteurs.">
   <link rel="icon" href="../favicon.svg">
-  <link rel="stylesheet" href="./styles.css?v=8">
-  <script>window.addEventListener("error",e=>{var b=document.getElementById("gpu-banner");if(b){b.className="banner danger";b.textContent="Erreur : "+(e.message||e);}});</script>
-  <script type="module" src="./app.js?v=8"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=9">
+  <script type="module" src="./app.js?v=9"></script>
 </head>
 <body>
   <a class="skip" href="#input">Aller à la saisie</a>
-  <div id="gpu-banner" class="banner danger hidden" role="alert"></div>
+  <div id="banner" class="banner hidden" role="alert"></div>
 
   <header class="top">
-    <a class="logo" href="../">EXIOR</a>
-    <span class="badge">Agent</span>
+    <a class="logo" href="../" title="EXIOR">EXIORBOT</a>
+    <span class="badge" id="model-pill">Nemotron 3 Ultra</span>
     <div class="top-actions">
+      <label class="model-wrap">
+        <span class="sr-only">Modèle</span>
+        <select id="model-select" aria-label="Modèle gratuit"></select>
+      </label>
       <button id="btn-panel" type="button" class="btn-s" aria-expanded="false" aria-controls="panel">Connecteurs</button>
     </div>
   </header>
 
   <div class="layout">
     <main class="chat-col">
-      <div class="key-bar" id="key-bar">
-        <label class="field grow">
-          <span>Clé OpenRouter</span>
-          <input id="or-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-… collée une seule fois, stockée ici seulement">
-        </label>
-        <button id="btn-key" type="button" class="btn-p">Enregistrer</button>
-        <p id="key-state" class="key-state" role="status"></p>
-      </div>
-      <div class="toolbar">
-        <label class="field grow">
-          <span>Modèle gratuit</span>
-          <select id="model-select" title="Modèles gratuits OpenRouter compatibles avec les outils"></select>
-        </label>
-        <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
-      </div>
       <div id="messages" class="messages" aria-live="polite"></div>
       <form id="composer" class="composer">
         <label class="sr-only" for="input">Votre message</label>
-        <textarea id="input" rows="1" placeholder="Collez d’abord votre clé OpenRouter…" disabled></textarea>
-        <button id="btn-send" type="submit" class="btn-p" disabled>Envoyer</button>
+        <textarea id="input" rows="1" placeholder="Écrire à EXIORBOT…" autofocus></textarea>
+        <button id="btn-send" type="submit" class="btn-p" aria-label="Envoyer">Envoyer</button>
         <button id="btn-stop" type="button" class="btn-s hidden">Arrêter</button>
       </form>
     </main>
 
     <aside id="panel" class="panel" hidden>
       <div class="panel-head">
-        <h2>Outils et connecteurs</h2>
+        <h2>Connecteurs</h2>
         <button id="btn-panel-close" type="button" class="icon-btn" aria-label="Fermer">×</button>
       </div>
-
       <section>
-        <h3>Connecteurs rapides</h3>
-        <p class="hint">Serveurs MCP officiels, vérifiés. Ceux sans compte s’ajoutent tout de suite. Les autres demandent une autorisation ou un jeton, stocké uniquement dans ce navigateur. Les pastilles orange sont réels mais bloqués par CORS depuis une page web.</p>
+        <h3>En un clic</h3>
+        <p class="hint">Autorisation directe avec ton compte, sans coller de clé. Dis aussi à EXIORBOT « connecte mon GitHub ».</p>
         <div id="presets" class="presets"></div>
         <p id="preset-status" class="status" role="status"></p>
       </section>
-
       <section>
-        <h3>Outils intégrés</h3>
-        <p class="hint">Toujours disponibles une fois la clé enregistrée. Les notes restent dans ce navigateur.</p>
+        <h3>Outils toujours là</h3>
         <ul id="builtin-list" class="tool-list"></ul>
       </section>
-
       <section>
-        <h3>Connecteurs MCP</h3>
-        <p class="hint">Ajoutez n’importe quel serveur MCP distant en HTTP streamable ou SSE. Le jeton, s’il y en a un, n’est stocké que dans ce navigateur, jamais envoyé ailleurs que vers l’URL indiquée.</p>
+        <h3>Connectés</h3>
         <ul id="connector-list" class="connector-list"></ul>
-        <form id="connector-form" class="connector-form">
-          <h4>Ajouter un connecteur</h4>
-          <label class="field">
-            <span>Nom</span>
-            <input id="c-name" type="text" maxlength="80" placeholder="Mon serveur" required>
-          </label>
-          <label class="field">
-            <span>URL du serveur</span>
-            <input id="c-url" type="url" inputmode="url" placeholder="https://exemple.com/mcp" required>
-          </label>
-          <label class="field">
-            <span>Jeton bearer <em>(optionnel)</em></span>
-            <input id="c-token" type="password" autocomplete="off" placeholder="laissé vide si aucun">
-          </label>
-          <label class="check">
-            <input id="c-oauth" type="checkbox">
-            <span>Autoriser via OAuth (SDK MCP officiel)</span>
-          </label>
-          <button type="submit" class="btn-p">Ajouter et lister les outils</button>
-          <p id="c-status" class="status" role="status"></p>
-        </form>
       </section>
-
       <section>
         <h3>Notes locales</h3>
         <div id="notes" class="notes"></div>
       </section>
-
-      <p class="legal">Les réponses passent par un modèle <strong>gratuit OpenRouter</strong> que vous choisissez. Votre clé est enregistrée uniquement dans ce navigateur, jamais dans le code du site, et n’est envoyée qu’à OpenRouter. En cas d’indisponibilité, l’agent bascule tout seul sur le modèle gratuit suivant. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
+      <p class="legal">EXIORBOT tourne dans ton navigateur. Les réponses passent par des modèles gratuits. Les autorisations d’apps restent dans ce navigateur. Pour une nouvelle conversation, utilise le bouton ci-dessous.</p>
+      <div class="panel-foot">
+        <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
+      </div>
     </aside>
   </div>
   <div id="backdrop" class="backdrop hidden"></div>

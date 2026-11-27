@@ -1,17 +1,14 @@
 import {
-  MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
-} from "./lib/agent.js?v=8";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=8";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=8";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=8";
-import {
-  hasOpenRouterKey, getOpenRouterKey, setOpenRouterKey,
-  FREE_TOOL_MODELS, getPreferredModel, setPreferredModel, modelLabel,
-} from "./lib/openrouter.js?v=8";
+  MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
+} from "./lib/agent.js?v=9";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=9";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=9";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS, connectApps } from "./lib/mcp.js?v=9";
+import { FREE_TOOL_MODELS, getPreferredModel, setPreferredModel, modelLabel } from "./lib/openrouter.js?v=9";
+import { marked } from "https://cdn.jsdelivr.net/npm/marked@15.0.12/+esm";
+import DOMPurify from "https://cdn.jsdelivr.net/npm/dompurify@3.2.6/+esm";
 
 const $ = (id) => document.getElementById(id);
-
-let ready = false;
 let conversation = { id: newId(), messages: [], updatedAt: Date.now() };
 let abort = null;
 let mcpClients = new Map();
@@ -23,32 +20,20 @@ function escapeHtml(s) {
 }
 
 function renderMarkdown(src) {
-  const escaped = escapeHtml(src);
-  const parts = escaped.split(/```([\s\S]*?)```/);
-  let html = "";
-  for (let i = 0; i < parts.length; i++) {
-    if (i % 2 === 1) {
-      const nl = parts[i].indexOf("\n");
-      const body = nl >= 0 ? parts[i].slice(nl + 1) : parts[i];
-      html += `<pre><code>${body}</code></pre>`;
-    } else {
-      html += parts[i]
-        .replace(/`([^`]+)`/g, "<code>$1</code>")
-        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
-        .replace(/\n/g, "<br>");
-    }
-  }
-  return `<div class="md">${html}</div>`;
+  const html = marked.parse(String(src || ""), { gfm: true, breaks: true });
+  return `<div class="md">${DOMPurify.sanitize(html)}</div>`;
 }
 
 function showEmpty() {
   $("messages").innerHTML = `
     <div class="empty">
-      <h1>Agent EXIOR</h1>
-      <p>Collez votre clé OpenRouter une seule fois : elle reste dans ce navigateur. L’agent utilise un modèle gratuit, avec un basculement automatique si le premier est saturé.</p>
-      <p>Posez ensuite une question. L’agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP.</p>
+      <h1>EXIORBOT</h1>
+      <p>Expert des logiciels métier — ERP, CRM, comptabilité — et de la façon de les relier. Dis-moi ce dont tu as besoin.</p>
+      <div class="chips">
+        <button type="button" data-q="Cours de l'action Anthropic aujourd'hui, avec la source.">Cours Anthropic</button>
+        <button type="button" data-q="Connecte mon GitHub.">Connecter GitHub</button>
+        <button type="button" data-q="Comment relier Odoo à Pennylane, concrètement ?">Odoo → Pennylane</button>
+      </div>
     </div>`;
 }
 
@@ -63,61 +48,6 @@ function appendMsg(role, html, { cls } = {}) {
   return el;
 }
 
-function setReady(on) {
-  ready = !!on;
-  $("input").disabled = !ready;
-  $("btn-send").disabled = !ready;
-  if (ready) $("input").placeholder = "Écrivez votre message…";
-  else $("input").placeholder = "Collez d’abord votre clé OpenRouter…";
-}
-
-function syncKeyState() {
-  const state = $("key-state");
-  const input = $("or-key");
-  if (hasOpenRouterKey()) {
-    input.value = "";
-    input.placeholder = "Clé déjà enregistrée dans ce navigateur";
-    state.className = "key-state ok";
-    state.textContent = "Clé enregistrée ici seulement. Vous pouvez écrire.";
-    setReady(true);
-  } else {
-    input.placeholder = "sk-or-… collée une seule fois, stockée ici seulement";
-    state.className = "key-state";
-    state.textContent = "Collez votre clé OpenRouter pour commencer. Elle ne quitte pas ce navigateur, sauf vers OpenRouter.";
-    setReady(false);
-    input.focus();
-  }
-}
-
-function fillModels() {
-  const sel = $("model-select");
-  const current = getPreferredModel();
-  sel.innerHTML = FREE_TOOL_MODELS.map((m) => {
-    const extra = m.hint ? ` — ${m.hint}` : "";
-    return `<option value="${escapeHtml(m.id)}"${m.id === current ? " selected" : ""}>${escapeHtml(m.label + extra)}</option>`;
-  }).join("");
-}
-
-function saveKey() {
-  const raw = $("or-key").value;
-  const v = setOpenRouterKey(raw);
-  const state = $("key-state");
-  if (!v) {
-    state.className = "key-state err";
-    state.textContent = "Clé effacée. Collez-en une pour continuer.";
-    setReady(false);
-    return;
-  }
-  if (v.length < 12) {
-    setOpenRouterKey("");
-    state.className = "key-state err";
-    state.textContent = "Cette clé semble trop courte. Vérifiez-la puis enregistrez-la à nouveau.";
-    setReady(false);
-    return;
-  }
-  syncKeyState();
-}
-
 function renderBuiltins() {
   $("builtin-list").innerHTML = BUILTIN_TOOLS.map((t) =>
     `<li><b>${escapeHtml(BUILTIN_LABELS[t.name] || t.name)}</b><span>${escapeHtml(t.description)}</span></li>`
@@ -129,7 +59,7 @@ function renderPresets() {
   $("presets").innerHTML = PRESET_CONNECTORS.map((p) => {
     const added = saved.has(p.url.replace(/\/+$/, ""));
     const tagClass = p.cors === false ? "warn" : "ok";
-    const tag = added ? "Ajouté" : p.tag;
+    const tag = added ? "Ajouté" : (p.auth === "none" ? "Sans compte" : (p.cors === false ? "CORS bloqué" : "Autorisation"));
     return `<button type="button" class="preset ${p.cors === false ? "blocked" : ""}" data-preset="${escapeHtml(p.id)}">
       <b>${escapeHtml(p.name)}</b>
       <span>${escapeHtml(p.blurb)}</span>
@@ -142,7 +72,7 @@ async function renderNotes() {
   const rows = await listNotes();
   $("notes").innerHTML = rows.length
     ? rows.map((n) => `<article class="note"><b>${escapeHtml(n.title)}</b><p>${escapeHtml(n.content).slice(0, 280)}</p></article>`).join("")
-    : `<p class="hint">Aucune note pour le moment. Demandez à l'agent d'en enregistrer une.</p>`;
+    : `<p class="hint">Aucune note pour le moment.</p>`;
 }
 
 function renderConnectors() {
@@ -214,65 +144,30 @@ async function connectSaved() {
   renderPresets();
 }
 
-async function addConnector(connector, statusEl) {
-  const status = statusEl || $("c-status");
-  status.className = "status";
-  status.textContent = "Connexion au serveur MCP…";
-  try {
-    const { client, tools } = await probeConnector(connector);
-    const list = loadConnectors();
-    if (!list.some((c) => c.id === connector.id)) {
-      list.push(connector);
-      saveConnectors(list);
-    }
-    mcpClients.set(connector.id, { client, tools, name: connector.name, error: null });
-    status.className = "status ok";
-    status.textContent = tools.length
-      ? `Connecté : ${tools.length} outil(s) trouvé(s).`
-      : "Connecté, aucun outil exposé.";
-    renderConnectors();
-    renderPresets();
-    return true;
-  } catch (err) {
-    status.className = "status err";
-    status.textContent = err.message || String(err);
-    return false;
-  }
-}
-
 async function addPreset(id) {
   const preset = PRESET_CONNECTORS.find((p) => p.id === id);
   const status = $("preset-status");
   if (!preset) return;
   if (preset.cors === false) {
     status.className = "status err";
-    status.textContent = `${preset.name} est un vrai serveur MCP, mais il refuse les appels depuis un navigateur (CORS). Il ne peut pas être utilisé depuis cette page.`;
+    status.textContent = `${preset.name} refuse les appels depuis une page web (CORS).`;
     return;
   }
-  const already = loadConnectors().find((c) => c.url.replace(/\/+$/, "") === preset.url.replace(/\/+$/, ""));
-  if (already) {
+  status.className = "status";
+  status.textContent = "Connexion…";
+  try {
+    const text = await connectApps(preset.name);
     status.className = "status ok";
-    status.textContent = `${preset.name} est déjà dans vos connecteurs.`;
-    return;
+    status.textContent = text.replace(/\n/g, " ").slice(0, 280);
+    const url = (text.match(/https?:\/\/\S+/) || [])[0];
+    if (url) {
+      appendMsg("system", `Pour connecter ${escapeHtml(preset.name)} : <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">ouvrir l'autorisation</a>`);
+    }
+    await connectSaved();
+  } catch (err) {
+    status.className = "status err";
+    status.textContent = err.message || String(err);
   }
-  const connector = {
-    id: newId().slice(0, 8),
-    name: preset.name,
-    url: preset.url,
-    token: "",
-    oauth: preset.auth === "oauth" || preset.auth === "token-or-oauth",
-  };
-  if (preset.auth === "token-or-oauth" || preset.auth === "token") {
-    $("c-name").value = preset.name;
-    $("c-url").value = preset.url;
-    if ($("c-oauth")) $("c-oauth").checked = preset.auth === "token-or-oauth";
-    status.className = "status";
-    status.textContent = `${preset.name} : collez un jeton si vous en avez un, ou ajoutez le connecteur pour lancer l’autorisation.`;
-    $("c-token").focus();
-    togglePanel(true);
-    return;
-  }
-  await addConnector(connector, status);
 }
 
 async function newConversation() {
@@ -287,20 +182,19 @@ async function persist() {
 }
 
 async function send(text) {
-  if (!ready || !hasOpenRouterKey() || !text.trim()) return;
+  if (!text.trim()) return;
   const userText = text.trim();
   $("input").value = "";
   autoSize();
   conversation.messages.push({ role: "user", content: userText });
   appendMsg("user", escapeHtml(userText));
-  const bubble = appendMsg("assistant", `<span class="pending">Réflexion en cours…</span>`);
-  const bits = { plan: "", tools: "", think: "", body: "" };
-  const paint = () => {
-    let html = "";
-    if (bits.plan) html += `<div class="plan-box"><b>Plan</b>\n${escapeHtml(bits.plan)}</div>`;
-    if (bits.tools) html += bits.tools;
-    if (bits.think) html += `<details class="think"><summary>Réflexion</summary>${escapeHtml(bits.think)}</details>`;
-    html += bits.body ? renderMarkdown(bits.body) : `<span class="pending">…</span>`;
+  const bubble = appendMsg("assistant", `<span class="pending">…</span>`);
+  const bits = { tools: "", body: "" };
+  const paint = (streaming) => {
+    let html = bits.tools;
+    if (bits.body) html += renderMarkdown(bits.body);
+    else html += `<span class="pending">…</span>`;
+    if (streaming) html += `<span class="cursor" aria-hidden="true"></span>`;
     bubble.innerHTML = html;
     $("messages").scrollTop = $("messages").scrollHeight;
   };
@@ -308,7 +202,8 @@ async function send(text) {
   abort = new AbortController();
   $("btn-send").classList.add("hidden");
   $("btn-stop").classList.remove("hidden");
-  setReady(false);
+  $("btn-send").disabled = true;
+  $("input").disabled = true;
   $("btn-stop").disabled = false;
 
   try {
@@ -319,34 +214,32 @@ async function send(text) {
       userText,
       toolDefs: toolCatalog(),
       executeTool,
-      thinkingPref: "auto",
       signal: abort.signal,
-      onPlan(plan) { bits.plan = plan; paint(); },
-      onDelta(_d, full) { bits.body = full; paint(); },
+      onDelta(_d, full) { bits.body = full; paint(true); },
       onToolStart(call) {
         bits.tools += `<div class="tool-chip"><b>${escapeHtml(call.name)}</b> en cours…</div>`;
-        paint();
+        paint(true);
       },
       onToolEnd(rec) {
         bits.tools = bits.tools.replace(
           `<div class="tool-chip"><b>${escapeHtml(rec.name)}</b> en cours…</div>`,
           `<div class="tool-chip ${rec.isError ? "err" : ""}"><b>${escapeHtml(rec.name)}</b> ${rec.isError ? "erreur" : "ok"} — ${escapeHtml(String(rec.content || "")).slice(0, 180)}</div>`
         );
-        paint();
+        paint(true);
       },
       onCheck(check) {
-        bits.tools += `<div class="check-box ${check.ok ? "ok" : "bad"}">${
-          check.retried ? "Contrôle : réponse corrigée." : (check.ok ? "Contrôle : la réponse est cohérente avec les outils." : `Contrôle : ${escapeHtml(check.issue || "un écart a été relevé, correction en cours.")}`)
+        bits.tools += `<div class="check-box">${
+          check.ok ? "Contrôle : réponse alignée avec les outils." : `Contrôle : ${escapeHtml(check.issue || "correction en cours.")}`
         }</div>`;
-        paint();
+        paint(true);
       },
     });
-    bits.think = result.think || "";
     bits.body = result.assistant || "";
-    paint();
+    paint(false);
     conversation.messages.push({ role: "assistant", content: result.assistant || "" });
     await persist();
     await renderNotes();
+    await connectSaved();
   } catch (err) {
     bubble.classList.add("error");
     bubble.textContent = err.message || String(err);
@@ -354,7 +247,8 @@ async function send(text) {
     abort = null;
     $("btn-stop").classList.add("hidden");
     $("btn-send").classList.remove("hidden");
-    setReady(hasOpenRouterKey());
+    $("btn-send").disabled = false;
+    $("input").disabled = false;
     $("input").focus();
   }
 }
@@ -377,15 +271,25 @@ function togglePanel(open) {
   back.classList.toggle("hidden", !next);
 }
 
+function fillModels() {
+  const sel = $("model-select");
+  const current = getPreferredModel();
+  sel.innerHTML = FREE_TOOL_MODELS.map((m) =>
+    `<option value="${escapeHtml(m.id)}"${m.id === current ? " selected" : ""}>${escapeHtml(m.label)}</option>`
+  ).join("");
+  $("model-pill").textContent = modelLabel(current);
+}
+
 async function init() {
   renderBuiltins();
   renderPresets();
   showEmpty();
+  fillModels();
   await renderNotes();
 
   const oauth = await finishPendingOAuth();
   if (oauth?.error) {
-    appendMsg("system", "Autorisation MCP : " + oauth.error, { cls: "error" });
+    appendMsg("system", "Autorisation : " + oauth.error, { cls: "error" });
   } else if (oauth?.connector) {
     mcpClients.set(oauth.connector.id, {
       client: oauth.client,
@@ -393,7 +297,7 @@ async function init() {
       name: oauth.connector.name,
       error: null,
     });
-    appendMsg("system", "Connecteur « " + oauth.connector.name + " » autorisé.");
+    appendMsg("system", "Connecteur « " + escapeHtml(oauth.connector.name) + " » autorisé.");
   }
 
   const convId = await kvGet("currentConversation");
@@ -411,20 +315,6 @@ async function init() {
 
   await connectSaved();
 
-  fillModels();
-  syncKeyState();
-  $("btn-key").addEventListener("click", saveKey);
-  $("or-key").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") { e.preventDefault(); saveKey(); }
-  });
-  $("model-select").addEventListener("change", () => {
-    const id = setPreferredModel($("model-select").value);
-    const state = $("key-state");
-    if (hasOpenRouterKey()) {
-      state.className = "key-state ok";
-      state.textContent = "Modèle : " + modelLabel(id) + ". En cas d’indisponibilité, bascule automatique.";
-    }
-  });
   $("btn-new").addEventListener("click", newConversation);
   $("btn-panel").addEventListener("click", () => togglePanel());
   $("btn-panel-close").addEventListener("click", () => togglePanel(false));
@@ -440,31 +330,19 @@ async function init() {
     e.preventDefault();
     send($("input").value);
   });
-  $("btn-stop").addEventListener("click", () => {
-    abort?.abort();
-  });
-
+  $("btn-stop").addEventListener("click", () => abort?.abort());
   $("presets").addEventListener("click", (e) => {
     const btn = e.target.closest("[data-preset]");
     if (btn) addPreset(btn.dataset.preset);
   });
-
-  $("connector-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = $("c-name").value.trim();
-    const url = $("c-url").value.trim();
-    const token = $("c-token").value;
-    const oauth = $("c-oauth")?.checked || false;
-    const id = newId().slice(0, 8);
-    const ok = await addConnector({ id, name, url, token, oauth }, $("c-status"));
-    if (ok) {
-      $("c-name").value = "";
-      $("c-url").value = "";
-      $("c-token").value = "";
-      if ($("c-oauth")) $("c-oauth").checked = false;
-    }
+  $("messages").addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-q]");
+    if (chip) send(chip.dataset.q);
   });
-
+  $("model-select").addEventListener("change", () => {
+    const id = setPreferredModel($("model-select").value);
+    $("model-pill").textContent = modelLabel(id);
+  });
   $("connector-list").addEventListener("click", async (e) => {
     const btn = e.target.closest("button[data-act]");
     if (!btn) return;
@@ -495,5 +373,6 @@ async function init() {
 }
 
 init().catch((err) => {
-  appendMsg("system", escapeHtml(err.message || String(err)), { cls: "error" });
+  const b = $("banner");
+  if (b) { b.className = "banner"; b.textContent = err.message || String(err); }
 });
