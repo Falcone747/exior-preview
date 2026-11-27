@@ -1,6 +1,6 @@
 import { generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle&deps=zod@4.1.8";
-import { createWebLLMModel } from "./webllm-provider.js";
-import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js";
+import { createWebLLMModel } from "./webllm-provider.js?v=3";
+import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=3";
 
 export const MODEL_ID = "Qwen3-4B-q4f16_1-MLC";
 export const MODEL_LABEL = "Qwen3 4B";

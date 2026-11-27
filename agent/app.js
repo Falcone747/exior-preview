@@ -1,10 +1,10 @@
 import {
   MODEL_ID, MODEL_LABEL, WEBLLM_VERSION, hasWebGPU,
   runAgentTurn, BUILTIN_TOOLS, runBuiltin, looksComplex,
-} from "./lib/agent.js";
-import { BUILTIN_LABELS } from "./lib/tools.js";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth } from "./lib/mcp.js";
+} from "./lib/agent.js?v=3";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=3";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=3";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth } from "./lib/mcp.js?v=3";
 
 const $ = (id) => document.getElementById(id);
 

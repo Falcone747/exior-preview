@@ -1,4 +1,4 @@
-import { listNotes, getNote, upsertNote, deleteNote } from "./db.js";
+import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=3";
 
 export const BUILTIN_TOOLS = [
   {
