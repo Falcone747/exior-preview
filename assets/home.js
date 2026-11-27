@@ -35,16 +35,17 @@
   });
 
   document.querySelectorAll("[data-node]").forEach(function (n) { if (reduce) n.classList.add("on"); });
-  var schema = document.querySelector("[data-schema]");
-  if (schema && !reduce && "IntersectionObserver" in window) {
-    var sio = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      schema.querySelectorAll("[data-node]").forEach(function (n, i) {
-        setTimeout(function () { n.classList.add("on"); }, i * 400);
-      });
-      sio.disconnect();
-    }, { threshold: 0.3 });
-    sio.observe(schema);
+  if (!reduce && "IntersectionObserver" in window) {
+    document.querySelectorAll("[data-schema]").forEach(function (schema) {
+      var sio = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        schema.querySelectorAll("[data-node]").forEach(function (n, i) {
+          setTimeout(function () { n.classList.add("on"); }, i * 400);
+        });
+        sio.disconnect();
+      }, { threshold: 0.3 });
+      sio.observe(schema);
+    });
   }
 
   function watch(el, onEnter, onLeave) {
@@ -70,6 +71,7 @@
     }
     tick();
   }
+  window.exiorTypeText = typeText;
   function typeAppend(target, addition, alive, done) {
     var base = target.textContent;
     typeText({

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "algorithm": "AES-256-GCM",
+  "kdf": "PBKDF2-SHA256",
+  "iterations": 310000,
+  "envelopes": [
+    {
+      "salt": "9POR5WmNSt6HD0Ln+D7O/g==",
+      "iv": "cFLSZiGXnd4PB1Jn",
+      "wrapped": "0vBLDg0KLQZBqb9xnUWElYvPbI3m0uO7M7G2hJJClzwO/ZptaU5AeapngVCISf2u"
+    }
+  ]
+}
