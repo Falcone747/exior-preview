@@ -1,0 +1,747 @@
+{
+  "title": "Votre système IA souverain",
+  "parts": [
+    {
+      "num": 1,
+      "id": "01-comprendre",
+      "title": "Comprendre le système IA souverain",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "01-comprendre/01-systeme-ia-souverain",
+          "title": "Ce que signifie un système IA souverain pour un cabinet de syndic",
+          "summary": "lieu d'exécution (France, OVHcloud), contrôle des droits, réversibilité."
+        },
+        {
+          "num": 2,
+          "id": "01-comprendre/02-pourquoi-le-syndic",
+          "title": "Pourquoi le métier de syndic se prête à des agents encadrés",
+          "summary": "règles écrites + entrées désordonnées."
+        },
+        {
+          "num": 3,
+          "id": "01-comprendre/03-cadre-legal-1965-1967",
+          "title": "Le cadre légal de base",
+          "summary": "loi du 10 juillet 1965 et décret du 17 mars 1967."
+        },
+        {
+          "num": 4,
+          "id": "01-comprendre/04-hoguet-fonds-mandants",
+          "title": "Loi Hoguet, carte professionnelle et fonds des mandants",
+          "summary": "pourquoi les agents n'ont aucun droit de paiement."
+        },
+        {
+          "num": 5,
+          "id": "01-comprendre/05-alur-elan-extranet",
+          "title": "ALUR, ELAN, ordonnance 2019",
+          "summary": "contrat type, extranet, compte séparé, fonds de travaux, immatriculation, plan pluriannuel."
+        },
+        {
+          "num": 6,
+          "id": "01-comprendre/06-vocabulaire-ia",
+          "title": "Le vocabulaire IA indispensable",
+          "summary": "modèle de langage, poids ouverts, inférence, contexte, embeddings, RAG, agent, outil, harness, orchestrateur."
+        },
+        {
+          "num": 7,
+          "id": "01-comprendre/07-vocabulaire-copropriete",
+          "title": "Le vocabulaire des logiciels de copropriété",
+          "summary": "lots, tantièmes, clés de répartition, budget prévisionnel, appels de fonds, exercice, annexes comptables, état daté."
+        },
+        {
+          "num": 8,
+          "id": "01-comprendre/08-agent-ce-quil-fait",
+          "title": "Ce qu'un agent fait et ne fait pas",
+          "summary": "lire, classer, préparer, proposer ; jamais décider, payer ou envoyer seul."
+        },
+        {
+          "num": 9,
+          "id": "01-comprendre/09-trois-modes-interfacage",
+          "title": "Les trois modes d'interfaçage avec un logiciel",
+          "summary": "API, import/export de fichiers, opérateur sous contrôle humain."
+        },
+        {
+          "num": 10,
+          "id": "01-comprendre/10-principes-non-negociables",
+          "title": "Les principes non négociables",
+          "summary": "validation humaine bloquante, zéro paiement, moindre privilège, journal, calculs déterministes, réversibilité."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "id": "02-cartographier",
+      "title": "Cartographier son cabinet",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "02-cartographier/01-methode-cartographie",
+          "title": "Méthode de cartographie des processus d'un cabinet",
+          "summary": "entretiens, observation, pièces réelles."
+        },
+        {
+          "num": 2,
+          "id": "02-cartographier/02-inventaire-outils",
+          "title": "Inventaire des outils",
+          "summary": "logiciel de copropriété, banques, messageries, GED, extranet, téléphonie, tableurs, signature."
+        },
+        {
+          "num": 3,
+          "id": "02-cartographier/03-inventaire-donnees",
+          "title": "Inventaire des données et niveau de sensibilité",
+          "summary": "identité, coordonnées bancaires, santé (handicap, sinistres), comptes des syndicats."
+        },
+        {
+          "num": 4,
+          "id": "02-cartographier/04-mesurer-volumes",
+          "title": "Mesurer ses volumes sans les deviner",
+          "summary": "comment compter mails, factures, demandes et AG sur une période témoin."
+        },
+        {
+          "num": 5,
+          "id": "02-cartographier/05-goulots",
+          "title": "Repérer les goulots d'étranglement",
+          "summary": "files d'attente, ressaisies, allers-retours, périodes de pointe."
+        },
+        {
+          "num": 6,
+          "id": "02-cartographier/06-regles-vs-jugement",
+          "title": "La matrice règles / jugement",
+          "summary": "ce qui relève du calcul, de la lecture, de l'arbitrage du gestionnaire."
+        },
+        {
+          "num": 7,
+          "id": "02-cartographier/07-roles-du-cabinet",
+          "title": "Les rôles du cabinet et leurs habilitations",
+          "summary": "dirigeant, gestionnaire, assistant, comptable, service sinistres."
+        },
+        {
+          "num": 8,
+          "id": "02-cartographier/08-calendrier-annuel",
+          "title": "Le calendrier annuel d'un syndic",
+          "summary": "saison des AG, clôtures, appels trimestriels, contrats, échéances réglementaires."
+        },
+        {
+          "num": 9,
+          "id": "02-cartographier/09-prioriser-flux",
+          "title": "Prioriser les flux à confier aux agents",
+          "summary": "impact, risque, facilité de connexion."
+        },
+        {
+          "num": 10,
+          "id": "02-cartographier/10-fiche-processus",
+          "title": "Rédiger une fiche processus exploitable",
+          "summary": "déclencheur, entrées, règles, sorties, validation, exceptions."
+        },
+        {
+          "num": 11,
+          "id": "02-cartographier/11-dossier-architecture",
+          "title": "Le dossier d'architecture",
+          "summary": "contenu, livrables, critères d'acceptation, ce qu'il permet de décider."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "id": "03-architecture",
+      "title": "L'architecture technique souveraine",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "03-architecture/01-vue-ensemble-couches",
+          "title": "Vue d'ensemble",
+          "summary": "entrées, agents et mémoire, validation, logiciel officiel, journal."
+        },
+        {
+          "num": 2,
+          "id": "03-architecture/02-local-ou-serveur",
+          "title": "Local, serveur dédié ou cloud français",
+          "summary": "critères de choix pour un cabinet."
+        },
+        {
+          "num": 3,
+          "id": "03-architecture/03-ovhcloud-france",
+          "title": "L'infrastructure chez OVHcloud en France",
+          "summary": "ce que cela couvre concrètement, ce que cela ne couvre pas."
+        },
+        {
+          "num": 4,
+          "id": "03-architecture/04-ai-endpoints-open-weights",
+          "title": "Les modèles ouverts via OVHcloud AI Endpoints (par exemple Mistral)",
+          "summary": "principe, avantages, limites."
+        },
+        {
+          "num": 5,
+          "id": "03-architecture/05-taille-des-modeles",
+          "title": "Choisir la taille des modèles",
+          "summary": "petits modèles pour l'extraction, modèles plus grands pour les cas difficiles."
+        },
+        {
+          "num": 6,
+          "id": "03-architecture/06-deterministe-vs-llm",
+          "title": "Moteurs déterministes et modèle de langage",
+          "summary": "qui calcule, qui lit, qui rédige."
+        },
+        {
+          "num": 7,
+          "id": "03-architecture/07-memoire-metier",
+          "title": "La mémoire métier",
+          "summary": "référentiel des copropriétés, lots, tantièmes, clés, contrats, règles validées."
+        },
+        {
+          "num": 8,
+          "id": "03-architecture/08-harness",
+          "title": "Le harness d'un agent",
+          "summary": "boucle, outils, mémoire, garde-fous, validation, pourquoi il est indispensable en production."
+        },
+        {
+          "num": 9,
+          "id": "03-architecture/09-orchestrateur-agents",
+          "title": "L'orchestrateur et les agents spécialisés",
+          "summary": "répartition du travail, escalade, files."
+        },
+        {
+          "num": 10,
+          "id": "03-architecture/10-sorties-structurees",
+          "title": "Sorties structurées et contrôles",
+          "summary": "schémas, seuils de confiance, champs « à vérifier »."
+        },
+        {
+          "num": 11,
+          "id": "03-architecture/11-journal-audit",
+          "title": "Le journal d'audit",
+          "summary": "ce qu'on enregistre, comment le consulter, combien de temps le garder."
+        },
+        {
+          "num": 12,
+          "id": "03-architecture/12-isolation-cabinet",
+          "title": "Isolation des données",
+          "summary": "un environnement par cabinet, séparation par copropriété."
+        },
+        {
+          "num": 13,
+          "id": "03-architecture/13-couts-infrastructure",
+          "title": "Estimer les coûts d'infrastructure et d'inférence",
+          "summary": "méthode, sans chiffres inventés."
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "id": "04-connecteurs",
+      "title": "Connecter les outils du cabinet",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "04-connecteurs/01-logiciel-copropriete",
+          "title": "Connecter le logiciel de copropriété (Vilogi, ICS, Septeo, Powimo…)",
+          "summary": "principes et questions à poser à l'éditeur."
+        },
+        {
+          "num": 2,
+          "id": "04-connecteurs/02-sans-api",
+          "title": "Quand l'éditeur n'ouvre pas d'API",
+          "summary": "imports, exports, opérateur sous contrôle."
+        },
+        {
+          "num": 3,
+          "id": "04-connecteurs/03-messagerie",
+          "title": "Connecter les boîtes mail (Microsoft 365, Google Workspace, IMAP)",
+          "summary": "boîtes partagées, règles, pièces jointes."
+        },
+        {
+          "num": 4,
+          "id": "04-connecteurs/04-banque",
+          "title": "Connecter la banque en lecture seule",
+          "summary": "relevés, formats de fichiers, avis de virement."
+        },
+        {
+          "num": 5,
+          "id": "04-connecteurs/05-ged-documents",
+          "title": "GED et documents",
+          "summary": "classement par copropriété, nommage, versions."
+        },
+        {
+          "num": 6,
+          "id": "04-connecteurs/06-extranet",
+          "title": "L'extranet copropriétaires",
+          "summary": "lire ce qui est publié, préparer les publications."
+        },
+        {
+          "num": 7,
+          "id": "04-connecteurs/07-telephonie",
+          "title": "Téléphonie et comptes rendus d'appels",
+          "summary": "rattacher les appels aux dossiers."
+        },
+        {
+          "num": 8,
+          "id": "04-connecteurs/08-recommande-electronique",
+          "title": "Lettre recommandée électronique et courrier",
+          "summary": "préparer, faire valider, suivre les preuves."
+        },
+        {
+          "num": 9,
+          "id": "04-connecteurs/09-tableurs",
+          "title": "Tableurs et fichiers Excel du cabinet",
+          "summary": "les intégrer sans les casser."
+        },
+        {
+          "num": 10,
+          "id": "04-connecteurs/10-comptes-techniques",
+          "title": "Comptes techniques, droits et secrets par connecteur.",
+          "summary": ""
+        },
+        {
+          "num": 11,
+          "id": "04-connecteurs/11-tester-lecture-seule",
+          "title": "Tester un connecteur en lecture seule",
+          "summary": "protocole et critères."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "id": "05-agents",
+      "title": "Les agents du cabinet, processus par processus",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "05-agents/01-accueil-boite-mail",
+          "title": "Agent accueil et boîte mail",
+          "summary": "tri par copropriété, lot, sujet, urgence."
+        },
+        {
+          "num": 2,
+          "id": "05-agents/02-relation-coproprietaires",
+          "title": "Agent relation copropriétaires",
+          "summary": "réponses préparées avec pièces."
+        },
+        {
+          "num": 3,
+          "id": "05-agents/03-gestion-courante",
+          "title": "Agent gestion courante",
+          "summary": "demandes d'intervention, suivi jusqu'à clôture."
+        },
+        {
+          "num": 4,
+          "id": "05-agents/04-prestataires-contrats",
+          "title": "Agent prestataires et contrats",
+          "summary": "échéances, attestations, mise en concurrence."
+        },
+        {
+          "num": 5,
+          "id": "05-agents/05-sinistres",
+          "title": "Agent sinistres",
+          "summary": "déclaration, pièces, conventions entre assureurs, relances."
+        },
+        {
+          "num": 6,
+          "id": "05-agents/06-travaux",
+          "title": "Agent travaux",
+          "summary": "devis comparés, ordres de service, suivi de chantier, réception."
+        },
+        {
+          "num": 7,
+          "id": "05-agents/07-preparation-ag",
+          "title": "Agent préparation d'AG",
+          "summary": "ordre du jour, majorités, pièces jointes, convocation 21 jours avant."
+        },
+        {
+          "num": 8,
+          "id": "05-agents/08-tenue-ag",
+          "title": "Agent tenue d'AG",
+          "summary": "feuille de présence, pouvoirs, vote par correspondance, visioconférence, procès-verbal."
+        },
+        {
+          "num": 9,
+          "id": "05-agents/09-apres-ag",
+          "title": "Agent après l'AG",
+          "summary": "notification du PV, délai de contestation, exécution des décisions."
+        },
+        {
+          "num": 10,
+          "id": "05-agents/10-conseil-syndical",
+          "title": "Agent conseil syndical",
+          "summary": "préparation des réunions, contrôle des comptes, délégations."
+        },
+        {
+          "num": 11,
+          "id": "05-agents/11-factures-fournisseurs",
+          "title": "Agent factures fournisseurs",
+          "summary": "imputation par copropriété et clé, doublons, TVA."
+        },
+        {
+          "num": 12,
+          "id": "05-agents/12-banque-rapprochement",
+          "title": "Agent banque et rapprochement",
+          "summary": "opérations, virements non identifiés."
+        },
+        {
+          "num": 13,
+          "id": "05-agents/13-appels-de-fonds",
+          "title": "Agent appels de fonds",
+          "summary": "budget voté, tantièmes, fonds de travaux, appels trimestriels."
+        },
+        {
+          "num": 14,
+          "id": "05-agents/14-recouvrement-amiable",
+          "title": "Agent recouvrement amiable",
+          "summary": "vérification du contexte, paliers, limites."
+        },
+        {
+          "num": 15,
+          "id": "05-agents/15-mutations-etat-date",
+          "title": "Agent mutations",
+          "summary": "pré-état daté, état daté, échanges avec les notaires."
+        },
+        {
+          "num": 16,
+          "id": "05-agents/16-cloture-exercice",
+          "title": "Agent clôture d'exercice",
+          "summary": "contrôles, annexes comptables, écarts budget/réalisé."
+        },
+        {
+          "num": 17,
+          "id": "05-agents/17-conformite",
+          "title": "Agent conformité",
+          "summary": "immatriculation, fiche synthétique, plan pluriannuel, diagnostics."
+        },
+        {
+          "num": 18,
+          "id": "05-agents/18-veille-reglementaire",
+          "title": "Agent veille réglementaire",
+          "summary": "textes nouveaux, impact, mise à jour des règles."
+        },
+        {
+          "num": 19,
+          "id": "05-agents/19-direction",
+          "title": "Agent direction",
+          "summary": "état du portefeuille, points bloquants, charge par gestionnaire."
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "id": "06-espace-exior",
+      "title": "L'Espace EXIOR",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "06-espace-exior/01-role-espace",
+          "title": "Le rôle de l'Espace EXIOR dans le cabinet.",
+          "summary": ""
+        },
+        {
+          "num": 2,
+          "id": "06-espace-exior/02-file-validation",
+          "title": "La file de validation",
+          "summary": "priorités, affectation, délais."
+        },
+        {
+          "num": 3,
+          "id": "06-espace-exior/03-fiche-action",
+          "title": "La fiche action",
+          "summary": "pièce source, justification, contrôles, incertitudes."
+        },
+        {
+          "num": 4,
+          "id": "06-espace-exior/04-vue-copropriete",
+          "title": "La vue par copropriété",
+          "summary": "tout ce qui est en cours sur un immeuble."
+        },
+        {
+          "num": 5,
+          "id": "06-espace-exior/05-journal-consultable",
+          "title": "Le journal consultable",
+          "summary": "retrouver qui a décidé quoi."
+        },
+        {
+          "num": 6,
+          "id": "06-espace-exior/06-droits-collaborateurs",
+          "title": "Les droits par collaborateur et par type d'action.",
+          "summary": ""
+        },
+        {
+          "num": 7,
+          "id": "06-espace-exior/07-mobile-notifications",
+          "title": "Mobile et notifications",
+          "summary": "valider en déplacement sans perdre le contrôle."
+        },
+        {
+          "num": 8,
+          "id": "06-espace-exior/08-parametrer-regles",
+          "title": "Paramétrer ses règles",
+          "summary": "seuils, paliers, modèles de courriers."
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "id": "07-securite",
+      "title": "Sécurité et gouvernance",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "07-securite/01-modele-de-menace",
+          "title": "Le modèle de menace d'un cabinet de syndic",
+          "summary": "fraude au faux RIB, usurpation, fuite, erreur."
+        },
+        {
+          "num": 2,
+          "id": "07-securite/02-moindre-privilege",
+          "title": "Le moindre privilège appliqué à chaque agent.",
+          "summary": ""
+        },
+        {
+          "num": 3,
+          "id": "07-securite/03-masquage-donnees",
+          "title": "Masquer les données sensibles avant traitement.",
+          "summary": ""
+        },
+        {
+          "num": 4,
+          "id": "07-securite/04-injection-prompt",
+          "title": "Les instructions cachées dans les mails et pièces jointes (injection de prompt).",
+          "summary": ""
+        },
+        {
+          "num": 5,
+          "id": "07-securite/05-red-team",
+          "title": "Éprouver le système avant ouverture",
+          "summary": "tentatives de détournement."
+        },
+        {
+          "num": 6,
+          "id": "07-securite/06-secrets",
+          "title": "Gestion des secrets et des accès techniques.",
+          "summary": ""
+        },
+        {
+          "num": 7,
+          "id": "07-securite/07-sauvegardes-reversibilite",
+          "title": "Sauvegardes, restauration et réversibilité.",
+          "summary": ""
+        },
+        {
+          "num": 8,
+          "id": "07-securite/08-donnees-personnelles",
+          "title": "Protection des données personnelles des copropriétaires",
+          "summary": "principes et documentation."
+        },
+        {
+          "num": 9,
+          "id": "07-securite/09-charte-usage",
+          "title": "La charte d'usage interne de l'IA.",
+          "summary": ""
+        },
+        {
+          "num": 10,
+          "id": "07-securite/10-responsabilite",
+          "title": "Responsabilité",
+          "summary": "le cabinet reste responsable, comment la documenter."
+        },
+        {
+          "num": 11,
+          "id": "07-securite/11-incident",
+          "title": "Gérer un incident",
+          "summary": "détection, arrêt, analyse, correction."
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "id": "08-deployer",
+      "title": "Déployer",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "08-deployer/01-plan-quatre-semaines",
+          "title": "Le plan de déploiement par étapes.",
+          "summary": ""
+        },
+        {
+          "num": 2,
+          "id": "08-deployer/02-acces-lecture-seule",
+          "title": "Étape 1",
+          "summary": "accès et lecture seule."
+        },
+        {
+          "num": 3,
+          "id": "08-deployer/03-bac-a-sable",
+          "title": "Étape 2",
+          "summary": "bac à sable et jeux de test sur pièces réelles."
+        },
+        {
+          "num": 4,
+          "id": "08-deployer/04-tests-validation",
+          "title": "Étape 3",
+          "summary": "tests de validation et cycles d'ajustement."
+        },
+        {
+          "num": 5,
+          "id": "08-deployer/05-ouverture-progressive",
+          "title": "Étape 4",
+          "summary": "ouverture processus par processus."
+        },
+        {
+          "num": 6,
+          "id": "08-deployer/06-criteres-acceptation",
+          "title": "Écrire des critères d'acceptation mesurables.",
+          "summary": ""
+        },
+        {
+          "num": 7,
+          "id": "08-deployer/07-former-equipes",
+          "title": "Former les équipes à valider, corriger, refuser.",
+          "summary": ""
+        },
+        {
+          "num": 8,
+          "id": "08-deployer/08-conduite-changement",
+          "title": "Conduite du changement dans un cabinet.",
+          "summary": ""
+        },
+        {
+          "num": 9,
+          "id": "08-deployer/09-communiquer",
+          "title": "Informer le conseil syndical et les copropriétaires.",
+          "summary": ""
+        },
+        {
+          "num": 10,
+          "id": "08-deployer/10-erreurs-frequentes",
+          "title": "Les erreurs fréquentes de déploiement et comment les éviter.",
+          "summary": ""
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "id": "09-exploiter",
+      "title": "Exploiter et améliorer",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "09-exploiter/01-exploitation-mensuelle",
+          "title": "L'exploitation mensuelle",
+          "summary": "ce qui est surveillé et maintenu."
+        },
+        {
+          "num": 2,
+          "id": "09-exploiter/02-indicateurs",
+          "title": "Les indicateurs à suivre",
+          "summary": "délais, taux de validation, corrections."
+        },
+        {
+          "num": 3,
+          "id": "09-exploiter/03-memoire-regles",
+          "title": "Faire vivre la mémoire des règles validées.",
+          "summary": ""
+        },
+        {
+          "num": 4,
+          "id": "09-exploiter/04-ajouter-agent",
+          "title": "Ajouter un agent ou un processus.",
+          "summary": ""
+        },
+        {
+          "num": 5,
+          "id": "09-exploiter/05-mises-a-jour-reglementaires",
+          "title": "Intégrer les évolutions réglementaires.",
+          "summary": ""
+        },
+        {
+          "num": 6,
+          "id": "09-exploiter/06-maintenance-connecteurs",
+          "title": "Maintenir les connecteurs quand les outils changent.",
+          "summary": ""
+        },
+        {
+          "num": 7,
+          "id": "09-exploiter/07-revue-trimestrielle",
+          "title": "La revue trimestrielle avec la direction.",
+          "summary": ""
+        },
+        {
+          "num": 8,
+          "id": "09-exploiter/08-changer-de-modele",
+          "title": "Changer de modèle sans tout casser.",
+          "summary": ""
+        },
+        {
+          "num": 9,
+          "id": "09-exploiter/09-fin-de-contrat",
+          "title": "Fin de contrat",
+          "summary": "restitution et réversibilité."
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "id": "10-decider",
+      "title": "Décider et passer à l'action",
+      "chapters": [
+        {
+          "num": 1,
+          "id": "10-decider/01-cout-complet",
+          "title": "Calculer le coût complet d'un système IA.",
+          "summary": ""
+        },
+        {
+          "num": 2,
+          "id": "10-decider/02-mesurer-temps-gagne",
+          "title": "Mesurer le temps gagné avec une méthode honnête.",
+          "summary": ""
+        },
+        {
+          "num": 3,
+          "id": "10-decider/03-comparer-alternatives",
+          "title": "Comparer avec le recrutement, l'externalisation, les modules d'éditeur, l'IA grand public.",
+          "summary": ""
+        },
+        {
+          "num": 4,
+          "id": "10-decider/04-business-case",
+          "title": "Construire son dossier de décision.",
+          "summary": ""
+        },
+        {
+          "num": 5,
+          "id": "10-decider/05-questions-prestataire",
+          "title": "Les questions à poser à tout prestataire IA.",
+          "summary": ""
+        },
+        {
+          "num": 6,
+          "id": "10-decider/06-faire-soi-meme",
+          "title": "Faire soi-même, avec EXIOR, ou faire faire",
+          "summary": "arbitrer."
+        },
+        {
+          "num": 7,
+          "id": "10-decider/07-checklist-decision",
+          "title": "La checklist de décision.",
+          "summary": ""
+        },
+        {
+          "num": 8,
+          "id": "10-decider/08-glossaire",
+          "title": "Glossaire.",
+          "summary": ""
+        },
+        {
+          "num": 9,
+          "id": "10-decider/09-faq",
+          "title": "Questions fréquentes.",
+          "summary": ""
+        },
+        {
+          "num": 10,
+          "id": "10-decider/10-ressources-officielles",
+          "title": "Ressources officielles et textes de référence (Legifrance, service-public.fr, ANAH, OVHcloud).",
+          "summary": ""
+        }
+      ]
+    }
+  ]
+}
