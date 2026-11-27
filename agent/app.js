@@ -1,10 +1,10 @@
 import {
   MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
-} from "./lib/agent.js?v=9";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=9";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=9";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS, connectApps } from "./lib/mcp.js?v=9";
-import { FREE_TOOL_MODELS, getPreferredModel, setPreferredModel, modelLabel } from "./lib/openrouter.js?v=9";
+} from "./lib/agent.js?v=10";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=10";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=10";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS, connectApps } from "./lib/mcp.js?v=10";
+import { FREE_TOOL_MODELS, getPreferredModel, setPreferredModel, modelLabel } from "./lib/openrouter.js?v=10";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked@15.0.12/+esm";
 import DOMPurify from "https://cdn.jsdelivr.net/npm/dompurify@3.2.6/+esm";
 

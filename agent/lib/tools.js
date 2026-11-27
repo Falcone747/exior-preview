@@ -1,4 +1,4 @@
-import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=9";
+import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=10";
 
 export const BUILTIN_TOOLS = [
   {
@@ -178,19 +178,48 @@ async function webFetch({ url }) {
   }
 }
 
-async function wikiSearch(q) {
-  const url = "https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=1&format=json&origin=*&srlimit=4&srsearch=" + encodeURIComponent(q);
+function searchVariants(q) {
+  const raw = String(q || "").trim();
+  const out = [];
+  const add = (s) => {
+    const t = String(s || "").replace(/\s+/g, " ").trim();
+    if (t && !out.includes(t)) out.push(t);
+  };
+  add(raw);
+  const stop = new Set(("le la les un une des du de d l et ou a à au aux en y on je tu il elle nous vous ils elles mon ma mes ton ta tes son sa ses ce cet cette ces qui que quoi dont ou pour par pas plus moins tres très avec sans sur sous dans chez vers quel quelle quels quelles combien comment pourquoi quand est sont ai as avons avez ont ete été aujourd hui aujourd'hui aujourd’hui aujourdhui moi stp svp source sources merci voici voila voilà donc alors aussi bien encore deja déjà cours action actions prix cote cotee coté cotée cotation bourse ticker valeur valorisation cloture clôture market cap the of for today stock price with source").split(/\s+/));
+  const tokens = raw.replace(/[«»"'’`.,;:!?()[\]]/g, " ").split(/\s+/).filter(Boolean);
+  const kept = tokens.filter((tok) => {
+    const n = tok.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+    return n.length > 1 && !stop.has(n) && !stop.has(tok.toLowerCase());
+  });
+  if (kept.length) add(kept.join(" "));
+  const names = kept.filter((tok) => /^[A-ZÉÈÀÂÎÙÇ]/.test(tok) || /anthropic|nvidia|microsoft|google|apple|meta|tesla|openai|amazon|netflix|broadcom/i.test(tok));
+  const finance = /(cours|action|bourse|cot[ée]|ipo|nasdaq|nyse|stock|ticker|prix|valorisation|cl[oô]ture)/i.test(raw);
+  if (finance && names.length) {
+    add(names.join(" ") + " IPO");
+    add(names.join(" ") + " stock NASDAQ");
+    add(names[0] + " IPO");
+    add(names[0] + " stock");
+  } else if (names.length) {
+    add(names.join(" "));
+  }
+  return out.slice(0, 6);
+}
+
+async function wikiSearch(q, lang = "en") {
+  const host = lang === "fr" ? "https://fr.wikipedia.org" : "https://en.wikipedia.org";
+  const url = host + "/w/api.php?action=query&list=search&utf8=1&format=json&origin=*&srlimit=4&srsearch=" + encodeURIComponent(q);
   const data = await fetchJson(url);
   const hits = ((data.query || {}).search || []);
   if (!hits.length) return [];
   const titles = hits.map((h) => h.title).join("|");
-  const exUrl = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exchars=900&format=json&origin=*&titles=" + encodeURIComponent(titles);
+  const exUrl = host + "/w/api.php?action=query&prop=extracts&explaintext=1&exchars=900&format=json&origin=*&titles=" + encodeURIComponent(titles);
   const ex = await fetchJson(exUrl);
   const pages = Object.values((ex.query || {}).pages || {});
   const byTitle = Object.fromEntries(pages.map((p) => [p.title, p.extract || ""]));
   return hits.map((h) => {
-    const href = "https://en.wikipedia.org/wiki/" + encodeURIComponent(h.title.replace(/ /g, "_"));
-    return { title: h.title, url: href, snippet: (byTitle[h.title] || h.snippet || "").replace(/<[^>]+>/g, " "), source: "Wikipedia" };
+    const href = host + "/wiki/" + encodeURIComponent(h.title.replace(/ /g, "_"));
+    return { title: h.title, url: href, snippet: (byTitle[h.title] || h.snippet || "").replace(/<[^>]+>/g, " "), source: lang === "fr" ? "Wikipédia" : "Wikipedia" };
   });
 }
 
@@ -212,31 +241,44 @@ async function jinaSearch(q) {
 }
 
 async function webSearch({ query }) {
-  const q = String(query || "").trim();
-  if (!q) throw new Error("Requête vide.");
-  if (q.length > 300) throw new Error("Requête trop longue.");
+  const variants = searchVariants(query);
+  if (!variants.length) throw new Error("Requête vide.");
+  if (variants[0].length > 300) throw new Error("Requête trop longue.");
   const blocks = [];
-  try {
-    const wiki = await wikiSearch(q);
-    for (const r of wiki) {
-      blocks.push(`• ${r.title}\\n${String(r.snippet || "").slice(0, 700)}\\nSource : ${r.url}`);
+  const seen = new Set();
+  for (const v of variants) {
+    for (const lang of ["en", "fr"]) {
+      try {
+        const wiki = await wikiSearch(v, lang);
+        for (const r of wiki) {
+          if (seen.has(r.url)) continue;
+          seen.add(r.url);
+          blocks.push("• " + r.title + "\n" + String(r.snippet || "").slice(0, 700) + "\nSource : " + r.url);
+        }
+      } catch { /* continue */ }
     }
-  } catch { /* continue */ }
-  try {
-    const news = await hnSearch(q);
-    for (const r of news) {
-      blocks.push(`• ${r.title}${r.snippet ? " (" + r.snippet + ")" : ""}\\nSource : ${r.url}`);
-    }
-  } catch { /* continue */ }
-  try {
-    const raw = await jinaSearch(q);
-    if (raw && raw.length > 80 && !/AuthenticationRequiredError/i.test(raw)) {
-      blocks.push(truncateText(raw, 1800));
-    }
-  } catch { /* optional */ }
-  if (!blocks.length) throw new Error("Aucun résultat web pour le moment. Réessayez avec une requête plus précise.");
-  return truncateText("Résultats web pour « " + q + " » :\\n\\n" + blocks.join("\\n\\n"), 5000);
+    try {
+      const news = await hnSearch(v);
+      for (const r of news) {
+        if (seen.has(r.url)) continue;
+        seen.add(r.url);
+        blocks.push("• " + r.title + (r.snippet ? " (" + r.snippet + ")" : "") + "\nSource : " + r.url);
+      }
+    } catch { /* continue */ }
+    if (blocks.length >= 5) break;
+  }
+  if (!blocks.length) {
+    try {
+      const raw = await jinaSearch(variants[0]);
+      if (raw && raw.length > 80 && !/AuthenticationRequiredError/i.test(raw)) {
+        blocks.push(truncateText(raw, 1800));
+      }
+    } catch { /* optional */ }
+  }
+  if (!blocks.length) throw new Error("Aucun résultat web pour le moment. Relance web_search avec une requête courte (nom de l'entreprise + IPO ou stock).");
+  return truncateText("Résultats web pour « " + variants[0] + " » :\n\n" + blocks.join("\n\n"), 5000);
 }
+
 
 const CONSTANTS = { pi: Math.PI, e: Math.E };
 const FUNS = {
@@ -428,7 +470,7 @@ export async function runBuiltin(name, args = {}) {
       return `Note « ${n.title} » supprimée.`;
     }
     case "connect_app": {
-      const { connectApps } = await import("./mcp.js?v=9");
+      const { connectApps } = await import("./mcp.js?v=10");
       return connectApps(args.apps);
     }
     default:

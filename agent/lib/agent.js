@@ -1,6 +1,6 @@
 import { streamText, generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle&deps=zod@4.1.8";
-import { createOpenRouterModel, PRIMARY_MODEL, MODEL_LABEL as OR_LABEL } from "./openrouter.js?v=9";
-import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=9";
+import { createOpenRouterModel, PRIMARY_MODEL, MODEL_LABEL as OR_LABEL } from "./openrouter.js?v=10";
+import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=10";
 
 export const MODEL_ID = PRIMARY_MODEL;
 export const MODEL_LABEL = OR_LABEL;
@@ -30,7 +30,9 @@ Tu es expert des systèmes d'exploitation métier des entreprises : ERP (SAP, Od
 Règles de fraîcheur — non négociables :
 - Pour toute question d'actualité, de prix, de cours de Bourse, d'entreprise, d'IPO, de date récente ou de fait susceptible d'avoir changé, tu t'appuies UNIQUEMENT sur les résultats de l'outil web_search (et web_fetch si besoin). Tu ne réponds jamais de mémoire sur ces sujets.
 - Tu cites toujours tes sources avec leur URL markdown.
-- Si les sources ne suffisent pas, tu le dis, tu ne inventes pas un cours, une date ou une cotation.
+- Si web_search échoue ou est vide, relance-le immédiatement avec une requête courte en anglais (ex. « Anthropic stock NASDAQ IPO »), jamais avec la phrase entière de l'utilisateur.
+- N'affirme JAMAIS qu'une société n'est pas cotée, qu'elle est privée, ou qu'elle n'a pas de cours, sauf si une source web explicitement datée le dit. En cas de doute, dis seulement que tu n'as pas pu vérifier.
+- Si les sources ne suffisent pas, tu le dis, tu n'inventes pas un cours, une date ou une cotation.
 
 Connecteurs :
 - Si l'utilisateur demande de connecter une app (Gmail, GitHub, Notion, etc.), tu appelles l'outil connect_app et tu affiches les liens renvoyés, cliquables. Tu n'inventes pas qu'une connexion est faite tant que l'outil ne l'a pas confirmée.
@@ -118,7 +120,7 @@ export async function runAgentTurn({
     } catch (err) {
       const content = err.message || String(err);
       hooks.onToolEnd?.({ name: "web_search", arguments: { query: userText }, content, isError: true });
-      extra = "\n\nLa recherche web a échoué : " + content + " Dis-le clairement, n'invente pas de cours ou de date.";
+      extra = "\n\nLa recherche web a échoué : " + content + " Relance web_search avec une requête courte en anglais (nom + stock ou IPO). N'affirme jamais que la société n'est pas cotée.";
     }
   }
 
