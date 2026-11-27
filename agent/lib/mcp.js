@@ -170,6 +170,7 @@ export async function callMcpTool(client, name, args) {
   return text || JSON.stringify(result ?? {});
 }
 
+
 export const PRESET_CONNECTORS = [
   {
     id: "context7",
@@ -280,3 +281,106 @@ export const PRESET_CONNECTORS = [
     tag: "CORS bloqué",
   },
 ];
+
+const APP_ALIASES = {
+  github: "github", gh: "github", git: "github",
+  notion: "notion",
+  linear: "linear",
+  figma: "figma",
+  paypal: "paypal",
+  atlassian: "atlassian", jira: "atlassian", confluence: "atlassian",
+  huggingface: "huggingface", "hugging face": "huggingface", hf: "huggingface",
+  context7: "context7", deepwiki: "deepwiki",
+  "microsoft learn": "ms-learn", microsoft: "ms-learn",
+};
+
+export async function beginOAuthLink(connector) {
+  let authUrl = null;
+  const provider = createBrowserOAuthProvider(connector.id, "EXIORBOT");
+  provider.redirectToAuthorization = (url) => {
+    sessionStorage.setItem("exior-agent-oauth-pending", connector.id);
+    authUrl = url.toString();
+  };
+  async function tryTransport(Transport) {
+    const client = new Client({ name: "exiorbot", version: "1.0.0" });
+    const transport = new Transport(new URL(connector.url), { authProvider: provider });
+    await client.connect(transport);
+    const listed = await client.listTools();
+    const tools = listed?.tools || listed || [];
+    return { already: true, name: connector.name, tools: tools.map((t) => t.name), client };
+  }
+  try {
+    return await tryTransport(StreamableHTTPClientTransport);
+  } catch (err) {
+    if (authUrl) return { url: authUrl, name: connector.name };
+    try {
+      return await tryTransport(SSEClientTransport);
+    } catch (err2) {
+      if (authUrl) return { url: authUrl, name: connector.name };
+      throw new Error(corsHint(err));
+    }
+  }
+}
+
+export async function connectApps(appsRaw) {
+  let names = [];
+  if (Array.isArray(appsRaw)) names = appsRaw;
+  else names = String(appsRaw || "").split(/[,;+/]|\bet\b/i);
+  names = names.map((n) => String(n || "").trim().toLowerCase()).filter(Boolean);
+  if (!names.length) throw new Error("Précisez au moins une app à connecter (ex. GitHub).");
+  const lines = [];
+  const saved = loadConnectors();
+  for (const name of names) {
+    if (/gmail|google\s*mail|google\s*workspace|messagerie google/.test(name)) {
+      lines.push("Gmail : il n'existe pas de connecteur officiel utilisable depuis une page web statique (Google ne l'autorise pas sans une plateforme intermédiaire). Je ne peux donc pas ouvrir la connexion Gmail ici, sans te demander de clé.");
+      continue;
+    }
+    if (/composio|activepieces|slack|odoo|hubspot|drive|google drive/.test(name) && !APP_ALIASES[name]) {
+      lines.push(name + " : connexion directe depuis cette page impossible sans une clé de plateforme tierce. Les apps disponibles sans clé à coller sont GitHub, Notion, Linear, Figma, PayPal et Atlassian (connexion par autorisation, un clic).");
+      continue;
+    }
+    const slug = APP_ALIASES[name] || name;
+    const preset = PRESET_CONNECTORS.find((p) => p.id === slug || p.name.toLowerCase() === name);
+    if (!preset) {
+      lines.push(name + " : pas de connecteur connu pour cette app depuis le navigateur.");
+      continue;
+    }
+    if (preset.cors === false) {
+      lines.push(preset.name + " : le serveur refuse les appels depuis une page web (CORS).");
+      continue;
+    }
+    if (preset.auth === "none") {
+      const connector = { id: preset.id, name: preset.name, url: preset.url, token: "", oauth: false };
+      if (!saved.some((c) => c.url.replace(/\/+$/, "") === connector.url.replace(/\/+$/, ""))) {
+        saved.push(connector);
+        saveConnectors(saved);
+      }
+      lines.push(preset.name + " : déjà utilisable, sans compte. Ajouté à tes connecteurs.");
+      continue;
+    }
+    const connector = {
+      id: preset.id,
+      name: preset.name,
+      url: preset.url,
+      token: "",
+      oauth: true,
+    };
+    if (!saved.some((c) => c.id === connector.id || c.url.replace(/\/+$/, "") === connector.url.replace(/\/+$/, ""))) {
+      saved.push(connector);
+      saveConnectors(saved);
+    }
+    try {
+      const res = await beginOAuthLink(connector);
+      if (res.already) {
+        lines.push(preset.name + " : déjà autorisé" + (res.tools && res.tools.length ? " · outils : " + res.tools.slice(0, 8).join(", ") : "") + ".");
+      } else if (res.url) {
+        lines.push("Pour connecter " + preset.name + ", ouvre ce lien d'autorisation (un clic, tu te connectes avec ton compte " + preset.name + ", sans coller de clé) :\n" + res.url);
+      } else {
+        lines.push(preset.name + " : connexion commencée.");
+      }
+    } catch (err) {
+      lines.push(preset.name + " : " + (err.message || err));
+    }
+  }
+  return lines.join("\n\n");
+}

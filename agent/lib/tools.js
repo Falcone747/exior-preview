@@ -1,4 +1,4 @@
-import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=3";
+import { listNotes, getNote, upsertNote, deleteNote } from "./db.js?v=9";
 
 export const BUILTIN_TOOLS = [
   {
@@ -85,6 +85,17 @@ export const BUILTIN_TOOLS = [
       required: ["id"],
     },
   },
+  {
+    name: "connect_app",
+    description: "Démarre la connexion à une ou plusieurs apps de l'utilisateur (GitHub, Notion, Linear, Figma, PayPal, Atlassian, et documentations sans compte). À utiliser dès que l'utilisateur demande de connecter Gmail, GitHub ou une autre app. Renvoie des liens cliquables d'autorisation. Gmail n'a pas de connecteur officiel utilisable depuis une page web.",
+    parameters: {
+      type: "object",
+      properties: {
+        apps: { type: "string", description: "Liste d'apps séparées par des virgules, ex. github, notion, gmail" },
+      },
+      required: ["apps"],
+    },
+  },
 ];
 
 export const BUILTIN_LABELS = {
@@ -97,6 +108,7 @@ export const BUILTIN_LABELS = {
   notes_read: "Lire une note",
   notes_write: "Écrire une note",
   notes_delete: "Supprimer une note",
+  connect_app: "Connecter une app",
 };
 
 export function truncateText(text, limit = 2500) {
@@ -132,19 +144,98 @@ async function fetchText(url, { timeout = 20000, accept = "text/plain" } = {}) {
   }
 }
 
+async function fetchJson(url, timeout = 18000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeout);
+  try {
+    const res = await fetch(url, { headers: { Accept: "application/json, text/plain, */*" }, signal: ctrl.signal });
+    if (!res.ok) throw new Error(String(res.status));
+    const ct = res.headers.get("content-type") || "";
+    if (ct.includes("json")) return await res.json();
+    const t = await res.text();
+    try { return JSON.parse(t); } catch { return t; }
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function webFetch({ url }) {
   const target = safeUrl(url);
+  try {
+    const text = await fetchText("https://r.jina.ai/" + target);
+    return truncateText(text || "(page vide)", 4000);
+  } catch (err) {
+    if (/wikipedia\.org/i.test(target)) {
+      const title = decodeURIComponent(target.split("/wiki/")[1] || "").replace(/_/g, " ");
+      if (title) {
+        const api = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exchars=3000&format=json&origin=*&titles=" + encodeURIComponent(title);
+        const data = await fetchJson(api);
+        const page = Object.values((data.query || {}).pages || {})[0] || {};
+        if (page.extract) return truncateText(`# ${page.title}\\n\\n${page.extract}\\n\\nSource : ${target}`, 4000);
+      }
+    }
+    throw err;
+  }
+}
+
+async function wikiSearch(q) {
+  const url = "https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=1&format=json&origin=*&srlimit=4&srsearch=" + encodeURIComponent(q);
+  const data = await fetchJson(url);
+  const hits = ((data.query || {}).search || []);
+  if (!hits.length) return [];
+  const titles = hits.map((h) => h.title).join("|");
+  const exUrl = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exchars=900&format=json&origin=*&titles=" + encodeURIComponent(titles);
+  const ex = await fetchJson(exUrl);
+  const pages = Object.values((ex.query || {}).pages || {});
+  const byTitle = Object.fromEntries(pages.map((p) => [p.title, p.extract || ""]));
+  return hits.map((h) => {
+    const href = "https://en.wikipedia.org/wiki/" + encodeURIComponent(h.title.replace(/ /g, "_"));
+    return { title: h.title, url: href, snippet: (byTitle[h.title] || h.snippet || "").replace(/<[^>]+>/g, " "), source: "Wikipedia" };
+  });
+}
+
+async function hnSearch(q) {
+  const url = "https://hn.algolia.com/api/v1/search?hitsPerPage=6&query=" + encodeURIComponent(q);
+  const data = await fetchJson(url);
+  return (data.hits || []).filter((h) => h.title && h.url).map((h) => ({
+    title: h.title,
+    url: h.url,
+    snippet: (h.created_at || "").slice(0, 10),
+    source: "Actualité",
+  }));
+}
+
+async function jinaSearch(q) {
+  const target = "https://html.duckduckgo.com/html/?q=" + encodeURIComponent(q);
   const text = await fetchText("https://r.jina.ai/" + target);
-  return truncateText(text || "(page vide)", 4000);
+  return text;
 }
 
 async function webSearch({ query }) {
   const q = String(query || "").trim();
   if (!q) throw new Error("Requête vide.");
   if (q.length > 300) throw new Error("Requête trop longue.");
-  const target = "https://html.duckduckgo.com/html/?q=" + encodeURIComponent(q);
-  const text = await fetchText("https://r.jina.ai/" + target);
-  return truncateText(text || "Aucun résultat.", 4000);
+  const blocks = [];
+  try {
+    const wiki = await wikiSearch(q);
+    for (const r of wiki) {
+      blocks.push(`• ${r.title}\\n${String(r.snippet || "").slice(0, 700)}\\nSource : ${r.url}`);
+    }
+  } catch { /* continue */ }
+  try {
+    const news = await hnSearch(q);
+    for (const r of news) {
+      blocks.push(`• ${r.title}${r.snippet ? " (" + r.snippet + ")" : ""}\\nSource : ${r.url}`);
+    }
+  } catch { /* continue */ }
+  try {
+    const raw = await jinaSearch(q);
+    if (raw && raw.length > 80 && !/AuthenticationRequiredError/i.test(raw)) {
+      blocks.push(truncateText(raw, 1800));
+    }
+  } catch { /* optional */ }
+  if (!blocks.length) throw new Error("Aucun résultat web pour le moment. Réessayez avec une requête plus précise.");
+  return truncateText("Résultats web pour « " + q + " » :\\n\\n" + blocks.join("\\n\\n"), 5000);
 }
 
 const CONSTANTS = { pi: Math.PI, e: Math.E };
@@ -335,6 +426,10 @@ export async function runBuiltin(name, args = {}) {
       if (!n) throw new Error("Note introuvable.");
       await deleteNote(args.id);
       return `Note « ${n.title} » supprimée.`;
+    }
+    case "connect_app": {
+      const { connectApps } = await import("./mcp.js?v=9");
+      return connectApps(args.apps);
     }
     default:
       throw new Error(`Outil inconnu : ${name}`);
