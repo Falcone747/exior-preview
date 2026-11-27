@@ -120,3 +120,6 @@ a:hover{text-decoration:underline}
 .plan-box,.check-box{display:block;margin:0 0 8px;padding:8px 10px;border-radius:8px;background:var(--ac-soft);color:var(--ac-ink);font-size:12px;border:1px solid #DCD3FF;white-space:pre-wrap}
 .check-box.ok{background:var(--ok-bg);color:var(--ok);border-color:#CBE8D7}
 .check-box.bad{background:var(--warn-bg);color:var(--warn);border-color:#F2DDB8}
+
+.check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--tx)}
+.check input{width:auto}
