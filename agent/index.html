@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>EXIOR · Agent</title>
-  <meta name="description" content="Agent EXIOR local dans votre navigateur, avec outils et connecteurs MCP vers vos apps.">
+  <meta name="description" content="Agent EXIOR dans votre navigateur, avec outils et connecteurs MCP vers vos apps.">
   <link rel="icon" href="../favicon.svg">
-  <link rel="stylesheet" href="./styles.css?v=7">
+  <link rel="stylesheet" href="./styles.css?v=8">
   <script>window.addEventListener("error",e=>{var b=document.getElementById("gpu-banner");if(b){b.className="banner danger";b.textContent="Erreur : "+(e.message||e);}});</script>
-  <script type="module" src="./app.js?v=7"></script>
+  <script type="module" src="./app.js?v=8"></script>
 </head>
 <body>
   <a class="skip" href="#input">Aller à la saisie</a>
@@ -16,7 +16,7 @@
 
   <header class="top">
     <a class="logo" href="../">EXIOR</a>
-    <span class="badge">Agent local</span>
+    <span class="badge">Agent</span>
     <div class="top-actions">
       <button id="btn-panel" type="button" class="btn-s" aria-expanded="false" aria-controls="panel">Connecteurs</button>
     </div>
@@ -24,22 +24,25 @@
 
   <div class="layout">
     <main class="chat-col">
-      <div class="toolbar">
-        <div class="model-pill" title="onnx-community/LFM2-1.2B-ONNX">
-          <b>LFM2 1.2B</b>
-          <span>sur votre appareil · ~850 Mo (WebGPU) ou ~1,2 Go (sans)</span>
-        </div>
-        <button id="btn-load" type="button" class="btn-p">Charger le modèle</button>
-        <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
+      <div class="key-bar" id="key-bar">
+        <label class="field grow">
+          <span>Clé OpenRouter</span>
+          <input id="or-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-… collée une seule fois, stockée ici seulement">
+        </label>
+        <button id="btn-key" type="button" class="btn-p">Enregistrer</button>
+        <p id="key-state" class="key-state" role="status"></p>
       </div>
-      <div id="progress" class="progress hidden">
-        <div class="bar" aria-hidden="true"><i id="prog-bar"></i></div>
-        <p id="prog-text"></p>
+      <div class="toolbar">
+        <label class="field grow">
+          <span>Modèle gratuit</span>
+          <select id="model-select" title="Modèles gratuits OpenRouter compatibles avec les outils"></select>
+        </label>
+        <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
       </div>
       <div id="messages" class="messages" aria-live="polite"></div>
       <form id="composer" class="composer">
         <label class="sr-only" for="input">Votre message</label>
-        <textarea id="input" rows="1" placeholder="Chargez d’abord le modèle…" disabled></textarea>
+        <textarea id="input" rows="1" placeholder="Collez d’abord votre clé OpenRouter…" disabled></textarea>
         <button id="btn-send" type="submit" class="btn-p" disabled>Envoyer</button>
         <button id="btn-stop" type="button" class="btn-s hidden">Arrêter</button>
       </form>
@@ -60,7 +63,7 @@
 
       <section>
         <h3>Outils intégrés</h3>
-        <p class="hint">Toujours disponibles une fois le modèle chargé. Les notes restent dans ce navigateur.</p>
+        <p class="hint">Toujours disponibles une fois la clé enregistrée. Les notes restent dans ce navigateur.</p>
         <ul id="builtin-list" class="tool-list"></ul>
       </section>
 
@@ -96,7 +99,7 @@
         <div id="notes" class="notes"></div>
       </section>
 
-      <p class="legal">Le modèle <strong>LFM2 1.2B</strong> de Liquid AI tourne sur <strong>votre appareil</strong> (Transformers.js). Avec WebGPU, les poids q4 pèsent environ 850&nbsp;Mo. Sans WebGPU (y compris sur un téléphone), un mode plus lent (WASM, poids q8, environ 1,2&nbsp;Go) prend le relais. Le fichier reste ensuite enregistré dans ce navigateur. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
+      <p class="legal">Les réponses passent par un modèle <strong>gratuit OpenRouter</strong> que vous choisissez. Votre clé est enregistrée uniquement dans ce navigateur, jamais dans le code du site, et n’est envoyée qu’à OpenRouter. En cas d’indisponibilité, l’agent bascule tout seul sur le modèle gratuit suivant. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
     </aside>
   </div>
   <div id="backdrop" class="backdrop hidden"></div>

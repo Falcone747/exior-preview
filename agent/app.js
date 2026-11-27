@@ -1,15 +1,17 @@
 import {
   MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin,
-} from "./lib/agent.js?v=7";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=7";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=7";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=7";
-import { loadLFM2Engine } from "./lib/lfm2-provider.js?v=7";
+} from "./lib/agent.js?v=8";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=8";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=8";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=8";
+import {
+  hasOpenRouterKey, getOpenRouterKey, setOpenRouterKey,
+  FREE_TOOL_MODELS, getPreferredModel, setPreferredModel, modelLabel,
+} from "./lib/openrouter.js?v=8";
 
 const $ = (id) => document.getElementById(id);
 
-let lfm2 = null;
-let lfm2Device = null;
+let ready = false;
 let conversation = { id: newId(), messages: [], updatedAt: Date.now() };
 let abort = null;
 let mcpClients = new Map();
@@ -44,9 +46,9 @@ function renderMarkdown(src) {
 function showEmpty() {
   $("messages").innerHTML = `
     <div class="empty">
-      <h1>Agent EXIOR, sur votre appareil</h1>
-      <p>Un seul modèle : <strong>LFM2 1.2B</strong> de Liquid AI. Il se télécharge une première fois (environ 850&nbsp;Mo avec WebGPU, ou 1,2&nbsp;Go sans), reste enregistré dans ce navigateur, puis tourne ici — rien n'est envoyé à un serveur d'inférence.</p>
-      <p>Chargez le modèle, puis posez une question. L'agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP. Sans WebGPU, il fonctionne quand même, plus lentement.</p>
+      <h1>Agent EXIOR</h1>
+      <p>Collez votre clé OpenRouter une seule fois : elle reste dans ce navigateur. L’agent utilise un modèle gratuit, avec un basculement automatique si le premier est saturé.</p>
+      <p>Posez ensuite une question. L’agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP.</p>
     </div>`;
 }
 
@@ -61,18 +63,59 @@ function appendMsg(role, html, { cls } = {}) {
   return el;
 }
 
-function setProgress(frac, text) {
-  const wrap = $("progress");
-  wrap.classList.toggle("hidden", !text && !frac);
-  $("prog-bar").style.width = `${Math.round((frac || 0) * 100)}%`;
-  $("prog-text").textContent = text || "";
-}
-
-function setReady(ready) {
+function setReady(on) {
+  ready = !!on;
   $("input").disabled = !ready;
   $("btn-send").disabled = !ready;
   if (ready) $("input").placeholder = "Écrivez votre message…";
-  else $("input").placeholder = "Chargez d’abord le modèle…";
+  else $("input").placeholder = "Collez d’abord votre clé OpenRouter…";
+}
+
+function syncKeyState() {
+  const state = $("key-state");
+  const input = $("or-key");
+  if (hasOpenRouterKey()) {
+    input.value = "";
+    input.placeholder = "Clé déjà enregistrée dans ce navigateur";
+    state.className = "key-state ok";
+    state.textContent = "Clé enregistrée ici seulement. Vous pouvez écrire.";
+    setReady(true);
+  } else {
+    input.placeholder = "sk-or-… collée une seule fois, stockée ici seulement";
+    state.className = "key-state";
+    state.textContent = "Collez votre clé OpenRouter pour commencer. Elle ne quitte pas ce navigateur, sauf vers OpenRouter.";
+    setReady(false);
+    input.focus();
+  }
+}
+
+function fillModels() {
+  const sel = $("model-select");
+  const current = getPreferredModel();
+  sel.innerHTML = FREE_TOOL_MODELS.map((m) => {
+    const extra = m.hint ? ` — ${m.hint}` : "";
+    return `<option value="${escapeHtml(m.id)}"${m.id === current ? " selected" : ""}>${escapeHtml(m.label + extra)}</option>`;
+  }).join("");
+}
+
+function saveKey() {
+  const raw = $("or-key").value;
+  const v = setOpenRouterKey(raw);
+  const state = $("key-state");
+  if (!v) {
+    state.className = "key-state err";
+    state.textContent = "Clé effacée. Collez-en une pour continuer.";
+    setReady(false);
+    return;
+  }
+  if (v.length < 12) {
+    setOpenRouterKey("");
+    state.className = "key-state err";
+    state.textContent = "Cette clé semble trop courte. Vérifiez-la puis enregistrez-la à nouveau.";
+    setReady(false);
+    return;
+  }
+  syncKeyState();
 }
 
 function renderBuiltins() {
@@ -232,31 +275,6 @@ async function addPreset(id) {
   await addConnector(connector, status);
 }
 
-async function loadEngine() {
-  $("btn-load").disabled = true;
-  setProgress(0.01, "Préparation de LFM2 1.2B…");
-  try {
-    const { generator, device, dtype } = await loadLFM2Engine((info) => {
-      setProgress(info.frac || 0, info.text || "Chargement…");
-    });
-    lfm2 = generator;
-    lfm2Device = device;
-    const mode = device === "webgpu"
-      ? `WebGPU, ${dtype || "q4"}`
-      : `WASM ${dtype || "q8"} (plus lent, sans WebGPU)`;
-    setProgress(1, "Modèle prêt. Vous pouvez écrire.");
-    setReady(true);
-    $("btn-load").textContent = "Modèle chargé";
-    appendMsg("system", `Modèle ${escapeHtml(MODEL_LABEL)} prêt (${mode}).`);
-    setTimeout(() => $("progress").classList.add("hidden"), 1600);
-  } catch (err) {
-    setProgress(0, "");
-    $("progress").classList.add("hidden");
-    $("btn-load").disabled = false;
-    appendMsg("system", `Impossible de charger le modèle : ${escapeHtml(err.message || err)}`, { cls: "error" });
-  }
-}
-
 async function newConversation() {
   conversation = { id: newId(), messages: [], updatedAt: Date.now() };
   await kvSet("currentConversation", conversation.id);
@@ -269,7 +287,7 @@ async function persist() {
 }
 
 async function send(text) {
-  if (!lfm2 || !text.trim()) return;
+  if (!ready || !hasOpenRouterKey() || !text.trim()) return;
   const userText = text.trim();
   $("input").value = "";
   autoSize();
@@ -296,12 +314,12 @@ async function send(text) {
   try {
     const history = conversation.messages.slice(0, -1);
     const result = await runAgentTurn({
-      lfm2,
+      modelId: getPreferredModel(),
       history,
       userText,
       toolDefs: toolCatalog(),
       executeTool,
-      thinkingPref: "off",
+      thinkingPref: "auto",
       signal: abort.signal,
       onPlan(plan) { bits.plan = plan; paint(); },
       onDelta(_d, full) { bits.body = full; paint(); },
@@ -336,7 +354,7 @@ async function send(text) {
     abort = null;
     $("btn-stop").classList.add("hidden");
     $("btn-send").classList.remove("hidden");
-    setReady(!!lfm2);
+    setReady(hasOpenRouterKey());
     $("input").focus();
   }
 }
@@ -393,7 +411,20 @@ async function init() {
 
   await connectSaved();
 
-  $("btn-load").addEventListener("click", loadEngine);
+  fillModels();
+  syncKeyState();
+  $("btn-key").addEventListener("click", saveKey);
+  $("or-key").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); saveKey(); }
+  });
+  $("model-select").addEventListener("change", () => {
+    const id = setPreferredModel($("model-select").value);
+    const state = $("key-state");
+    if (hasOpenRouterKey()) {
+      state.className = "key-state ok";
+      state.textContent = "Modèle : " + modelLabel(id) + ". En cas d’indisponibilité, bascule automatique.";
+    }
+  });
   $("btn-new").addEventListener("click", newConversation);
   $("btn-panel").addEventListener("click", () => togglePanel());
   $("btn-panel-close").addEventListener("click", () => togglePanel(false));
