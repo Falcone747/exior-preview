@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>EXIOR · Agent local</title>
-  <meta name="description" content="Agent IA local dans votre navigateur, avec outils et connecteurs MCP.">
+  <title>EXIOR · Agent</title>
+  <meta name="description" content="Agent EXIOR dans votre navigateur, avec outils et connecteurs MCP vers vos apps.">
   <link rel="icon" href="../favicon.svg">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=4">
   <script>window.addEventListener("error",e=>{var b=document.getElementById("gpu-banner");if(b){b.className="banner danger";b.textContent="Erreur : "+(e.message||e);}});</script>
-  <script type="module" src="./app.js?v=3"></script>
+  <script type="module" src="./app.js?v=4"></script>
 </head>
 <body>
   <a class="skip" href="#input">Aller à la saisie</a>
@@ -16,7 +16,7 @@
 
   <header class="top">
     <a class="logo" href="../">EXIOR</a>
-    <span class="badge">Agent local</span>
+    <span class="badge">Agent</span>
     <div class="top-actions">
       <button id="btn-panel" type="button" class="btn-s" aria-expanded="false" aria-controls="panel">Connecteurs</button>
     </div>
@@ -25,9 +25,9 @@
   <div class="layout">
     <main class="chat-col">
       <div class="toolbar">
-        <div class="model-pill" title="Qwen3-4B-q4f16_1-MLC">
-          <b>Qwen3 4B</b>
-          <span>dans votre navigateur · ~2,3 Go au premier chargement</span>
+        <div class="model-pill" title="nvidia/nemotron-3-ultra-550b-a55b:free">
+          <b>Nemotron 3 Ultra</b>
+          <span>gratuit via OpenRouter · secours automatique</span>
         </div>
         <label class="field">
           <span>Réflexion</span>
@@ -37,17 +37,22 @@
             <option value="on">On</option>
           </select>
         </label>
-        <button id="btn-load" type="button" class="btn-p">Charger le modèle</button>
         <button id="btn-new" type="button" class="btn-s">Nouvelle conversation</button>
       </div>
-      <div id="progress" class="progress hidden">
-        <div class="bar" aria-hidden="true"><i id="prog-bar"></i></div>
-        <p id="prog-text"></p>
-      </div>
+
+      <form id="key-form" class="key-bar">
+        <label class="field grow">
+          <span>Clé OpenRouter</span>
+          <input id="or-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-or-v1-… collée une seule fois">
+        </label>
+        <button id="btn-save-key" type="submit" class="btn-p">Enregistrer</button>
+        <p id="key-state" class="key-state" role="status"></p>
+      </form>
+
       <div id="messages" class="messages" aria-live="polite"></div>
       <form id="composer" class="composer">
         <label class="sr-only" for="input">Votre message</label>
-        <textarea id="input" rows="1" placeholder="Écrivez votre message…" disabled></textarea>
+        <textarea id="input" rows="1" placeholder="Collez d’abord votre clé OpenRouter…" disabled></textarea>
         <button id="btn-send" type="submit" class="btn-p" disabled>Envoyer</button>
         <button id="btn-stop" type="button" class="btn-s hidden">Arrêter</button>
       </form>
@@ -60,14 +65,21 @@
       </div>
 
       <section>
+        <h3>Connecteurs rapides</h3>
+        <p class="hint">Serveurs MCP officiels, vérifiés. Ceux sans compte s’ajoutent tout de suite. Les autres demandent une autorisation ou un jeton, stocké uniquement dans ce navigateur. Les pastilles orange sont réels mais bloqués par CORS depuis une page web.</p>
+        <div id="presets" class="presets"></div>
+        <p id="preset-status" class="status" role="status"></p>
+      </section>
+
+      <section>
         <h3>Outils intégrés</h3>
-        <p class="hint">Toujours disponibles une fois le modèle chargé. Les notes restent dans ce navigateur.</p>
+        <p class="hint">Toujours disponibles une fois la clé enregistrée. Les notes restent dans ce navigateur.</p>
         <ul id="builtin-list" class="tool-list"></ul>
       </section>
 
       <section>
         <h3>Connecteurs MCP</h3>
-        <p class="hint">Reliez n’importe quel serveur MCP distant en HTTP streamable ou SSE. Le jeton, s’il y en a un, n’est stocké que dans ce navigateur (localStorage), jamais envoyé ailleurs que vers l’URL indiquée.</p>
+        <p class="hint">Ajoutez n’importe quel serveur MCP distant en HTTP streamable ou SSE. Le jeton, s’il y en a un, n’est stocké que dans ce navigateur, jamais envoyé ailleurs que vers l’URL indiquée.</p>
         <ul id="connector-list" class="connector-list"></ul>
         <form id="connector-form" class="connector-form">
           <h4>Ajouter un connecteur</h4>
@@ -97,7 +109,7 @@
         <div id="notes" class="notes"></div>
       </section>
 
-      <p class="legal">Le modèle <strong>Qwen3 4B</strong> tourne sur <strong>votre appareil</strong> via WebGPU (WebLLM). Premier téléchargement : environ 2,3&nbsp;Go, puis il reste enregistré dans ce navigateur. Wi-Fi recommandé. Utilisez Chrome ou Edge à jour. Sur Android, ouvrez cette page dans Chrome. La réflexion longue est en auto&nbsp;: coupée pour le chat, activée pour le calcul et les tâches en plusieurs étapes.</p>
+      <p class="legal">Le modèle <strong>Nemotron 3 Ultra</strong> (et, en cas d’indisponibilité, ERNIE 5.5 Flash puis Nemotron Lightning) est appelé via OpenRouter, en version gratuite. Votre clé reste dans ce navigateur et n’est envoyée qu’à OpenRouter. Les connecteurs parlent directement au serveur de l’app depuis votre navigateur.</p>
     </aside>
   </div>
   <div id="backdrop" class="backdrop hidden"></div>
