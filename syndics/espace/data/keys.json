@@ -1,13 +1,1 @@
-{
-  "version": 1,
-  "algorithm": "AES-256-GCM",
-  "kdf": "PBKDF2-SHA256",
-  "iterations": 310000,
-  "envelopes": [
-    {
-      "salt": "7xcG1K3WvMsylY89yUjb3A==",
-      "iv": "GcVJArhztF8KpDqD",
-      "wrapped": "cMkweLgy63mnxnhGd1y8a6mYVCS9BLjowSL9iLuSVg0LXnlUMB1Pd0VWulE3D8ur"
-    }
-  ]
-}
+$file:/workspace/exior_brand/syndics/deploy/work/syndics/espace/data/keys.json
