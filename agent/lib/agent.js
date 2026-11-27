@@ -1,9 +1,10 @@
 import { generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle&deps=zod@4.1.8";
-import { createOpenRouterModel, PRIMARY_MODEL, MODEL_LABEL, FALLBACK_MODELS, hasOpenRouterKey } from "./openrouter.js?v=4";
-import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=4";
+import { createLFM2Model, LFM2_LABEL, LFM2_MODEL_ID } from "./lfm2-provider.js?v=5";
+import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js?v=5";
 
-export const MODEL_ID = PRIMARY_MODEL;
-export { MODEL_LABEL, FALLBACK_MODELS, hasOpenRouterKey };
+export const MODEL_ID = LFM2_MODEL_ID;
+export const MODEL_LABEL = LFM2_LABEL;
+export { LFM2_LABEL };
 export const MAX_STEPS = 10;
 
 export { BUILTIN_TOOLS, runBuiltin, truncateText };
@@ -25,6 +26,7 @@ export function resolveThinking(pref, userText) {
 
 function systemPrompt() {
   return `Tu es l'agent EXIOR. Tu réponds toujours en français, de façon précise et utile.
+Tu tournes dans le navigateur de l'utilisateur avec LFM2 1.2B.
 Tu agis pour l'utilisateur : tu peux calculer, chercher, lire des pages, gérer ses notes locales, et utiliser les connecteurs MCP qu'il a branchés (ses apps).
 
 Règles :
@@ -89,6 +91,7 @@ function compactHistory(messages, maxChars = 12000) {
 }
 
 export async function runAgentTurn({
+  lfm2,
   history,
   userText,
   toolDefs,
@@ -101,8 +104,8 @@ export async function runAgentTurn({
   onCheck,
   signal,
 }) {
-  const thinking = resolveThinking(thinkingPref, userText);
-  const model = createOpenRouterModel({ enableThinking: thinking });
+  resolveThinking(thinkingPref, userText);
+  const model = createLFM2Model(lfm2);
   const steps = [];
   const hooks = {
     onToolStart,
@@ -121,8 +124,8 @@ export async function runAgentTurn({
     tools: toAiTools(toolDefs, executeTool, hooks),
     stopWhen: stepCountIs(MAX_STEPS),
     abortSignal: signal,
-    temperature: thinking ? 0.4 : 0.7,
-    maxOutputTokens: 2048,
+    temperature: 0.3,
+    maxOutputTokens: 512,
     onFinish: ({ text }) => { if (text) onDelta?.("", text); },
   });
 
@@ -135,14 +138,14 @@ export async function runAgentTurn({
 
   if (usedTools && answer && !signal?.aborted) {
     const evidence = steps.map((s) => `- ${s.name}${s.isError ? " (erreur)" : ""} : ${truncateText(s.content, 400)}`).join("\n");
-    const checkModel = createOpenRouterModel({ enableThinking: false });
+    const checkModel = createLFM2Model(lfm2);
     const check = await generateText({
       model: checkModel,
       system: "Tu vérifies une réponse d'agent. Réponds uniquement en JSON {\"ok\": true ou false, \"issue\": \"...\", \"answer\": \"réponse corrigée ou identique, en français\"}.",
       prompt: `Question : ${userText}\nRésultats d'outils :\n${evidence}\nRéponse proposée :\n${answer}`,
       abortSignal: signal,
       temperature: 0.2,
-      maxOutputTokens: 700,
+      maxOutputTokens: 512,
     });
     let parsed = null;
     const src = check.text || "";
@@ -162,7 +165,7 @@ export async function runAgentTurn({
           prompt: `Problème relevé : ${parsed.issue}\nQuestion : ${userText}\nPreuves :\n${evidence}\nRéponse à corriger : ${finalAnswer}`,
           abortSignal: signal,
           temperature: 0.2,
-          maxOutputTokens: 700,
+          maxOutputTokens: 512,
         });
         let fixed = finalAnswer;
         const rsrc = retry.text || "";
