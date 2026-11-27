@@ -1,15 +1,13 @@
 import {
-  MODEL_ID, MODEL_LABEL, WEBLLM_VERSION, hasWebGPU,
-  runAgentTurn, BUILTIN_TOOLS, runBuiltin, looksComplex,
-} from "./lib/agent.js?v=3";
-import { BUILTIN_LABELS } from "./lib/tools.js?v=3";
-import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=3";
-import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth } from "./lib/mcp.js?v=3";
+  MODEL_ID, MODEL_LABEL, runAgentTurn, BUILTIN_TOOLS, runBuiltin, hasOpenRouterKey,
+} from "./lib/agent.js?v=4";
+import { BUILTIN_LABELS } from "./lib/tools.js?v=4";
+import { kvGet, kvSet, newId, saveConversation, getConversation, listNotes } from "./lib/db.js?v=4";
+import { loadConnectors, saveConnectors, probeConnector, callMcpTool, finishPendingOAuth, PRESET_CONNECTORS } from "./lib/mcp.js?v=4";
+import { getOpenRouterKey, setOpenRouterKey } from "./lib/openrouter.js?v=4";
 
 const $ = (id) => document.getElementById(id);
 
-let engine = null;
-let engineKind = null;
 let conversation = { id: newId(), messages: [], updatedAt: Date.now() };
 let abort = null;
 let mcpClients = new Map();
@@ -42,11 +40,18 @@ function renderMarkdown(src) {
 }
 
 function showEmpty() {
-  $("messages").innerHTML = `
+  const ready = hasOpenRouterKey();
+  $("messages").innerHTML = ready
+    ? `
     <div class="empty">
-      <h1>Agent EXIOR, sur votre appareil</h1>
-      <p>Un seul modèle : <strong>Qwen3 4B</strong>. Il se télécharge une première fois (environ 2,3&nbsp;Go), reste enregistré dans ce navigateur, puis tourne ici via WebGPU — rien n'est envoyé à un serveur d'inférence.</p>
-      <p>Chargez le modèle, puis posez une question. L'agent peut calculer, chercher sur le web, lire une page, gérer vos notes, et se connecter à vos apps via MCP.</p>
+      <h1>Agent EXIOR, branché sur vos apps</h1>
+      <p>Le modèle <strong>${escapeHtml(MODEL_LABEL)}</strong> répond tout de suite. Posez une question, ou ouvrez les connecteurs pour relier une app (GitHub, Notion, Linear…).</p>
+    </div>`
+    : `
+    <div class="empty">
+      <h1>Agent EXIOR, branché sur vos apps</h1>
+      <p>Collez une fois votre <strong>clé OpenRouter</strong> (gratuite) dans le champ ci-dessus. Elle reste dans ce navigateur et n’est envoyée qu’à OpenRouter. Ensuite le modèle ${escapeHtml(MODEL_LABEL)} répond sans téléchargement.</p>
+      <p>Créez une clé sur <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">openrouter.ai/keys</a>, puis reliez vos apps dans le panneau Connecteurs.</p>
     </div>`;
 }
 
@@ -61,27 +66,53 @@ function appendMsg(role, html, { cls } = {}) {
   return el;
 }
 
-function setProgress(frac, text) {
-  const wrap = $("progress");
-  wrap.classList.toggle("hidden", !text && !frac);
-  $("prog-bar").style.width = `${Math.round((frac || 0) * 100)}%`;
-  $("prog-text").textContent = text || "";
-}
-
 function setReady(ready) {
   $("input").disabled = !ready;
   $("btn-send").disabled = !ready;
   if (ready) $("input").placeholder = "Écrivez votre message…";
+  else $("input").placeholder = "Collez d’abord votre clé OpenRouter…";
 }
 
 function thinkingPref() {
   return $("thinking").value || "auto";
 }
 
+function renderKeyState() {
+  const state = $("key-state");
+  if (hasOpenRouterKey()) {
+    state.className = "key-state ok";
+    state.textContent = "Clé enregistrée dans ce navigateur. Vous pouvez écrire.";
+    $("or-key").placeholder = "••••••••  (déjà enregistrée — collez-en une autre pour la remplacer)";
+    $("or-key").value = "";
+    $("btn-save-key").textContent = "Mettre à jour";
+    setReady(true);
+  } else {
+    state.className = "key-state";
+    state.textContent = "";
+    $("or-key").placeholder = "sk-or-v1-… collée une seule fois";
+    $("btn-save-key").textContent = "Enregistrer";
+    setReady(false);
+  }
+}
+
 function renderBuiltins() {
   $("builtin-list").innerHTML = BUILTIN_TOOLS.map((t) =>
     `<li><b>${escapeHtml(BUILTIN_LABELS[t.name] || t.name)}</b><span>${escapeHtml(t.description)}</span></li>`
   ).join("");
+}
+
+function renderPresets() {
+  const saved = new Set(loadConnectors().map((c) => c.url.replace(/\/+$/, "")));
+  $("presets").innerHTML = PRESET_CONNECTORS.map((p) => {
+    const added = saved.has(p.url.replace(/\/+$/, ""));
+    const tagClass = p.cors === false ? "warn" : "ok";
+    const tag = added ? "Ajouté" : p.tag;
+    return `<button type="button" class="preset ${p.cors === false ? "blocked" : ""}" data-preset="${escapeHtml(p.id)}">
+      <b>${escapeHtml(p.name)}</b>
+      <span>${escapeHtml(p.blurb)}</span>
+      <i class="tag ${tagClass}">${escapeHtml(tag)}</i>
+    </button>`;
+  }).join("");
 }
 
 async function renderNotes() {
@@ -157,61 +188,68 @@ async function connectSaved() {
     }
   }
   renderConnectors();
+  renderPresets();
 }
 
-function gpuBanner() {
-  const el = $("gpu-banner");
-  if (hasWebGPU()) {
-    el.className = "banner danger hidden";
-    el.textContent = "";
-    return true;
-  }
-  el.className = "banner danger";
-  el.textContent = "WebGPU est indisponible dans ce navigateur. L'agent ne peut pas faire tourner Qwen3 4B sur cet appareil. Ouvrez cette page dans Chrome ou Edge à jour (sur Android : Chrome).";
-  return false;
-}
-
-async function loadEngine() {
-  if (!gpuBanner()) return;
-  $("btn-load").disabled = true;
-  setProgress(0.01, "Préparation du moteur…");
+async function addConnector(connector, statusEl) {
+  const status = statusEl || $("c-status");
+  status.className = "status";
+  status.textContent = "Connexion au serveur MCP…";
   try {
-    const webllm = await import(`https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm@${WEBLLM_VERSION}/+esm`);
-    let cached = false;
-    try { cached = await webllm.hasModelInCache(MODEL_ID); } catch { cached = false; }
-    const onProgress = (p) => {
-      const frac = typeof p.progress === "number" ? p.progress : 0;
-      const label = cached
-        ? "Déjà téléchargé — chargement depuis le navigateur…"
-        : "Téléchargement du modèle (une seule fois, environ 2,3 Go)…";
-      setProgress(frac, `${label} ${p.text || ""}`.trim());
-    };
-    try {
-      const worker = new Worker(new URL("./worker.js", import.meta.url), { type: "module" });
-      engine = await webllm.CreateWebWorkerMLCEngine(worker, MODEL_ID, {
-        initProgressCallback: onProgress,
-        logLevel: "error",
-      });
-      engineKind = "worker";
-    } catch (err) {
-      console.warn("Worker indisponible, repli sur le fil principal", err);
-      engine = await webllm.CreateMLCEngine(MODEL_ID, {
-        initProgressCallback: onProgress,
-        logLevel: "error",
-      });
-      engineKind = "main";
+    const { client, tools } = await probeConnector(connector);
+    const list = loadConnectors();
+    if (!list.some((c) => c.id === connector.id)) {
+      list.push(connector);
+      saveConnectors(list);
     }
-    setProgress(1, "Modèle prêt. Vous pouvez écrire.");
-    setReady(true);
-    $("btn-load").textContent = "Modèle chargé";
-    appendMsg("system", `Modèle ${escapeHtml(MODEL_LABEL)} prêt (${engineKind === "worker" ? "arrière-plan" : "fil principal"}).`);
-    setTimeout(() => $("progress").classList.add("hidden"), 1600);
+    mcpClients.set(connector.id, { client, tools, name: connector.name, error: null });
+    status.className = "status ok";
+    status.textContent = tools.length
+      ? `Connecté : ${tools.length} outil(s) trouvé(s).`
+      : "Connecté, aucun outil exposé.";
+    renderConnectors();
+    renderPresets();
+    return true;
   } catch (err) {
-    setProgress(0, "");
-    $("progress").classList.add("hidden");
-    $("btn-load").disabled = false;
-    appendMsg("system", `Impossible de charger le modèle : ${escapeHtml(err.message || err)}`, { cls: "error" });
+    status.className = "status err";
+    status.textContent = err.message || String(err);
+    return false;
   }
+}
+
+async function addPreset(id) {
+  const preset = PRESET_CONNECTORS.find((p) => p.id === id);
+  const status = $("preset-status");
+  if (!preset) return;
+  if (preset.cors === false) {
+    status.className = "status err";
+    status.textContent = `${preset.name} est un vrai serveur MCP, mais il refuse les appels depuis un navigateur (CORS). Il ne peut pas être utilisé depuis cette page.`;
+    return;
+  }
+  const already = loadConnectors().find((c) => c.url.replace(/\/+$/, "") === preset.url.replace(/\/+$/, ""));
+  if (already) {
+    status.className = "status ok";
+    status.textContent = `${preset.name} est déjà dans vos connecteurs.`;
+    return;
+  }
+  const connector = {
+    id: newId().slice(0, 8),
+    name: preset.name,
+    url: preset.url,
+    token: "",
+    oauth: preset.auth === "oauth" || preset.auth === "token-or-oauth",
+  };
+  if (preset.auth === "token-or-oauth" || preset.auth === "token") {
+    $("c-name").value = preset.name;
+    $("c-url").value = preset.url;
+    if ($("c-oauth")) $("c-oauth").checked = preset.auth === "token-or-oauth";
+    status.className = "status";
+    status.textContent = `${preset.name} : collez un jeton si vous en avez un, ou ajoutez le connecteur pour lancer l’autorisation.`;
+    $("c-token").focus();
+    togglePanel(true);
+    return;
+  }
+  await addConnector(connector, status);
 }
 
 async function newConversation() {
@@ -226,7 +264,7 @@ async function persist() {
 }
 
 async function send(text) {
-  if (!engine || !text.trim()) return;
+  if (!hasOpenRouterKey() || !text.trim()) return;
   const userText = text.trim();
   $("input").value = "";
   autoSize();
@@ -253,7 +291,6 @@ async function send(text) {
   try {
     const history = conversation.messages.slice(0, -1);
     const result = await runAgentTurn({
-      engine,
       history,
       userText,
       toolDefs: toolCatalog(),
@@ -293,7 +330,7 @@ async function send(text) {
     abort = null;
     $("btn-stop").classList.add("hidden");
     $("btn-send").classList.remove("hidden");
-    setReady(!!engine);
+    setReady(hasOpenRouterKey());
     $("input").focus();
   }
 }
@@ -318,7 +355,8 @@ function togglePanel(open) {
 
 async function init() {
   renderBuiltins();
-  gpuBanner();
+  renderPresets();
+  renderKeyState();
   showEmpty();
   await renderNotes();
 
@@ -340,7 +378,7 @@ async function init() {
   $("thinking").addEventListener("change", () => kvSet("thinkingPref", thinkingPref()));
 
   const convId = await kvGet("currentConversation");
-  if (convId) {
+  if (convId && hasOpenRouterKey()) {
     const existing = await getConversation(convId);
     if (existing?.messages?.length) {
       conversation = existing;
@@ -354,7 +392,24 @@ async function init() {
 
   await connectSaved();
 
-  $("btn-load").addEventListener("click", loadEngine);
+  $("key-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const typed = $("or-key").value;
+    if (!typed.trim() && hasOpenRouterKey()) {
+      renderKeyState();
+      return;
+    }
+    if (!typed.trim()) {
+      $("key-state").className = "key-state err";
+      $("key-state").textContent = "Collez une clé OpenRouter pour commencer.";
+      return;
+    }
+    setOpenRouterKey(typed);
+    $("or-key").value = "";
+    renderKeyState();
+    showEmpty();
+  });
+
   $("btn-new").addEventListener("click", newConversation);
   $("btn-panel").addEventListener("click", () => togglePanel());
   $("btn-panel-close").addEventListener("click", () => togglePanel(false));
@@ -372,7 +427,11 @@ async function init() {
   });
   $("btn-stop").addEventListener("click", () => {
     abort?.abort();
-    try { engine?.interruptGenerate?.(); } catch { /* ignore */ }
+  });
+
+  $("presets").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-preset]");
+    if (btn) addPreset(btn.dataset.preset);
   });
 
   $("connector-form").addEventListener("submit", async (e) => {
@@ -381,29 +440,13 @@ async function init() {
     const url = $("c-url").value.trim();
     const token = $("c-token").value;
     const oauth = $("c-oauth")?.checked || false;
-    const status = $("c-status");
-    status.className = "status";
-    status.textContent = "Connexion au serveur MCP…";
     const id = newId().slice(0, 8);
-    const connector = { id, name, url, token, oauth };
-    try {
-      const { client, tools } = await probeConnector(connector);
-      const list = loadConnectors();
-      list.push(connector);
-      saveConnectors(list);
-      mcpClients.set(id, { client, tools, name, error: null });
+    const ok = await addConnector({ id, name, url, token, oauth }, $("c-status"));
+    if (ok) {
       $("c-name").value = "";
       $("c-url").value = "";
       $("c-token").value = "";
       if ($("c-oauth")) $("c-oauth").checked = false;
-      status.className = "status ok";
-      status.textContent = tools.length
-        ? `Connecté : ${tools.length} outil(s) trouvé(s).`
-        : "Connecté, aucun outil exposé.";
-      renderConnectors();
-    } catch (err) {
-      status.className = "status err";
-      status.textContent = err.message || String(err);
     }
   });
 
@@ -419,6 +462,7 @@ async function init() {
       try { await mcpClients.get(id)?.client?.close(); } catch { /* ignore */ }
       mcpClients.delete(id);
       renderConnectors();
+      renderPresets();
       return;
     }
     if (btn.dataset.act === "refresh") {
