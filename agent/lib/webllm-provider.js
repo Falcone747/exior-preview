@@ -1,4 +1,4 @@
-import { createOpenAICompatible } from "https://esm.sh/@ai-sdk/openai-compatible@3.0.96?bundle";
+import { createOpenAICompatible } from "https://esm.sh/@ai-sdk/openai-compatible@3.0.96?bundle&deps=zod@4.1.8";
 
 const MODEL_ID = "Qwen3-4B-q4f16_1-MLC";
 

@@ -3,7 +3,7 @@ import {
   StreamableHTTPClientTransport,
   SSEClientTransport,
   UnauthorizedError,
-} from "https://esm.sh/@modelcontextprotocol/client@2.4.0?bundle";
+} from "https://esm.sh/@modelcontextprotocol/client@2.4.0?bundle&deps=zod@4.1.8";
 
 const STORAGE_KEY = "exior-agent-connectors";
 const OAUTH_PREFIX = "exior-agent-oauth:";

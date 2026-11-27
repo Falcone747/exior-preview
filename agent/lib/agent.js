@@ -1,4 +1,4 @@
-import { generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle";
+import { generateText, tool, stepCountIs, jsonSchema } from "https://esm.sh/ai@7.0.183?bundle&deps=zod@4.1.8";
 import { createWebLLMModel } from "./webllm-provider.js";
 import { runBuiltin, BUILTIN_TOOLS, truncateText } from "./tools.js";
 
